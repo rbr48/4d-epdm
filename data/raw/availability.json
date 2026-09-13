@@ -1,0 +1,162 @@
+{
+  "GDP_GROWTH": {
+    "code": "NY.GDP.MKTP.KD.ZG",
+    "source": null,
+    "observations": 595
+  },
+  "EXPORT_GROWTH": {
+    "code": "NE.EXP.GNFS.KD.ZG",
+    "source": null,
+    "observations": 560
+  },
+  "IMPORT_GROWTH": {
+    "code": "NE.IMP.GNFS.KD.ZG",
+    "source": null,
+    "observations": 560
+  },
+  "INFLATION": {
+    "code": "FP.CPI.TOTL.ZG",
+    "source": null,
+    "observations": 589
+  },
+  "CREDIT_PRIVATE": {
+    "code": "FS.AST.PRVT.GD.ZS",
+    "source": null,
+    "observations": 513
+  },
+  "CURRENT_ACCOUNT": {
+    "code": "BN.CAB.XOKA.GD.ZS",
+    "source": null,
+    "observations": 540
+  },
+  "RESERVES_MONTHS": {
+    "code": "FI.RES.TOTL.MO",
+    "source": null,
+    "observations": 575
+  },
+  "TERMS_OF_TRADE": {
+    "code": "TT.PRI.MRCH.XD.WD",
+    "source": null,
+    "observations": 340
+  },
+  "UNEMPLOYMENT": {
+    "code": "SL.UEM.TOTL.ZS",
+    "source": null,
+    "observations": 578
+  },
+  "GROSS_SAVINGS": {
+    "code": "NY.GNS.ICTR.ZS",
+    "source": null,
+    "observations": 575
+  },
+  "REAL_INTEREST": {
+    "code": "FR.INR.RINR",
+    "source": null,
+    "observations": 423
+  },
+  "EXCHANGE_RATE": {
+    "code": "PA.NUS.FCRF",
+    "source": null,
+    "observations": 560
+  },
+  "GDP_PC_PPP": {
+    "code": "NY.GDP.PCAP.PP.KD",
+    "source": null,
+    "observations": 595
+  },
+  "INVESTMENT": {
+    "code": "NE.GDI.TOTL.ZS",
+    "source": null,
+    "observations": 590
+  },
+  "FDI": {
+    "code": "BX.KLT.DINV.WD.GD.ZS",
+    "source": null,
+    "observations": 595
+  },
+  "TRADE_OPENNESS": {
+    "code": "NE.TRD.GNFS.ZS",
+    "source": null,
+    "observations": 595
+  },
+  "ELECTRICITY": {
+    "code": "EG.ELC.ACCS.ZS",
+    "source": null,
+    "observations": 542
+  },
+  "LIFE_EXPECTANCY": {
+    "code": "SP.DYN.LE00.IN",
+    "source": null,
+    "observations": 595
+  },
+  "SCHOOLING_SEC": {
+    "code": "SE.SEC.ENRR",
+    "source": null,
+    "observations": 410
+  },
+  "RND": {
+    "code": "GB.XPD.RSDV.GD.ZS",
+    "source": null,
+    "observations": 374
+  },
+  "HIGH_TECH_EXPORTS": {
+    "code": "TX.VAL.TECH.MF.ZS",
+    "source": null,
+    "observations": 279
+  },
+  "TAX_REVENUE": {
+    "code": "GC.TAX.TOTL.GD.ZS",
+    "source": null,
+    "observations": 463
+  },
+  "REVENUE_EX_GRANTS": {
+    "code": "GC.REV.XGRT.GD.ZS",
+    "source": null,
+    "observations": 464
+  },
+  "DEPENDENCY_RATIO": {
+    "code": "SP.POP.DPND",
+    "source": null,
+    "observations": 595
+  },
+  "POPULATION": {
+    "code": "SP.POP.TOTL",
+    "source": null,
+    "observations": 595
+  },
+  "MANUF_VA": {
+    "code": "NV.IND.MANF.ZS",
+    "source": null,
+    "observations": 534
+  },
+  "URBAN_SHARE": {
+    "code": "SP.URB.TOTL.IN.ZS",
+    "source": null,
+    "observations": 595
+  },
+  "GOV_EFFECTIVENESS": {
+    "code": "GOV_WGI_GE.EST",
+    "source": 3,
+    "observations": 416
+  },
+  "REG_QUALITY": {
+    "code": "GOV_WGI_RQ.EST",
+    "source": 3,
+    "observations": 416
+  },
+  "RULE_OF_LAW": {
+    "code": "GOV_WGI_RL.EST",
+    "source": 3,
+    "observations": 416
+  },
+  "CONTROL_CORRUPTION": {
+    "code": "GOV_WGI_CC.EST",
+    "source": 3,
+    "observations": 416
+  },
+  "POLITICAL_STABILITY": {
+    "code": "GOV_WGI_PV.EST",
+    "source": 3,
+    "observations": 416
+  }
+}

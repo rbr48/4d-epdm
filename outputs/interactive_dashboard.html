@@ -1006,9 +1006,9 @@
                     <!-- Timeline Milestones -->
                     <div class="milestone-timeline">
                         <div class="milestone-item">
-                            <div class="milestone-year">2026 Milestone</div>
+                            <div class="milestone-year" id="ms-ldc-year">2026 Milestone</div>
                             <div class="milestone-name">LDC Graduation Cliff</div>
-                            <div class="milestone-desc">Scheduled loss of EU Everything-But-Arms duty-free access.</div>
+                            <div class="milestone-desc" id="ms-ldc-desc">Scheduled loss of EU Everything-But-Arms duty-free access.</div>
                         </div>
                         <div class="milestone-item" style="border-left-color: var(--warning);">
                             <div class="milestone-year" style="color: var(--warning);">2030 Milestone</div>
@@ -1241,6 +1241,23 @@
         }
     }
 
+    let ldcTargetYear = 2026;
+
+    function setLdcYear(year) {
+        ldcTargetYear = year;
+        const b26 = document.getElementById('btn-ldc-2026');
+        const b29 = document.getElementById('btn-ldc-2029');
+        if (b26 && b29) {
+            b26.classList.toggle('active', year === 2026);
+            b29.classList.toggle('active', year === 2029);
+            b26.style.background = year === 2026 ? 'var(--primary)' : 'var(--bg-card)';
+            b26.style.color = year === 2026 ? '#ffffff' : 'var(--text-muted)';
+            b29.style.background = year === 2029 ? 'var(--primary)' : 'var(--bg-card)';
+            b29.style.color = year === 2029 ? '#ffffff' : 'var(--text-muted)';
+        }
+        recalculate();
+    }
+
     function toggleShock(e, id) {
         if (e && e.target && e.target.tagName === 'INPUT') return;
         const chk = document.getElementById(id);
@@ -1343,23 +1360,37 @@
 
         document.getElementById('txt-ldc-mag').innerText = ldcMag + '%';
         document.getElementById('txt-npl-mag').innerText = nplMag + '%';
-        document.getElementById('badge-ldc-val').innerText = shockLDC ? `${ldcMag}% Shock` : 'Off';
+        document.getElementById('badge-ldc-val').innerText = shockLDC ? `${ldcMag}% (${ldcTargetYear})` : 'Off';
         document.getElementById('badge-npl-val').innerText = shockNPL ? `${nplMag}% NPL` : 'Off';
         document.getElementById('badge-climate-val').innerText = shockClimate ? 'Active' : 'Off';
 
-        const deltaShock = new Array(9).fill(0);
+        // Update Timeline Milestone text
+        const msLdcYear = document.getElementById('ms-ldc-year');
+        const msLdcDesc = document.getElementById('ms-ldc-desc');
+        if (msLdcYear) msLdcYear.innerText = `${ldcTargetYear} Milestone`;
+        if (msLdcDesc) {
+            msLdcDesc.innerText = (ldcTargetYear === 2029)
+                ? 'UN-CDP recommended 3-year extension; preferential market access ends Nov 2029.'
+                : 'Official scheduled loss of EU Everything-But-Arms duty-free market access.';
+        }
+
+        const deltaLDC = new Array(9).fill(0);
         if (shockLDC) {
-            deltaShock[5] -= 0.001 * ldcMag;
-            deltaShock[6] -= 0.0008 * ldcMag;
-            deltaShock[8] -= 0.0005 * ldcMag;
+            deltaLDC[5] -= 0.001 * ldcMag;
+            deltaLDC[6] -= 0.0008 * ldcMag;
+            deltaLDC[8] -= 0.0005 * ldcMag;
         }
+
+        const deltaNPL = new Array(9).fill(0);
         if (shockNPL) {
-            deltaShock[0] -= 0.0007 * nplMag;
-            deltaShock[8] -= 0.0008 * nplMag;
+            deltaNPL[0] -= 0.0007 * nplMag;
+            deltaNPL[8] -= 0.0008 * nplMag;
         }
+
+        const deltaClimate = new Array(9).fill(0);
         if (shockClimate) {
-            deltaShock[0] -= 0.008;
-            deltaShock[6] -= 0.010;
+            deltaClimate[0] -= 0.008;
+            deltaClimate[6] -= 0.010;
         }
 
         // Run Multi-Horizon Trajectory Simulation
@@ -1373,8 +1404,19 @@
         simulationSeries = [];
         simulationSeries.push({ year: 2024, epi_p50: p50_path[0], epi_p10: p10_path[0], epi_p90: p90_path[0] });
 
+        const ldcStartOffset = (ldcTargetYear === 2029) ? 5 : 2; // 2024 + 2 = 2026, 2024 + 5 = 2029
+
         for (let y = 1; y <= 20; y++) {
-            let activeShock = (y >= 2) ? deltaShock : new Array(9).fill(0);
+            let activeShock = new Array(9).fill(0);
+            if (shockLDC && y >= ldcStartOffset) {
+                for (let i = 0; i < 9; i++) activeShock[i] += deltaLDC[i];
+            }
+            if (shockNPL && y >= 2) {
+                for (let i = 0; i < 9; i++) activeShock[i] += deltaNPL[i];
+            }
+            if (shockClimate) {
+                for (let i = 0; i < 9; i++) activeShock[i] += deltaClimate[i];
+            }
             let nextVec = [];
             for (let i = 0; i < 9; i++) {
                 let drift = 0.005 * (1.0 - current[i]);

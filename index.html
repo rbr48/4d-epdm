@@ -1197,13 +1197,14 @@
     let controlMode = 'macro';
     let simulationSeries = [];
 
-    function calcEPI(vec) {
+    function calculateEPI(vec) {
         let p = 1.0;
         for (let i = 0; i < 9; i++) {
             p *= Math.pow(Math.max(0.01, Math.min(0.99, vec[i])), WEIGHTS[i]);
         }
         return 100.0 * p;
     }
+    const calcEPI = calculateEPI;
 
     function switchControlMode(mode) {
         controlMode = mode;

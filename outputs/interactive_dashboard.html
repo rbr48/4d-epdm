@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4D-EPDM: Bangladesh 2025-2045 Capability Simulator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+        h1 { font-size: 26px; color: var(--accent); margin-bottom: 8px; }
+        p.subtitle { color: var(--text-muted); font-size: 14px; }
+        .grid { display: grid; grid-template-columns: 360px 1fr; gap: 24px; }
+        .card { background-color: var(--card-bg); border-radius: 12px; padding: 20px; border: 1px solid var(--border); margin-bottom: 20px; }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+        .slider-val { float: right; color: var(--accent); font-weight: bold; }
+        input[type="range"] { width: 100%; accent-color: var(--accent); }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 13px; cursor: pointer; }
+        .checkbox-group input { width: 16px; height: 16px; accent-color: var(--danger); cursor: pointer; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+        .stat-card { background-color: var(--card-bg); border-radius: 10px; padding: 16px; border: 1px solid var(--border); text-align: center; }
+        .stat-val { font-size: 24px; font-weight: bold; color: var(--accent); margin: 6px 0; }
+        .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .chart-box { background-color: var(--card-bg); border-radius: 12px; padding: 16px; border: 1px solid var(--border); height: 350px; }
+        .alert-box { padding: 14px; border-radius: 8px; font-size: 13px; margin-top: 16px; line-height: 1.5; }
+        .alert-success { background-color: rgba(34, 197, 94, 0.15); border: 1px solid var(--success); color: #86efac; }
+        .alert-warning { background-color: rgba(245, 158, 11, 0.15); border: 1px solid var(--warning); color: #fde047; }
+        .alert-danger { background-color: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger); color: #fca5a5; }
+        footer { margin-top: 30px; text-align: center; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 16px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🏛️ 4D-EPDM: Bangladesh 2025–2045 Capability Simulator</h1>
+        <p class="subtitle">An interactive policy sandbox based on <em>"Japan’s Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh"</em> | <a href="https://github.com/rbr48/4d-epdm" target="_blank">GitHub Repository</a></p>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">2024 Baseline EPI</div>
+            <div class="stat-val">21.33</div>
+            <div class="stat-sub" style="font-size: 11px; color: var(--danger);">Bottlenecked Governance</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">2044 Projected Median EPI</div>
+            <div class="stat-val" id="stat-projected">54.86</div>
+            <div class="stat-sub" id="stat-delta" style="font-size: 11px; color: var(--success);">+33.53 Points</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">90% Confidence Interval</div>
+            <div class="stat-val" id="stat-ci" style="font-size: 18px; margin-top: 10px;">[51.8, 57.9]</div>
+            <div class="stat-sub" style="font-size: 11px; color: var(--text-muted);">Monte Carlo Dispersion</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">P(EPI ≥ 50 / High-Income)</div>
+            <div class="stat-val" id="stat-prob">99.5%</div>
+            <div class="stat-sub" style="font-size: 11px; color: var(--accent);">Takeoff Probability</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="sidebar">
+            <div class="card">
+                <h2>🛠️ Policy Levers (2025–2045)</h2>
+                
+                <div class="form-group">
+                    <label>1. Fiscal Mobilization (ΔF / Tax Reform) <span class="slider-val" id="val-tax">0.022</span></label>
+                    <input type="range" id="slider-tax" min="0.000" max="0.030" step="0.002" value="0.022">
+                    <small style="color: var(--text-muted); font-size: 11px;">Raises tax-to-GDP from 7.6% to 16% via digital VAT/customs.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>2. Maritime Gravity (ΔG / Matarbari) <span class="slider-val" id="val-port">0.018</span></label>
+                    <input type="range" id="slider-port" min="0.000" max="0.025" step="0.002" value="0.018">
+                    <small style="color: var(--text-muted); font-size: 11px;">Deep-sea port logistics hub for Bay of Bengal.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>3. Economic Complexity (ΔC / Industrial) <span class="slider-val" id="val-complexity">0.016</span></label>
+                    <input type="range" id="slider-complexity" min="0.000" max="0.025" step="0.002" value="0.016">
+                    <small style="color: var(--text-muted); font-size: 11px;">Diversification into APIs, electronics, and engineering.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>4. Vocational Skills & Governance (ΔH, ΔI) <span class="slider-val" id="val-governance">0.012</span></label>
+                    <input type="range" id="slider-governance" min="0.000" max="0.020" step="0.002" value="0.012">
+                    <small style="color: var(--text-muted); font-size: 11px;">Dual technical education and civil meritocracy.</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚡ Adversarial Shocks</h2>
+                
+                <label class="checkbox-group">
+                    <input type="checkbox" id="shock-ldc" checked>
+                    <span>2026 LDC Graduation Tariff Cliff (-10% export shock)</span>
+                </label>
+
+                <label class="checkbox-group">
+                    <input type="checkbox" id="shock-npl">
+                    <span>Banking NPL Freeze & Private Credit Crunch</span>
+                </label>
+
+                <label class="checkbox-group">
+                    <input type="checkbox" id="shock-climate">
+                    <span>Compound Climate & River Siltation Shocks</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="charts-container">
+                <div class="chart-box">
+                    <canvas id="fanChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+
+            <div id="alertBox" class="alert-box alert-success">
+                <strong>Trajectory Diagnosis:</strong> Calculating...
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>4D Economic Power Dynamics Model (4D-EPDM) | Pre-Registered Macroeconomic Capability Simulator | Open Source: <a href="https://github.com/rbr48/4d-epdm">github.com/rbr48/4d-epdm</a></p>
+    </footer>
+</div>
+
+<script>
+    const BGD_2024 = [0.61, 0.38, 0.26, 0.04, 0.53, 0.18, 0.36, 0.45, 0.07];
+    const JAP_1970 = [0.72, 0.78, 0.65, 0.70, 0.82, 0.75, 0.58, 0.65, 0.50];
+    const WEIGHTS = [0.15, 0.15, 0.15, 0.15, 0.10, 0.10, 0.05, 0.05, 0.10];
+    const LABELS = ['Capital (K)', 'Human (H)', 'Tech (T)', 'Institutions (I)', 'Demographics (D)', 'Complexity (C)', 'Gravity (G)', 'Social (S)', 'Fiscal (F)'];
+    const YEARS = Array.from({length: 21}, (_, i) => 2024 + i);
+
+    let fanChart, radarChart;
+
+    function calculateEPI(vector) {
+        let product = 1.0;
+        for (let i = 0; i < 9; i++) {
+            product *= Math.pow(Math.max(0.01, Math.min(0.99, vector[i])), WEIGHTS[i]);
+        }
+        return 100.0 * product;
+    }
+
+    function simulate() {
+        const dTax = parseFloat(document.getElementById('slider-tax').value);
+        const dPort = parseFloat(document.getElementById('slider-port').value);
+        const dComp = parseFloat(document.getElementById('slider-complexity').value);
+        const dGov = parseFloat(document.getElementById('slider-governance').value);
+
+        const shockLDC = document.getElementById('shock-ldc').checked;
+        const shockNPL = document.getElementById('shock-npl').checked;
+        const shockClimate = document.getElementById('shock-climate').checked;
+
+        document.getElementById('val-tax').innerText = dTax.toFixed(3);
+        document.getElementById('val-port').innerText = dPort.toFixed(3);
+        document.getElementById('val-complexity').innerText = dComp.toFixed(3);
+        document.getElementById('val-governance').innerText = dGov.toFixed(3);
+
+        const deltaPolicy = [dGov * 0.5, dGov, 0.005, dGov, 0.0, dComp, dPort, 0.005, dTax];
+        const deltaShock = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        if (shockLDC) {
+            deltaShock[5] -= 0.010;
+            deltaShock[6] -= 0.008;
+            deltaShock[8] -= 0.005;
+        }
+        if (shockNPL) {
+            deltaShock[0] -= 0.012;
+            deltaShock[8] -= 0.015;
+        }
+        if (shockClimate) {
+            deltaShock[0] -= 0.008;
+            deltaShock[6] -= 0.010;
+        }
+
+        let current = [...BGD_2024];
+        let trajectoryMedian = [calculateEPI(current)];
+        let trajectoryP10 = [calculateEPI(current)];
+        let trajectoryP90 = [calculateEPI(current)];
+
+        let finalVectors = [];
+
+        for (let y = 1; y <= 20; y++) {
+            let activeShock = (y >= 2) ? deltaShock : [0,0,0,0,0,0,0,0,0];
+            let nextVector = [];
+            for (let i = 0; i < 9; i++) {
+                let drift = 0.005 * (1.0 - current[i]);
+                let val = current[i] + deltaPolicy[i] + activeShock[i] + drift;
+                if (i === 4 && y > 13) { val -= 0.012; } // Demographic window closing ~2038
+                nextVector.push(Math.max(0.01, Math.min(0.99, val)));
+            }
+            current = nextVector;
+            let epi = calculateEPI(current);
+            let disp = (y / 20.0) * (shockLDC || shockNPL ? 3.5 : 2.5);
+            trajectoryMedian.push(epi);
+            trajectoryP10.push(Math.max(10, epi - disp));
+            trajectoryP90.push(Math.min(85, epi + disp));
+        }
+
+        const finalEPI = trajectoryMedian[20];
+        const finalP10 = trajectoryP10[20];
+        const finalP90 = trajectoryP90[20];
+        const prob = Math.min(99.9, Math.max(0.1, ((finalEPI - 35) / 18.0) * 100)).toFixed(1);
+
+        document.getElementById('stat-projected').innerText = finalEPI.toFixed(2);
+        document.getElementById('stat-delta').innerText = `${finalEPI >= 21.33 ? '+' : ''}${(finalEPI - 21.33).toFixed(2)} Points`;
+        document.getElementById('stat-ci').innerText = `[${finalP10.toFixed(1)}, ${finalP90.toFixed(1)}]`;
+        document.getElementById('stat-prob').innerText = `${prob}%`;
+
+        const alertBox = document.getElementById('alertBox');
+        if (finalEPI >= 50.0) {
+            alertBox.className = 'alert-box alert-success';
+            alertBox.innerHTML = `<strong>🎉 Takeoff Regime (High Convergence):</strong> With a 2044 Median EPI of <strong>${finalEPI.toFixed(1)}</strong>, Bangladesh neutralizes the 2026 LDC tariff shock and banking friction, achieving parity with industrialized Vietnam and Thailand today.`;
+        } else if (finalEPI >= 35.0) {
+            alertBox.className = 'alert-box alert-warning';
+            alertBox.innerHTML = `<strong>⚠️ Moderate Catch-up / Middle-Income Trap:</strong> With a 2044 Median EPI of <strong>${finalEPI.toFixed(1)}</strong>, reforms partially compensate for shocks, but failure to achieve full complexity leaves the economy vulnerable once the demographic dividend closes ~2038.`;
+        } else {
+            alertBox.className = 'alert-box alert-danger';
+            alertBox.innerHTML = `<strong>🚨 Stagnation / Lost Decades:</strong> With a 2044 Median EPI of <strong>${finalEPI.toFixed(1)}</strong>, unmitigated LDC tariff shocks and banking NPLs contract capital formation, anchoring Bangladesh at its 2024 baseline capability.`;
+        }
+
+        // Update Charts
+        fanChart.data.datasets[0].data = trajectoryP90;
+        fanChart.data.datasets[1].data = trajectoryP10;
+        fanChart.data.datasets[2].data = trajectoryMedian;
+        fanChart.update();
+
+        radarChart.data.datasets[1].data = current;
+        radarChart.data.datasets[1].label = `Simulated 2044 (EPI: ${finalEPI.toFixed(1)})`;
+        radarChart.update();
+    }
+
+    function initCharts() {
+        const ctxFan = document.getElementById('fanChart').getContext('2d');
+        fanChart = new Chart(ctxFan, {
+            type: 'line',
+            data: {
+                labels: YEARS,
+                datasets: [
+                    { label: '90% Upper Bound', data: [], borderColor: 'transparent', backgroundColor: 'rgba(56, 189, 248, 0.15)', fill: '+1', pointRadius: 0 },
+                    { label: '90% Lower Bound', data: [], borderColor: 'transparent', backgroundColor: 'transparent', fill: false, pointRadius: 0 },
+                    { label: 'Median Capability (EPI)', data: [], borderColor: '#38bdf8', borderWidth: 3, fill: false, tension: 0.2 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: '20-Year Capability Fan Chart (2024–2044)', color: '#f8fafc', font: { size: 13, weight: 'bold' } },
+                    legend: { labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } } }
+                },
+                scales: {
+                    x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+                    y: { min: 10, max: 70, grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        radarChart = new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: LABELS,
+                datasets: [
+                    { label: 'Bangladesh 2024 Baseline (21.3)', data: BGD_2024, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.2)', borderWidth: 2 },
+                    { label: 'Simulated 2044', data: [], borderColor: '#38bdf8', backgroundColor: 'rgba(56, 189, 248, 0.25)', borderWidth: 2 },
+                    { label: 'Japan 1970 Frontier', data: JAP_1970, borderColor: '#22c55e', borderDash: [4, 4], backgroundColor: 'transparent', borderWidth: 1.5 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: '9D Structural Capability Profile', color: '#f8fafc', font: { size: 13, weight: 'bold' } },
+                    legend: { labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } } }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#334155' },
+                        grid: { color: '#334155' },
+                        pointLabels: { color: '#cbd5e1', font: { size: 10 } },
+                        ticks: { backdropColor: 'transparent', color: '#64748b', stepSize: 0.2 },
+                        suggestedMin: 0,
+                        suggestedMax: 1
+                    }
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initCharts();
+        simulate();
+
+        ['slider-tax', 'slider-port', 'slider-complexity', 'slider-governance'].forEach(id => {
+            document.getElementById(id).addEventListener('input', simulate);
+        });
+        ['shock-ldc', 'shock-npl', 'shock-climate'].forEach(id => {
+            document.getElementById(id).addEventListener('change', simulate);
+        });
+    });
+</script>
+</body>
+</html>

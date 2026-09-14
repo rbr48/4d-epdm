@@ -276,32 +276,42 @@ To ensure uncompromising academic reproducibility and scientific transparency, a
 
 ### 10.1 Computational Environment & Dependencies
 - **Runtime**: Python 3.10+ on standard x86_64 / Windows / Linux architectures.
+- **Dependency Pinning**: Pinned dependencies and Conda lockfiles are provided via [`requirements.txt`](requirements.txt) and [`environment.yml`](environment.yml).
 - **Core Libraries**: `numpy` ($\ge 1.24$), `pandas` ($\ge 2.0$), `scipy` ($\ge 1.10$), `matplotlib` ($\ge 3.7$), and `seaborn` ($\ge 0.12$).
 
 ### 10.2 Replicating Empirical Findings & Simulations
+The entire empirical pipeline, capability simulation, stress-testing suite, and figure generation can be reproduced via a single automated command:
+```bash
+python run_all.py --all
+# Or via GNU Make:
+make reproduce-paper
+```
+
+Individual sub-components can also be executed independently:
 1. **Out-of-Sample Rolling-Origin Forecasting**:
    ```bash
-   python run_evaluation.py
+   python run_evaluation.py  # Or: make eval
    ```
    Generates `outputs_candidate.csv` comprising 9,120 out-of-sample predictions across 19 origins and computes pooled RMSE and Diebold–Mariano statistics against `ar1_fe`.
 
 2. **9D Capability Indexation & Monte Carlo Trajectories**:
    ```bash
-   python power_dynamics_engine.py
+   python power_dynamics_engine.py  # Or: make sim
    ```
    Executes the 20,000 Monte Carlo paths for Bangladesh (2025–2045), runs the weight robustness test, and generates `outputs/weight_robustness_check.csv`.
 
 3. **Adversarial Stress Testing & Falsification Suite**:
    ```bash
-   python stress_testing.py
+   python stress_testing.py  # Or: make stress
    ```
    Performs the crisis vs. tranquil split (2008 GFC, 2020 COVID), archetype heterogeneity evaluation, Bangladesh horizon tracking, and the placebo permutation test.
 
-4. **Publication Visualizations**:
+4. **Publication Visualizations & Interactive Dashboards**:
    ```bash
-   python generate_video_figures.py
+   python generate_video_figures.py  # Or: make figures
+   streamlit run dashboard.py        # Or: make dashboard
    ```
-   Renders all 300 DPI high-resolution figures in `outputs/figures/`.
+   Renders all 300 DPI high-resolution figures in `outputs/figures/` and launches the interactive capability sandbox. A standalone zero-dependency web visualizer is also available at `outputs/interactive_dashboard.html`.
 
 ### 10.3 Reproducibility & Random Seeds
 All stochastic routines utilize fixed pseudo-random number seeds (`seed=42` for Monte Carlo trajectory generation; `seed=101` for the cross-country placebo permutation test), guaranteeing bitwise identity across independent computational environments.

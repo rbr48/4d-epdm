@@ -2,13 +2,15 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Pre-Registration](https://img.shields.io/badge/pre--registration-PASS%20(%E2%9C%93)-brightgreen.svg)](PRE_REGISTRATION.md)
-[![Diebold-Mariano](https://img.shields.io/badge/Diebold--Mariano%20(h=3)-p%20=%200.0062-success.svg)](#4-empirical-benchmarking--pre-registration-results)
+[![Diebold-Mariano](https://img.shields.io/badge/Diebold--Mariano%20(h=3)-p%20=%200.0062-success.svg)](#2-dieboldmariano-statistical-significance-tests-vs-ar1_fe)
 [![Evaluation Horizons](https://img.shields.io/badge/horizons-h%20=%201...5-orange.svg)](#)
 [![Observations](https://img.shields.io/badge/OOS%20observations-9,120-blueviolet.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
+[![Izhaan Intellect Video](https://img.shields.io/badge/YouTube-Izhaan%20Intellect-red.svg)](https://www.youtube.com/shorts/BKpkIKy8MT8)
 
 > **Japan’s Postwar Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh (2025–2045)**  
-> *Izhaan Intellect Research Series & Academic Working Paper*
+> *Izhaan Intellect Research Series & Academic Working Paper*  
+> 📺 **Presentation & Overview**: [Izhaan Intellect Research Series on YouTube](https://www.youtube.com/shorts/BKpkIKy8MT8)
 
 ---
 
@@ -61,7 +63,7 @@ Evaluated over **19 rolling historical origins (2001–2019)** across **16 econo
 
 Cross-sectionally averaged loss differentials across $N=16$ economies with Harvey–Leybourne–Newbold small-sample correction and Newey–West lag order $h-1$:
 
-| Horizon ($h$) | DM Statistic | $p$-value | Significance ($\alpha = 0.05$) | Outcome |
+| Horizon ($h$) | DM Statistic | $p$-value | Significance ($lpha = 0.05$) | Outcome |
 | :---: | :---: | :---: | :---: | :---: |
 | $h = 1$ | $0.000$ | $1.0000$ | Matched by design | — |
 | $h = 2$ | $-1.923$ | $0.0705$ | Marginal advantage | `NCD-LP` |
@@ -90,7 +92,7 @@ Our architecture was subjected to rigorous stress-testing in [`stress_testing.py
 4. **Placebo Permutation Falsification**:
    - Randomly permuting demographic dependency and income across economies increases RMSE to **2.8975** and destroys statistical significance ($p > 0.05$), confirming genuine economic causality.
 5. **Weight Robustness Audit**:
-   - Testing baseline tiered weights vs. strict equal weighting ($w_j = 1/9$): Spearman rank correlation **$\rho = 0.9382$ ($p = 7.80 \times 10^{-8}$)** and Pearson linear correlation **$r = 0.9765$ ($p = 1.00 \times 10^{-10}$)**.
+   - Testing baseline tiered weights vs. strict equal weighting ($w_j = 1/9$): Spearman rank correlation **$ho = 0.9382$ ($p = 7.80 	imes 10^{-8}$)** and Pearson linear correlation **$r = 0.9765$ ($p = 1.00 	imes 10^{-10}$)**.
 
 ---
 
@@ -98,7 +100,7 @@ Our architecture was subjected to rigorous stress-testing in [`stress_testing.py
 
 20,000 Monte Carlo paths executed across four adversarial and reform scenarios:
 
-| Simulation Scenario | 2044 Median EPI | 90% Confidence Interval | $P(\text{EPI} \ge 50)$ | Strategic Trajectory Outcome |
+| Simulation Scenario | 2044 Median EPI | 90% Confidence Interval | $P(	ext{EPI} \ge 50)$ | Strategic Trajectory Outcome |
 | :--- | :---: | :---: | :---: | :--- |
 | **Baseline Status Quo** | **35.89** | $[32.90, \; 38.51]$ | 0.0% | **Middle-Income Trap**: Demographic window closes ~2038 without industrial upgrade. |
 | **2026 LDC Tariff Shock** | **31.32** | $[26.80, \; 35.35]$ | 0.0% | **Export Contraction**: Loss of EU EBA duty-free access erodes reserves and growth. |
@@ -122,6 +124,24 @@ All figures are generated at 300 DPI in `outputs/figures/`:
 
 ---
 
+## 🎮 Interactive Web Dashboards & Simulators
+
+We provide two interactive platforms to explore the policy parameter space:
+
+1. **Streamlit Web Application**:
+   ```bash
+   pip install streamlit
+   streamlit run dashboard.py
+   # Or:
+   make dashboard
+   ```
+   Interactive sliders for tax mobilization, deep-sea port logistics, product complexity, vocational skills, and toggleable adversarial shocks.
+
+2. **Zero-Dependency Standalone Browser Visualizer**:
+   Open [`outputs/interactive_dashboard.html`](outputs/interactive_dashboard.html) in **any web browser** without installing Python or dependencies. Real-time client-side calculation of 2025–2045 trajectory fan charts and 9D capability radar diagrams.
+
+---
+
 ## 🏛️ Strategic 4-Pillar Roadmap for Bangladesh
 
 To replicate Japan's postwar trajectory and avoid the middle-income trap, Bangladesh must execute an integrated four-pillar transformation with feasible political-economy sequencing:
@@ -139,38 +159,37 @@ To replicate Japan's postwar trajectory and avoid the middle-income trap, Bangla
 
 ---
 
-## 🚀 Quickstart & Reproduction
+## 🚀 Quickstart & Replication
 
-### Prerequisites
+### Installation & Environment
 ```bash
 git clone https://github.com/rbr48/4d-epdm.git
 cd 4d-epdm
-pip install numpy pandas scipy matplotlib seaborn
+
+# Via pip requirements lockfile:
+pip install -r requirements.txt
+
+# Or via Conda:
+conda env create -f environment.yml
+conda activate 4d-epdm
 ```
 
-### 1. Run Pre-Registered Out-of-Sample Benchmark
+### 1-Click Master Reproduction
+Reproduce the entire empirical paper, 19-origin evaluations, 20-year Monte Carlo trajectories, stress-testing suite, and publication figures in a single command:
 ```bash
-python run_evaluation.py
+python run_all.py --all
+# Or via GNU Make:
+make reproduce-paper
 ```
-*Evaluates candidate model across 19 rolling origins and 16 economies; outputs metrics and pre-registration PASS status.*
 
-### 2. Run 9D Capability State Space & Monte Carlo Simulator
+### Modular Execution
 ```bash
-python power_dynamics_engine.py
+python run_evaluation.py          # Out-of-sample rolling-origin evaluation (make eval)
+python power_dynamics_engine.py    # 9D capability simulation & Monte Carlo (make sim)
+python stress_testing.py           # Crisis split, archetype & placebo tests (make stress)
+python generate_video_figures.py   # Publication 300 DPI figures (make figures)
+streamlit run dashboard.py         # Launch Streamlit web dashboard (make dashboard)
 ```
-*Simulates 20,000 Monte Carlo paths for Bangladesh (2025–2045) and runs weight sensitivity robustness checks.*
-
-### 3. Run Adversarial Stress-Testing Suite
-```bash
-python stress_testing.py
-```
-*Executes crisis split, archetype heterogeneity, Bangladesh tracking, and placebo permutation test.*
-
-### 4. Generate High-Resolution Publication Figures
-```bash
-python generate_video_figures.py
-```
-*Generates 5 figures at 300 DPI in `outputs/figures/`.*
 
 ---
 
@@ -180,17 +199,24 @@ python generate_video_figures.py
 4d-epdm/
 ├── PRE_REGISTRATION.md                         # Pre-registered hypotheses and benchmarking protocol
 ├── RESEARCH_PAPER_AND_DISSERTATION_CHAPTER.md  # Complete academic working paper & dissertation chapter
+├── README.md                                   # Comprehensive repository documentation
+├── Makefile                                    # Automation targets for GNU Make
+├── requirements.txt                            # Pinned Python package dependencies
+├── environment.yml                             # Conda environment definition
+├── run_all.py                                  # 1-Click master replication pipeline CLI
 ├── candidate_model.py                          # Engine 1: NCD-LP direct local projection forecaster
 ├── power_dynamics_engine.py                    # Engine 2: 9D capability state space & 20-yr Monte Carlo
 ├── run_evaluation.py                           # 19 rolling origins zero-leakage evaluation harness
 ├── stress_testing.py                           # Crisis split, archetype heterogeneity, placebo permutation
 ├── generate_video_figures.py                   # 300 DPI visualization generation script
+├── dashboard.py                                # Streamlit interactive capability sandbox
 ├── data_layer.py                               # Macroeconomic data ingestion & panel construction
 ├── evaluation.py                               # Benchmark estimators & Diebold-Mariano tests
 ├── outputs/                                    # Evaluation logs, weight checks, and figures
 │   ├── figures/                                # Publication-ready figures (PNG, 300 DPI)
+│   ├── interactive_dashboard.html              # Standalone zero-dependency browser visualizer
 │   └── weight_robustness_check.csv             # Weight schema robustness audit
-└── README.md                                   # Repository documentation (this file)
+└── data/                                       # Raw World Bank WDI and PWT empirical datasets
 ```
 
 ---
@@ -214,4 +240,4 @@ If you use this model or code in your research, please cite:
 ---
 
 ## 📄 License
-This research project is licensed under the MIT License.
+This research project is licensed under the [MIT License](LICENSE).

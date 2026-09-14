@@ -55,19 +55,90 @@
             -webkit-font-smoothing: antialiased;
         }
 
+                html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Tooltip Component */
+        .tooltip-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            cursor: help;
+        }
+        .tooltip-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #64748b;
+            font-size: 9.5px;
+            font-weight: 700;
+            margin-left: 4px;
+            transition: background 0.15s;
+        }
+        .tooltip-wrap:hover .tooltip-icon {
+            background: var(--primary);
+            color: #ffffff;
+        }
+        .tooltip-box {
+            visibility: hidden;
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: #f8fafc;
+            font-size: 11px;
+            line-height: 1.45;
+            padding: 7px 11px;
+            border-radius: 6px;
+            width: max-content;
+            max-width: 240px;
+            z-index: 1000;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .tooltip-box::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #0f172a transparent transparent transparent;
+        }
+        .tooltip-wrap:hover .tooltip-box {
+            visibility: visible;
+            opacity: 1;
+        }
+
         /* Top Sticky Bar */
         .top-navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(14px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 12px 32px;
+            padding: 10px 28px;
+            min-height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow-xs);
+            gap: 16px;
         }
         .nav-brand {
             display: flex;
@@ -130,55 +201,156 @@
             gap: 10px;
         }
         .btn-nav {
-            padding: 7px 14px;
-            border-radius: var(--radius-full);
-            font-size: 12.5px;
+            padding: 6px 13px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             transition: all 0.2s;
-            border: 1px solid var(--border);
+            border: 1px solid #cbd5e1;
             background: #ffffff;
-            color: var(--text-body);
+            color: #334155;
+            cursor: pointer;
+            line-height: 1.2;
         }
         .btn-nav:hover {
             border-color: var(--primary);
             color: var(--primary);
-            box-shadow: var(--shadow-sm);
+            background: #f8fafc;
+            box-shadow: var(--shadow-xs);
+        }
+        .btn-paper {
+            border-color: #cbd5e1;
+            color: #1e293b;
+            background: #f8fafc;
+            font-weight: 700;
+        }
+        .btn-paper:hover {
+            background: #ffffff;
+            border-color: var(--primary);
+            color: var(--primary);
         }
         .btn-youtube {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+            font-weight: 700;
+            box-shadow: none;
+        }
+        .btn-youtube:hover {
             background: #dc2626;
             color: #ffffff;
             border-color: #dc2626;
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
-        }
-        .btn-youtube:hover {
-            background: #b91c1c;
-            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
         }
 
         /* Container */
         .app-container {
-            max-width: 1560px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 24px 32px 40px;
+            padding: 16px 24px 36px;
         }
 
         /* Hero / Preset Header */
         .hero-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 24px 28px;
-            margin-bottom: 22px;
-            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-xs);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .hero-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
             flex-wrap: wrap;
-            gap: 20px;
+        }
+        .hero-info h2 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            margin-bottom: 2px;
+        }
+        .hero-info p {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            max-width: 900px;
+            line-height: 1.4;
+        }
+        .preset-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-top: 12px;
+            border-top: 1px solid #f1f5f9;
+        }
+        .preset-left-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .preset-tag {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-right: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-scenario {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            font-weight: 600;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .btn-scenario:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f8fafc;
+        }
+        .btn-scenario.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(37,99,235,0.25);
+        }
+        .btn-reset-ghost {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .btn-reset-ghost:hover {
+            border-color: #94a3b8;
+            color: #0f172a;
+            background: #f8fafc;
         }
         .hero-info h2 {
             font-size: 22px;
@@ -235,26 +407,26 @@
         /* Metrics Bar (5 KPIs) */
         .kpi-row {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
-            margin-bottom: 22px;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 18px;
         }
-        @media (max-width: 1280px) { .kpi-row { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { .kpi-row { grid-template-columns: 1fr; } }
+        @media (max-width: 980px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .kpi-row { grid-template-columns: 1fr; } }
 
         .kpi-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 18px 20px;
-            box-shadow: var(--shadow-sm);
+            padding: 12px 14px;
+            box-shadow: var(--shadow-xs);
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
         .kpi-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
         }
         .kpi-card-bar {
             position: absolute;
@@ -262,30 +434,37 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: var(--primary);
         }
         .kpi-title {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+            letter-spacing: 0.04em;
+            color: #475569;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .kpi-num {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--text-main);
             letter-spacing: -0.03em;
+            line-height: 1.15;
         }
         .kpi-sub {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 600;
             margin-top: 4px;
             display: flex;
             align-items: center;
             gap: 4px;
+            color: #334155;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* 2-Column War Room Workspace */
@@ -720,17 +899,34 @@
         </div>
     </div>
     <div class="nav-badges">
-        <span class="badge-chip badge-pre-reg">Pre-Registration PASS ✓</span>
-        <span class="badge-chip badge-dm">DM Stat: -3.100 (p=0.0062)</span>
+        <div class="tooltip-wrap">
+            <span class="badge-chip badge-pre-reg">Pre-Registration PASS ✓</span>
+            <span class="tooltip-icon">i</span>
+            <div class="tooltip-box">Specification, loss functions, empirical panel data, and replication code successfully pre-registered and audited.</div>
+        </div>
+        <div class="tooltip-wrap">
+            <span class="badge-chip badge-dm">DM Stat: -3.100 (p=0.0062)</span>
+            <span class="tooltip-icon">i</span>
+            <div class="tooltip-box">Diebold–Mariano predictive accuracy test. Confirms NCD-LP significantly outperforms AR(1)+FE benchmark at 99% confidence (p &lt; 0.01).</div>
+        </div>
     </div>
     <div class="nav-links">
         <a class="btn-nav" href="https://github.com/rbr48/4d-epdm" target="_blank">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
         </a>
-        <a class="btn-nav" href="https://github.com/rbr48/4d-epdm/blob/main/RESEARCH_PAPER_AND_DISSERTATION_CHAPTER.md" target="_blank">📄 Paper</a>
-        <button class="btn-nav" onclick="downloadCSV()">⬇️ Export CSV</button>
-        <a class="btn-nav btn-youtube" href="https://www.youtube.com/@IzhaanIntellect" target="_blank">📺 @IzhaanIntellect</a>
+        <a class="btn-nav btn-paper" href="https://github.com/rbr48/4d-epdm/blob/main/RESEARCH_PAPER_AND_DISSERTATION_CHAPTER.md" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Paper
+        </a>
+        <button class="btn-nav" onclick="downloadCSV()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export CSV
+        </button>
+        <a class="btn-nav btn-youtube" href="https://www.youtube.com/@IzhaanIntellect" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            @IzhaanIntellect
+        </a>
     </div>
 </header>
 
@@ -738,62 +934,114 @@
 
     <!-- Hero / Scenario Presets -->
     <div class="hero-section">
-        <div class="hero-info">
-            <h2>National Economic Power & Capability Sandbox (2025–2045)</h2>
-            <p>Simulate 20,000 Monte Carlo structural paths for Bangladesh across 9 capability dimensions. Test how domestic tax mobilization, Matarbari deep-sea logistics, and product space discovery neutralize post-2026 LDC tariff cliffs.</p>
+        <div class="hero-top-row">
+            <div class="hero-info">
+                <h2>National Economic Power & Capability Sandbox (2025–2045)</h2>
+                <p>Simulate 20,000 Monte Carlo structural paths across 9 capability dimensions. Test how fiscal mobilization, deep-sea logistics, and product complexity neutralize post-2026 LDC tariff cliffs.</p>
+            </div>
+            <div>
+                <button class="btn-scenario btn-run-primary" id="btn-run-sim" onclick="runLiveSimulationAnimation()" style="background: var(--primary); color: #ffffff; border-color: var(--primary); font-weight: 700; padding: 7px 16px; box-shadow: 0 2px 8px rgba(37,99,235,0.35);">
+                    <span>▶</span> Run Simulation
+                </button>
+            </div>
         </div>
-        <div class="preset-group">
-            <span class="preset-tag">Preset Scenarios:</span>
-            <button class="btn-scenario btn-run-primary" id="btn-run-sim" onclick="runLiveSimulationAnimation()" style="background: var(--primary); color: #ffffff; border-color: var(--primary); font-weight: 700; box-shadow: 0 2px 6px rgba(37,99,235,0.3);">▶ Run Simulation</button>
-            <button class="btn-scenario active" id="btn-p-leap" onclick="setPreset('leap')">🚀 Resilient 4D+ Leap</button>
-            <button class="btn-scenario" id="btn-p-status" onclick="setPreset('status')">⚖️ Status Quo</button>
-            <button class="btn-scenario" id="btn-p-ldc" onclick="setPreset('ldc')">⚡ 2026 LDC Shock</button>
-            <button class="btn-scenario" id="btn-p-npl" onclick="setPreset('npl')">🏦 Banking NPL Freeze</button>
-            <button class="btn-scenario" id="btn-p-poly" onclick="setPreset('poly')">💥 Polycrisis</button>
-            <button class="btn-scenario" id="btn-p-reset" onclick="setPreset('reset')">🔄 Reset</button>
+        <div class="preset-toolbar">
+            <div class="preset-left-group">
+                <span class="preset-tag">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Scenarios:
+                </span>
+                <button class="btn-scenario active" id="btn-p-leap" onclick="setPreset('leap')">🚀 4D+ Leap</button>
+                <button class="btn-scenario" id="btn-p-status" onclick="setPreset('status')">⚖️ Status Quo</button>
+                <button class="btn-scenario" id="btn-p-ldc" onclick="setPreset('ldc')">⚡ LDC Shock</button>
+                <button class="btn-scenario" id="btn-p-npl" onclick="setPreset('npl')">🏦 NPL Freeze</button>
+                <button class="btn-scenario" id="btn-p-poly" onclick="setPreset('poly')">💥 Polycrisis</button>
+            </div>
+            <div>
+                <button class="btn-scenario btn-reset-ghost" id="btn-p-reset" onclick="setPreset('reset')">🔄 Reset Defaults</button>
+            </div>
         </div>
     </div>
 
-    <!-- Live KPI Metrics Row -->
+    <!-- Live KPI Metrics Row (Compact 5-Metric Strip with Semantic Coding & Tooltips) -->
     <div class="kpi-row">
+        <!-- Metric 1: 2024 Baseline -->
         <div class="kpi-card">
-            <div class="kpi-card-bar" style="background: var(--warning);"></div>
-            <div class="kpi-title">2024 Baseline EPI</div>
+            <div class="kpi-card-bar" style="background: #64748b;"></div>
+            <div class="kpi-title">
+                <span>2024 Baseline EPI</span>
+                <span class="tooltip-wrap">
+                    <span class="tooltip-icon">i</span>
+                    <span class="tooltip-box">Starting 4D-EPDM composite score (0–100 scale), calibrated to 2024 empirical panel data.</span>
+                </span>
+            </div>
             <div class="kpi-num">21.33</div>
-            <div class="kpi-sub" style="color: var(--danger);">
+            <div class="kpi-sub" style="color: #dc2626;">
                 <span>Rank #16 / Severe Fiscal Deficit</span>
             </div>
         </div>
+
+        <!-- Metric 2: 2044 Projected Median -->
         <div class="kpi-card">
-            <div class="kpi-card-bar" style="background: var(--primary);"></div>
-            <div class="kpi-title">2044 Projected Median EPI</div>
-            <div class="kpi-num" id="kpi-median">54.86</div>
-            <div class="kpi-sub" id="kpi-delta" style="color: var(--success);">
-                <span>+33.53 pts vs 2024</span>
+            <div class="kpi-card-bar" style="background: #2563eb;"></div>
+            <div class="kpi-title">
+                <span>2044 Projected EPI</span>
+                <span class="tooltip-wrap">
+                    <span class="tooltip-icon">i</span>
+                    <span class="tooltip-box">Projected median (P50) national capability score after 20-year multi-horizon policy simulation.</span>
+                </span>
+            </div>
+            <div class="kpi-num" id="kpi-median">51.11</div>
+            <div class="kpi-sub" id="kpi-delta" style="color: #059669;">
+                <span>+29.78 pts vs 2024</span>
             </div>
         </div>
+
+        <!-- Metric 3: GDP per Capita PPP -->
         <div class="kpi-card">
-            <div class="kpi-card-bar" style="background: var(--purple);"></div>
-            <div class="kpi-title">Est. 2044 GDP per Capita (PPP)</div>
-            <div class="kpi-num" id="kpi-gdppc">$28,450</div>
-            <div class="kpi-sub" style="color: var(--purple);">
+            <div class="kpi-card-bar" style="background: #4f46e5;"></div>
+            <div class="kpi-title">
+                <span>Est. 2044 GDPpc (PPP)</span>
+                <span class="tooltip-wrap">
+                    <span class="tooltip-icon">i</span>
+                    <span class="tooltip-box">Estimated GDP per capita (constant international $ PPP), calibrated to cross-country panel convergence.</span>
+                </span>
+            </div>
+            <div class="kpi-num" id="kpi-gdppc">$22,301</div>
+            <div class="kpi-sub" style="color: #4f46e5;">
                 <span id="kpi-gdp-tier">High Middle-Income Frontier</span>
             </div>
         </div>
+
+        <!-- Metric 4: Takeoff Probability -->
         <div class="kpi-card">
-            <div class="kpi-card-bar" style="background: var(--success);"></div>
-            <div class="kpi-title">P(EPI ≥ 50 / Takeoff)</div>
-            <div class="kpi-num" id="kpi-prob">99.5%</div>
-            <div class="kpi-sub" id="kpi-prob-desc" style="color: var(--success);">
-                <span>Takeoff Virtually Guaranteed</span>
+            <div class="kpi-card-bar" style="background: #059669;"></div>
+            <div class="kpi-title">
+                <span>P(EPI ≥ 50 / Takeoff)</span>
+                <span class="tooltip-wrap">
+                    <span class="tooltip-icon">i</span>
+                    <span class="tooltip-box">Probability of crossing the EPI=50 structural takeoff frontier required to escape the middle-income trap.</span>
+                </span>
+            </div>
+            <div class="kpi-num" id="kpi-prob">95.2%</div>
+            <div class="kpi-sub" id="kpi-prob-desc" style="color: #059669;">
+                <span>Takeoff Highly Probable</span>
             </div>
         </div>
+
+        <!-- Metric 5: Global Peer Rank -->
         <div class="kpi-card">
-            <div class="kpi-card-bar" style="background: #0ea5e9;"></div>
-            <div class="kpi-title">2044 Global Peer Rank</div>
-            <div class="kpi-num" id="kpi-rank">#4 / 16</div>
-            <div class="kpi-sub" style="color: var(--primary);">
-                <span id="kpi-peer-comp">Surpasses Vietnam & Germany</span>
+            <div class="kpi-card-bar" style="background: #0891b2;"></div>
+            <div class="kpi-title">
+                <span>2044 Global Peer Rank</span>
+                <span class="tooltip-wrap">
+                    <span class="tooltip-icon">i</span>
+                    <span class="tooltip-box">Simulated position among 16 benchmark economies (Asian Tigers, Advanced OECD, Catch-up Giants).</span>
+                </span>
+            </div>
+            <div class="kpi-num" id="kpi-rank">#7 / 16</div>
+            <div class="kpi-sub" style="color: #0284c7;">
+                <span id="kpi-peer-comp">Surpasses Regional Peers</span>
             </div>
         </div>
     </div>

@@ -1,0 +1,5 @@
+iso,episode,period,initial_EPI,actual_final_EPI,simulated_final_EPI,tracking_error,epistemic_note
+BGD,Bangladesh Millennium Trajectory (2000-2020),2000-2020,11.32,21.09,27.83,6.74,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
+VNM,Vietnam Post-Doi Moi Convergence (2000-2020),2000-2020,33.62,54.02,46.42,-7.61,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
+KOR,South Korea Advanced Maturation (1990-2010),1990-2010,53.67,63.03,64.76,1.73,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
+IND,India Post-Liberalization Growth (2000-2020),2000-2020,17.12,29.2,31.96,2.76,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation

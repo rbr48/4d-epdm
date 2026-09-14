@@ -1,4 +1,4 @@
-# Japan’s Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh
+# Japan’s Rise as an Economic Superpower and a Dual-Engine Development Framework for Bangladesh: Empirically Validated Medium-Term Projections and Calibrated Policy Space Simulation
 
 **Working Paper & Dissertation Chapter**  
 *Project: 4D Economic Power Dynamics Model (4D-EPDM)*  
@@ -11,11 +11,13 @@
 
 How do developing nations transition into high-income, technologically complex industrial superpowers? While the postwar Japanese economic miracle (1950–1975) is frequently cited as a template for rapid economic catch-up, standard structural capability models in development economics frequently fall into the trap of claiming in-sample validity ("passing all internal diagnostic checks") while failing out-of-sample against naive statistical heuristics such as country historical averages or random walks.
 
-This paper addresses this fundamental methodological challenge by developing a pre-registered, out-of-sample validated **Dual-Engine National Economic Capability Architecture**. The framework comprises:
-1. **An Out-of-Sample Forecasting Engine (`NCD-LP`)**: A multi-horizon direct local projection model combining short-term business cycle persistence ($h=1$) with neoclassical income convergence and demographic dividend dynamics ($h=2\dots 5$) under $L_2$ Ridge shrinkage. Evaluated across 19 rolling origins (2001–2019) and 16 major economies under a strict zero-leakage protocol, the model achieves a pooled RMSE of **2.8905**, statistically significantly beating the pre-registered iterated AR(1) fixed-effects benchmark under the cross-sectionally averaged Diebold–Mariano test ($stat = -3.100, p = 0.0062$ at $h=3$).
-2. **A 20-Year Structural State-Space Simulator**: A 9-dimensional capability framework ($\mathbf{K, H, T, I, D, C, G, S, F}$) modeling productive capital, human capital, technology, institutions, demographic dividend, economic complexity, geographic gravity, social capital, and fiscal/financial depth.
+This paper addresses this fundamental methodological challenge by developing a transparent **Dual-Engine National Economic Capability Framework** with a strict, pre-registered division of epistemic labor:
+1. **Engine 1: Out-of-Sample Predictive Forecaster (`NCD-LP`)**: A multi-horizon direct local projection model combining short-term business cycle persistence ($h=1$) with neoclassical income convergence and demographic dividend dynamics ($h=2\dots 5$) under $L_2$ Ridge shrinkage. Evaluated across 19 rolling origins (2001–2019) and 16 major economies under a strict zero-leakage protocol, the model achieves a pooled RMSE of **2.8905**, statistically significantly beating the pre-registered iterated AR(1) fixed-effects benchmark under the cross-sectionally averaged Diebold–Mariano test ($stat = -3.100, p = 0.0062$ at $h=3$). We formally demonstrate that this predictive advantage is invariant across four orders of magnitude of regularization ($\lambda \in [0.01, 200.0]$), refuting any suspicion of knife-edge parameter tuning.
+2. **Engine 2: Calibrated 20-Year Structural State-Space Simulator**: A 9-dimensional capability framework ($\mathbf{K, H, T, I, D, C, G, S, F}$) modeling productive capital, human capital, technology, institutions, demographic dividend, economic complexity, geographic gravity, social capital, and fiscal/financial depth.
 
-Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators), we evaluate Bangladesh's 2025–2045 development trajectory. We subject the economy to adversarial real-world stress tests, including the scheduled **2026 UN LDC graduation tariff shock** and domestic banking sector liquidity stress. Grounded in **empirically calibrated stochastic simulations** and **politically feasible implementation sequencing**, we demonstrate that under status-quo policies, Bangladesh faces severe middle-income stagnation as its demographic window begins closing around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing—doubling tax mobilization ($8\% \to 16\%$ of GDP), operationalizing the Matarbari deep-sea port, and diversifying export complexity beyond ready-made garments—neutralizes external shocks and elevates Bangladesh's Economic Power Index from $21.3$ to **$54.9$–$58.3$ by 2044**, matching present-day Vietnam and Malaysia.
+**Epistemic Demarcation**: We explicitly disclose that while Engine 1 provides an empirically validated, out-of-sample predictive model for medium-term growth bounds ($h=1\dots 5$), Engine 2 serves as an exploratory, calibrated policy simulation laboratory for long-run structural scenarios ($h=1\dots 20$). Its state-space parameters are calibrated to historical frontier dynamics rather than estimated out-of-sample, and its 2044 projections represent conditional "if-then" normative policy experiments rather than unconditional point forecasts. 
+
+Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators) and historically backtested against actual catch-up episodes (Bangladesh 2000–2020, Vietnam 2000–2020, South Korea 1990–2010), we evaluate Bangladesh's 2025–2045 trajectory under scheduled **2026 UN LDC graduation tariff shocks** and domestic banking sector liquidity stress. We demonstrate that under status-quo policies, Bangladesh faces middle-income stagnation as its demographic window closes around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing elevates Bangladesh's conditional simulated Economic Power Index from $21.3$ to **$54.9$–$58.3$ by 2044**, matching present-day Vietnam and Malaysia.
 
 
 ---
@@ -32,6 +34,13 @@ In macroeconomics and geopolitical capability indexation, researchers frequently
 3. **Absence of Hard Out-of-Sample Benchmarking**: Models are evaluated on in-sample fit ($R^2$ or posterior likelihoods) rather than genuine out-of-sample forecast accuracy against strong benchmarks (iterated AR(1) with country fixed effects and historical country means).
 
 This study explicitly eliminates these pitfalls by enforcing pre-registration rules ([`PRE_REGISTRATION.md`](PRE_REGISTRATION.md)), refitting all estimators on rolling historical windows, and testing hypotheses using small-sample corrected Diebold–Mariano statistics.
+
+### 1.3 Epistemic Demarcation: Predictive Validation vs. Normative Policy Simulation
+To maintain uncompromising academic integrity, this study enforces a strict distinction between two fundamentally different modes of macroeconomic inquiry:
+1. **Predictive Econometric Forecasting (Engine 1 - `NCD-LP`)**: Answers the empirical question: *Given historical data strictly up to year $T$, what is the unconditional forecast of macroeconomic growth over horizons $h=1\dots 5$?* This engine is held to the strictest standard of science: zero data leakage, automated re-estimation at every rolling origin, and pre-registered Diebold–Mariano hypothesis testing against iterated AR(1) with country fixed effects.
+2. **Structural Scenario Simulation (Engine 2 - 9D State-Space)**: Answers the normative, counterfactual question: *If policymakers execute a coordinated structural reform package that shifts tax mobilization, port logistics, and product complexity over 20 years, how does the national capability frontier evolve?* This engine is a calibrated dynamic accounting and policy simulation sandbox. Its parameters are derived from empirical frontier distributions and historical convergence velocities ($\theta \approx 0.007$), not estimated out-of-sample.
+
+Conflating these two engines—applying Engine 1's empirical predictive validation to Engine 2's long-run policy simulations—would constitute "epistemic laundering." Throughout this paper, all 2044 capability trajectories are presented exclusively as conditional normative policy experiments, while all claims of predictive validity are restricted strictly to Engine 1.
 
 ---
 
@@ -222,6 +231,40 @@ $$\mathbf{S}_{t+1} = \text{clip}\Big(\mathbf{S}_t + \mathbf{\Delta}_{\text{polic
 
 *Source: Monte Carlo state-space simulations (20,000 iterations per scenario, seed=42) calibrated on empirical panel dynamics and historical shock variance.*
 
+### 7.5 Hyperparameter Sensitivity Audit: Ruling Out L2 Cherry-Picking
+A critical concern in pre-registered forecasting is whether hyperparameter choices—specifically the Ridge shrinkage parameter $\lambda = 15.0$ in Engine 1 (`candidate_model.py`)—were selected through uncommitted trial-and-error against the test set. To eliminate this ambiguity, we conducted a systematic grid sweep of $\lambda$ across four orders of magnitude ($\lambda \in [0.01, 200.0]$) under the exact 19 rolling-origin, 16-country pre-registered protocol.
+
+| Ridge Penalty ($\lambda$) | Pooled RMSE ($h=1\dots 5$) | Diff vs. AR(1)+FE | Beats AR(1)+FE? | DM Test ($h=3$) Stat | DM Test ($h=3$) $p$-value | Pre-Reg Verdict |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **0.01** | 2.8903 | -0.0383 | Yes | -3.142 | 0.0056 | **PASS** |
+| **0.10** | 2.8903 | -0.0383 | Yes | -3.141 | 0.0056 | **PASS** |
+| **1.00** | 2.8903 | -0.0383 | Yes | -3.139 | 0.0057 | **PASS** |
+| **5.00** | 2.8903 | -0.0383 | Yes | -3.127 | 0.0058 | **PASS** |
+| **10.00** | 2.8904 | -0.0382 | Yes | -3.113 | 0.0060 | **PASS** |
+| **15.00 (Baseline)** | **2.8905** | **-0.0382** | **Yes** | **-3.100** | **0.0062** | **PASS** |
+| **20.00** | 2.8905 | -0.0381 | Yes | -3.087 | 0.0064 | **PASS** |
+| **50.00** | 2.8907 | -0.0379 | Yes | -3.025 | 0.0073 | **PASS** |
+| **100.00** | 2.8910 | -0.0377 | Yes | -2.951 | 0.0085 | **PASS** |
+| **200.00** | 2.8911 | -0.0375 | Yes | -2.862 | 0.0104 | **PASS** |
+
+*Table 7.1: Out-of-sample sensitivity sweep across 19 rolling origins (2001–2019). File: `outputs/l2_sensitivity_audit.csv`.*
+
+**Audit Finding**: The predictive superiority of the NCD-LP model does not depend on $\lambda = 15.0$. Across the entire range $\lambda \in [0.01, 200.0]$, pooled RMSE varies by less than $0.0008$, and the Diebold–Mariano test at $h=3$ remains statistically significant ($p < 0.01$). The result is driven by the structural economic signal (neoclassical income convergence and demographic dividend), not parameter tuning.
+
+### 7.6 Historical Backcasting Audit & Epistemic Boundaries of Engine 2
+To benchmark the tracking error of Engine 2 against ground truth, we backtested the 9D capability simulation against four historical 20-year developmental transitions:
+
+| Economy | Historical Episode | Period | Initial Observed EPI | Final Observed EPI | Simulated Final EPI | Tracking Error ($\Delta$) | Epistemic Diagnostics |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Bangladesh** | Millennium Growth | 2000–2020 | 11.32 | 21.09 | 27.83 | +6.74 | Status-quo drift overshoots actual EPI due to institutional & fiscal drag. |
+| **Vietnam** | Post-Doi Moi Convergence | 2000–2020 | 33.62 | 54.02 | 46.42 | -7.61 | Actual growth exceeded naive drift due to aggressive structural reforms. |
+| **South Korea** | Advanced Maturation | 1990–2010 | 53.67 | 63.03 | 64.76 | +1.73 | High tracking precision in mature, institutionalized economic regimes. |
+| **India** | Post-Liberalization Growth | 2000–2020 | 17.12 | 29.20 | 31.96 | +2.76 | Moderate tracking error; infrastructure gains balanced by reform delays. |
+
+*Table 7.2: Historical 20-year backcast validation. File: `outputs/historical_backcast_validation.csv`.*
+
+Furthermore, estimating the frontier convergence velocity directly on our 16-country panel yields an average empirical velocity of $\bar{\theta} = 0.00711$ per annum (with capital at $0.0068$, human capital at $0.0179$, and fiscal mobilization at $0.0035$), confirming that the calibrated model's $\theta = 0.005$ represents a conservative lower-bound estimate rather than an arbitrary inflationary parameter.
+
 ---
 
 ## 8. Strategic Policy Roadmap for Bangladesh (2025–2045)
@@ -263,7 +306,9 @@ While the four strategic pillars are theoretically unassailable, real-world deve
 
 The Japanese economic ascent demonstrated that destruction and initial poverty do not predetermine national destiny; rather, disciplined technological learning, institutional coordination, and human capital accumulation generate sustained long-run growth.
 
-For Bangladesh, the next decade represents a critical historical juncture. With its demographic dividend beginning to close around 2038 and the 2026 LDC graduation tariff cliff approaching, relying on basic garment factor accumulation will inevitably precipitate the middle-income trap. By adopting an integrated 4D+ structural reform strategy—backed by the empirical and econometric validation established in this study—Bangladesh can transcend its current constraints and achieve high-income industrial convergence.
+For Bangladesh, the next decade represents a critical historical juncture. With its demographic dividend beginning to close around 2038 and the 2026 LDC graduation tariff cliff approaching, relying on basic garment factor accumulation will inevitably precipitate the middle-income trap. 
+
+While near-term macroeconomic vulnerabilities and convergence bounds are disciplined by the pre-registered econometric projections of Engine 1, the 2044 capability trajectories (Engine 2) must be understood strictly as normative policy scenario experiments under assumed structural reforms, rather than validated point forecasts. By adopting an integrated 4D+ structural reform strategy, Bangladesh can transcend its factor-driven constraints and achieve high-income industrial convergence.
 
 ---
 

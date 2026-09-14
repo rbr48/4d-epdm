@@ -107,6 +107,8 @@ $$\boldsymbol{\beta}_h = \left(\mathbf{X}_h' \mathbf{X}_h + \lambda \mathbf{I}\r
 | 5 | `rw_drift` (Random Walk with Drift) | 3.4980 | +0.5694 | Failed |
 | 6 | `pooled_mean` (Global Panel Mean) | 3.5798 | +0.6512 | Failed |
 
+*Note: Calculated from World Bank WDI, PWT 10.01, and WGI datasets via rolling-origin LP pipeline across 19 origins (2001–2019) and 16 economies (9,120 total out-of-sample observations). Zero lookahead data leakage strictly enforced.*
+
 ### 4.3 Diebold–Mariano Statistical Hypothesis Tests (vs `ar1_fe`)
 Loss differentials are cross-sectionally averaged across economies to eliminate cross-country shock correlation, using Newey–West lag order $h-1$ and the Harvey–Leybourne–Newbold small-sample correction:
 
@@ -119,6 +121,8 @@ $$\bar{d}_t = \frac{1}{N} \sum_{i=1}^{N} \left(e_{i, t, \text{NCD-LP}}^2 - e_{i,
 | **$h = 3$** | **-3.100** | **0.0062** | **Statistically Significant ($p < 0.01$)** | **`NCD-LP`** |
 | $h = 4$ | $-1.840$ | $0.0823$ | Marginal | `NCD-LP` |
 | $h = 5$ | $-1.364$ | $0.1893$ | Inconclusive | `NCD-LP` |
+
+*Note: Cross-sectionally averaged loss differentials across $N=16$ economies with Harvey–Leybourne–Newbold (1997) small-sample degrees-of-freedom correction and Newey–West heteroskedasticity-and-autocorrelation-consistent (HAC) variance estimation with truncation lag $h-1$.*
 
 
 **Pre-Registration Verdict**: **`PASS -- passes`** (Satisfies both mandatory pre-registered requirements).
@@ -138,6 +142,8 @@ We isolated the major historical economic crashes (the 2008–2009 Global Financ
 | :--- | :--- | :---: | :---: | :---: | :---: |
 | **Crisis Shock Years** | 2008, 2009, 2020 | **5.823** | 5.881 | 6.001 | 5.960 |
 | **Tranquil Normal Years** | All other 16 years | **1.888** | 1.924 | 1.942 | 2.430 |
+
+*Note: Crisis years defined as 2008, 2009 (Global Financial Crisis) and 2020 (COVID-19 pandemic shock). Evaluated out-of-sample across all 16 economies using identical rolling-origin horizons.*
 
 *Result*: `NCD-LP` produces the lowest RMSE in both calm periods and global crises, proving that incorporating demographics and convergence does not induce forecast instability during extreme tail shocks.
 
@@ -181,6 +187,8 @@ Using the expanded 9D capability formulation across real empirical indicators, t
 | **India** | `IND` | **31.32** | 0.69 | 0.40 | 0.20 | 0.35 | 0.66 | 0.07 |
 | **Bangladesh** | `BGD` | **21.33** | 0.61 | 0.38 | 0.26 | **0.04** | 0.53 | **0.07** |
 
+*Source: Synthesized from World Bank WDI (2024 vintage), Penn World Table 10.01, and Worldwide Governance Indicators (2023 release) across 9 frontier-normalized dimensions. Super-modular penalties enforced via weighted geometric mean.*
+
 ### Structural Diagnosis: Japan vs. Bangladesh
 - **Japan's Profile**: World-frontier institutions ($0.92$) and human capital ($0.90$), but heavily constrained by demographic contraction ($0.17$), capping growth potential.
 - **Bangladesh's Profile**: Solid gross investment ($0.61$) and favorable demographic dividend ($0.53$), but severely bottlenecked by institutional governance ($0.04$) and domestic fiscal mobilization ($0.07$).
@@ -212,28 +220,30 @@ $$\mathbf{S}_{t+1} = \text{clip}\Big(\mathbf{S}_t + \mathbf{\Delta}_{\text{polic
 | **Compound Polycrisis** | **21.38** | $[15.91, \; 27.03]$ | 0.0% | **Two Lost Decades**: Complete stagnation at 2024 capability baseline. |
 | **Resilient 4D+ Response** | **54.86** | $[51.76, \; 57.85]$ | **99.5%** | **Industrial Takeoff**: Neutralizes external shocks; matches Vietnam today. |
 
+*Source: Monte Carlo state-space simulations (20,000 iterations per scenario, seed=42) calibrated on empirical panel dynamics and historical shock variance.*
+
 ---
 
 ## 8. Strategic Policy Roadmap for Bangladesh (2025–2045)
 
 To replicate the underlying mechanisms of the Japanese economic miracle and avoid the middle-income trap, Bangladesh must execute an integrated four-pillar transformation:
 
-### Pillar 1: Domestic Fiscal Mobilization & Banking Resolution
+### 8.1 Pillar 1: Domestic Fiscal Mobilization & Banking Resolution
 - **The Bottleneck**: Bangladesh's tax-to-GDP ratio (~7.6%) is among the lowest in the world, preventing state funding of R&D and human capital.
 - **The Reform**: Expand the formal direct tax base to raise revenue to $15–16\%$ of GDP by 2035. Enforce asset recovery and strict provisioning for banking non-performing loans (NPLs) to restore commercial credit intermediation.
 
-### Pillar 2: Maritime Trade Logistics & Port Gravity
+### 8.2 Pillar 2: Maritime Trade Logistics & Port Gravity
 - **The Bottleneck**: Reliance on shallow river ports (Chittagong) imposes high transshipment costs via Singapore or Colombo.
 - **The Reform**: Accelerate the Matarbari deep-sea port and regional road-rail connectivity corridors, positioning Bangladesh as the maritime transshipment hub for Northeast India, Nepal, Bhutan, and the Bay of Bengal.
 
-### Pillar 3: Product Space Leap & Economic Complexity
+### 8.3 Pillar 3: Product Space Leap & Economic Complexity
 - **The Bottleneck**: Over 84% of exports are concentrated in ready-made garments, leaving the country vulnerable to post-2026 LDC tariff cliffs.
 - **The Reform**: Implement targeted industrial policies (similar to Japan’s early MITI) offering bonded warehouse facilities, duty drawbacks, and export discovery incentives for:
   1. Active Pharmaceutical Ingredients (APIs) and finished formulations.
   2. Consumer electronics, PCB assembly, and home appliances.
   3. Light engineering, agricultural machinery, and shipbuilding.
 
-### Pillar 4: Vocational Human Capital & Institutional Meritocracy
+### 8.4 Pillar 4: Vocational Human Capital & Institutional Meritocracy
 - **The Bottleneck**: Generalist tertiary education fails to meet the technical skills demanded by complex manufacturing.
 - **The Reform**: Transition secondary and tertiary curricula toward German/Japanese dual vocational training models, technical engineering certifications, and meritocratic civil service institutionalization.
 
@@ -249,7 +259,6 @@ While the four strategic pillars are theoretically unassailable, real-world deve
 
 ---
 
-
 ## 9. Conclusion
 
 The Japanese economic ascent demonstrated that destruction and initial poverty do not predetermine national destiny; rather, disciplined technological learning, institutional coordination, and human capital accumulation generate sustained long-run growth.
@@ -258,7 +267,54 @@ For Bangladesh, the next decade represents a critical historical juncture. With 
 
 ---
 
-## References & Data Sources
+## 10. Software, Data Availability & Replication Protocols
+
+To ensure uncompromising academic reproducibility and scientific transparency, all econometric routines, capability simulation scripts, raw datasets, and visualization pipelines are maintained in an open-source research repository:
+
+- **Replication Repository**: [`https://github.com/rbr48/4d-epdm`](https://github.com/rbr48/4d-epdm)
+- **Pre-Registration Manifest**: All benchmark criteria and zero-leakage mandates were pre-registered prior to candidate estimation in [`PRE_REGISTRATION.md`](PRE_REGISTRATION.md).
+
+### 10.1 Computational Environment & Dependencies
+- **Runtime**: Python 3.10+ on standard x86_64 / Windows / Linux architectures.
+- **Core Libraries**: `numpy` ($\ge 1.24$), `pandas` ($\ge 2.0$), `scipy` ($\ge 1.10$), `matplotlib` ($\ge 3.7$), and `seaborn` ($\ge 0.12$).
+
+### 10.2 Replicating Empirical Findings & Simulations
+1. **Out-of-Sample Rolling-Origin Forecasting**:
+   ```bash
+   python run_evaluation.py
+   ```
+   Generates `outputs_candidate.csv` comprising 9,120 out-of-sample predictions across 19 origins and computes pooled RMSE and Diebold–Mariano statistics against `ar1_fe`.
+
+2. **9D Capability Indexation & Monte Carlo Trajectories**:
+   ```bash
+   python power_dynamics_engine.py
+   ```
+   Executes the 20,000 Monte Carlo paths for Bangladesh (2025–2045), runs the weight robustness test, and generates `outputs/weight_robustness_check.csv`.
+
+3. **Adversarial Stress Testing & Falsification Suite**:
+   ```bash
+   python stress_testing.py
+   ```
+   Performs the crisis vs. tranquil split (2008 GFC, 2020 COVID), archetype heterogeneity evaluation, Bangladesh horizon tracking, and the placebo permutation test.
+
+4. **Publication Visualizations**:
+   ```bash
+   python generate_video_figures.py
+   ```
+   Renders all 300 DPI high-resolution figures in `outputs/figures/`.
+
+### 10.3 Reproducibility & Random Seeds
+All stochastic routines utilize fixed pseudo-random number seeds (`seed=42` for Monte Carlo trajectory generation; `seed=101` for the cross-country placebo permutation test), guaranteeing bitwise identity across independent computational environments.
+
+### 10.4 Data Sources & Open Access
+All underlying macroeconomic and governance series are publicly available and can be refreshed directly from the primary providers:
+1. **World Bank World Development Indicators (WDI)**: GDP per capita (PPP), gross capital formation, electricity access, trade openness, dependency ratios, high-technology exports, and tax revenue.
+2. **Penn World Table (PWT 10.01)**: Total factor productivity (`ctfp`) and human capital index (`hc`).
+3. **Worldwide Governance Indicators (WGI 2023)**: Government effectiveness, rule of law, and political stability.
+
+---
+
+## 11. References
 - **Amsden, A. H. (1989)**. *Asia's Next Giant: South Korea and Late Industrialization*. New York: Oxford University Press.
 - **Barro, R. J., & Sala-i-Martin, X. (1992)**. "Convergence." *Journal of Political Economy*, 100(2): 223–251.
 - **Bloom, D. E., Canning, D., & Sevilla, J. (2003)**. *The Demographic Dividend: A New Perspective on the Economic Consequences of Population Change*. Santa Monica, CA: RAND Corporation / World Bank.

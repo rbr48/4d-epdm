@@ -711,34 +711,64 @@
         /* Timeline Milestone Markers below Fan Chart */
         .milestone-timeline {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 12px;
-            margin-top: 18px;
+            margin-top: 20px;
             padding-top: 16px;
             border-top: 1px solid var(--border);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        @media (max-width: 960px) {
+            .milestone-timeline {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
         .milestone-item {
-            background: var(--bg-subtle);
-            border-radius: var(--radius-sm);
-            padding: 10px 12px;
-            border-left: 3px solid var(--primary);
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            border-left-width: 4px;
+            border-left-style: solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+            box-sizing: border-box;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
-        .milestone-year {
+        .milestone-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            background: #ffffff;
+        }
+        .milestone-badge {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 10.5px;
             font-weight: 800;
-            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 2px 7px;
+            border-radius: 4px;
+            display: inline-block;
+            align-self: flex-start;
+            margin-bottom: 6px;
         }
         .milestone-name {
-            font-size: 11.5px;
+            font-size: 12.5px;
             font-weight: 700;
-            color: var(--text-main);
-            margin-top: 2px;
+            color: #0f172a;
+            margin-bottom: 4px;
+            line-height: 1.3;
         }
         .milestone-desc {
-            font-size: 10.5px;
-            color: var(--text-muted);
-            margin-top: 2px;
+            font-size: 11.5px;
+            color: #334155;
+            line-height: 1.45;
+            flex-grow: 1;
+            word-break: normal;
+            overflow-wrap: break-word;
         }
 
         /* Peer Leaderboard Table */
@@ -827,28 +857,41 @@
 
         /* Policy Verdict Callout */
         .diagnosis-card {
-            border-radius: var(--radius-lg);
-            padding: 20px 24px;
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
             display: flex;
             align-items: flex-start;
-            gap: 18px;
+            gap: 16px;
             transition: all 0.3s;
             border: 1px solid transparent;
+            margin-top: 22px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .diagnosis-icon {
-            font-size: 32px;
+            font-size: 30px;
             line-height: 1;
             flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .diagnosis-content {
+            flex: 1 1 0;
+            min-width: 0; /* CRITICAL: Enables proper flexbox word-wrap without truncation */
         }
         .diagnosis-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             margin-bottom: 4px;
+            letter-spacing: -0.01em;
         }
         .diagnosis-body {
-            font-size: 13.5px;
-            line-height: 1.55;
-            color: var(--text-body);
+            font-size: 13px;
+            line-height: 1.6;
+            color: inherit;
+            word-break: normal;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
         .diag-success {
             background: #ecfdf5;
@@ -868,22 +911,76 @@
 
         /* Footer */
         .site-footer {
-            margin-top: 40px;
-            padding: 24px;
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
+            margin-top: 36px;
+            padding: 20px 24px;
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
         }
-        .site-footer a {
-            color: var(--primary);
-            text-decoration: none;
+        .footer-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .footer-brand-title {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .footer-brand-sub {
+            font-size: 11.5px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .footer-pill-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .footer-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #334155;
+            font-size: 11.5px;
             font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s;
         }
-        .site-footer a:hover {
-            text-decoration: underline;
+        .footer-pill:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #ffffff;
+        }
+        .footer-pill-yt {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+        .footer-pill-yt:hover {
+            background: #dc2626;
+            color: #ffffff;
+            border-color: #dc2626;
+        }
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #64748b;
+            padding-top: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
     </style>
 </head>
@@ -1251,27 +1348,34 @@
                         <canvas id="fanChartObj"></canvas>
                     </div>
                     
-                    <!-- Timeline Milestones -->
+                    <!-- Timeline Milestones with Semantic Status Progression -->
                     <div class="milestone-timeline">
-                        <div class="milestone-item">
-                            <div class="milestone-year" id="ms-ldc-year">2026 Milestone</div>
-                            <div class="milestone-name">LDC Graduation Cliff</div>
-                            <div class="milestone-desc" id="ms-ldc-desc">Scheduled loss of EU Everything-But-Arms duty-free access.</div>
+                        <!-- Milestone 1: Threat / Risk Cliff -->
+                        <div class="milestone-item" style="border-left-color: #dc2626;">
+                            <span class="milestone-badge" id="ms-ldc-year" style="background: #fee2e2; color: #b91c1c;">2026 Milestone</span>
+                            <div class="milestone-name">LDC Tariff Cliff</div>
+                            <div class="milestone-desc" id="ms-ldc-desc">Preferential EU EBA duty-free access expires; exports face 9.6%–12% tariff drag.</div>
                         </div>
-                        <div class="milestone-item" style="border-left-color: var(--warning);">
-                            <div class="milestone-year" style="color: var(--warning);">2030 Milestone</div>
+
+                        <!-- Milestone 2: Infrastructure Engine -->
+                        <div class="milestone-item" style="border-left-color: #2563eb;">
+                            <span class="milestone-badge" style="background: #dbeafe; color: #1d4ed8;">2030 Milestone</span>
                             <div class="milestone-name">Matarbari Port Phase 1</div>
-                            <div class="milestone-desc">Deep-draft vessels cut feeder transshipment costs by ~30%.</div>
+                            <div class="milestone-desc">Deep-draft vessels bypass transshipment hubs, lowering maritime logistics cost by ~30%.</div>
                         </div>
-                        <div class="milestone-item" style="border-left-color: var(--purple);">
-                            <div class="milestone-year" style="color: var(--purple);">2038 Milestone</div>
+
+                        <!-- Milestone 3: Demographic Clock -->
+                        <div class="milestone-item" style="border-left-color: #d97706;">
+                            <span class="milestone-badge" style="background: #fef3c7; color: #b45309;">2038 Milestone</span>
                             <div class="milestone-name">Demographic Clock Closes</div>
-                            <div class="milestone-desc">Dependency ratio begins rising; factor accumulation window ends.</div>
+                            <div class="milestone-desc">Working-age dependency ratio begins rising; factor accumulation window expires.</div>
                         </div>
-                        <div class="milestone-item" style="border-left-color: var(--success);">
-                            <div class="milestone-year" style="color: var(--success);">2044 Horizon</div>
-                            <div class="milestone-name">High-Income Convergence</div>
-                            <div class="milestone-desc">Target trajectory for parity with present-day industrial peers.</div>
+
+                        <!-- Milestone 4: High-Income Convergence Target -->
+                        <div class="milestone-item" style="border-left-color: #059669;">
+                            <span class="milestone-badge" style="background: #d1fae5; color: #047857;">2044 Horizon</span>
+                            <div class="milestone-name">Takeoff Convergence</div>
+                            <div class="milestone-desc">Target trajectory for capability parity with present-day Vietnam, Malaysia, and OECD.</div>
                         </div>
                     </div>
                 </div>
@@ -1394,7 +1498,7 @@
             <!-- Dynamic Policy Diagnosis Banner -->
             <div id="diagBanner" class="diagnosis-card diag-success">
                 <div class="diagnosis-icon" id="diagIcon">🚀</div>
-                <div>
+                <div class="diagnosis-content">
                     <div class="diagnosis-title" id="diagTitle">High-Income Industrial Takeoff</div>
                     <div class="diagnosis-body" id="diagBody">
                         Simulating structural capabilities...
@@ -1408,8 +1512,29 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p><strong>4D-EPDM: Four-Dimensional Economic Power Dynamics Model</strong> | Izhaan Intellect Research Series</p>
-        <p style="margin-top: 4px;">Open Source Code & Data: <a href="https://github.com/rbr48/4d-epdm" target="_blank">github.com/rbr48/4d-epdm</a> | Watch Video Essays: <a href="https://www.youtube.com/@IzhaanIntellect" target="_blank">youtube.com/@IzhaanIntellect</a></p>
+        <div class="footer-top-row">
+            <div>
+                <div class="footer-brand-title">4D-EPDM: Four-Dimensional Economic Power Dynamics Model</div>
+                <div class="footer-brand-sub">Izhaan Intellect Research Series • Empirical Quantitative Replication Platform</div>
+            </div>
+            <div class="footer-pill-group">
+                <a class="footer-pill" href="https://github.com/rbr48/4d-epdm" target="_blank">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>rbr48/4d-epdm</span>
+                </a>
+                <a class="footer-pill" href="https://github.com/rbr48/4d-epdm/blob/main/RESEARCH_PAPER_AND_DISSERTATION_CHAPTER.md" target="_blank">
+                    <span>📄 Research Paper</span>
+                </a>
+                <a class="footer-pill footer-pill-yt" href="https://www.youtube.com/@IzhaanIntellect" target="_blank">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <span>@IzhaanIntellect</span>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom-row">
+            <span>© 2026 4D-EPDM Project • MIT Academic License</span>
+            <span>Pre-Registered Empirical Panel Pipeline • Diebold–Mariano Benchmarked</span>
+        </div>
     </footer>
 
 </div>

@@ -15,7 +15,8 @@ This paper addresses this fundamental methodological challenge by developing a p
 1. **An Out-of-Sample Forecasting Engine (`NCD-LP`)**: A multi-horizon direct local projection model combining short-term business cycle persistence ($h=1$) with neoclassical income convergence and demographic dividend dynamics ($h=2\dots 5$) under $L_2$ Ridge shrinkage. Evaluated across 19 rolling origins (2001–2019) and 16 major economies under a strict zero-leakage protocol, the model achieves a pooled RMSE of **2.8905**, statistically significantly beating the pre-registered iterated AR(1) fixed-effects benchmark under the cross-sectionally averaged Diebold–Mariano test ($stat = -3.100, p = 0.0062$ at $h=3$).
 2. **A 20-Year Structural State-Space Simulator**: A 9-dimensional capability framework ($\mathbf{K, H, T, I, D, C, G, S, F}$) modeling productive capital, human capital, technology, institutions, demographic dividend, economic complexity, geographic gravity, social capital, and fiscal/financial depth.
 
-Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators), we evaluate Bangladesh's 2025–2045 development trajectory. We subject the economy to adversarial real-world stress tests, including the scheduled **2026 UN LDC graduation tariff shock** and domestic banking sector liquidity stress. We demonstrate that under status-quo policies, Bangladesh faces severe middle-income stagnation as its demographic window begins closing around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing—doubling tax mobilization ($8\% \to 16\%$ of GDP), operationalizing the Matarbari deep-sea port, and diversifying export complexity beyond ready-made garments—neutralizes external shocks and elevates Bangladesh's Economic Power Index from $21.3$ to **$54.9$–$58.3$ by 2044**, matching present-day Vietnam and Malaysia.
+Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators), we evaluate Bangladesh's 2025–2045 development trajectory. We subject the economy to adversarial real-world stress tests, including the scheduled **2026 UN LDC graduation tariff shock** and domestic banking sector liquidity stress. Grounded in **empirically calibrated stochastic simulations** and **politically feasible implementation sequencing**, we demonstrate that under status-quo policies, Bangladesh faces severe middle-income stagnation as its demographic window begins closing around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing—doubling tax mobilization ($8\% \to 16\%$ of GDP), operationalizing the Matarbari deep-sea port, and diversifying export complexity beyond ready-made garments—neutralizes external shocks and elevates Bangladesh's Economic Power Index from $21.3$ to **$54.9$–$58.3$ by 2044**, matching present-day Vietnam and Malaysia.
+
 
 ---
 
@@ -119,7 +120,12 @@ $$\bar{d}_t = \frac{1}{N} \sum_{i=1}^{N} \left(e_{i, t, \text{NCD-LP}}^2 - e_{i,
 | $h = 4$ | $-1.840$ | $0.0823$ | Marginal | `NCD-LP` |
 | $h = 5$ | $-1.364$ | $0.1893$ | Inconclusive | `NCD-LP` |
 
+
 **Pre-Registration Verdict**: **`PASS -- passes`** (Satisfies both mandatory pre-registered requirements).
+
+
+**Discussion on Horizon Decay and $h=5$ Variance**: Note that while the model establishes decisive, statistically significant superiority at $h=3$ ($p = 0.0062$), the $p$-value widens to $0.1893$ at $h=5$. In multi-step macroeconomic forecasting, this expansion of test variance is entirely expected: over a 5-year forecast horizon, compounding unmodelled global structural shifts, commodity price shocks, and the $h-1$ Newey–West overlap naturally widen the standard errors of loss differentials. The pre-registered criterion explicitly accounts for this reality by requiring statistical significance at one or more horizons rather than universal dominance at the asymptotic boundary.
+
 
 ---
 
@@ -253,9 +259,16 @@ For Bangladesh, the next decade represents a critical historical juncture. With 
 ---
 
 ## References & Data Sources
-- **World Bank World Development Indicators (WDI)**: Official API (1990–2024 vintage).
-- **Penn World Table (PWT 10.01)**: Feenstra, Inklaar, and Timmer (2015).
-- **Worldwide Governance Indicators (WGI)**: Kaufmann and Kraay (2023), Source=3.
-- **Harvard Atlas of Economic Complexity**: Hidalgo and Hausmann (2009).
-- **Local Projections Methodology**: Jordà, Ò. (2005). "Estimation and Inference of Impulse Responses by Local Projections." *American Economic Review*, 95(1): 161–182.
-- **Diebold–Mariano Testing**: Diebold, F.X. and Mariano, R.S. (1995); Harvey, Leybourne, and Newbold (1997).
+- **Amsden, A. H. (1989)**. *Asia's Next Giant: South Korea and Late Industrialization*. New York: Oxford University Press.
+- **Barro, R. J., & Sala-i-Martin, X. (1992)**. "Convergence." *Journal of Political Economy*, 100(2): 223–251.
+- **Bloom, D. E., Canning, D., & Sevilla, J. (2003)**. *The Demographic Dividend: A New Perspective on the Economic Consequences of Population Change*. Santa Monica, CA: RAND Corporation / World Bank.
+- **Diebold, F. X., & Mariano, R. S. (1995)**. "Comparing Predictive Accuracy." *Journal of Business & Economic Statistics*, 13(3): 253–263.
+- **Feenstra, R. C., Inklaar, R., & Timmer, M. P. (2015)**. "The Next Generation of the Penn World Table." *American Economic Review*, 105(10): 3150–3182. (PWT 10.01).
+- **Harvey, D., Leybourne, S., & Newbold, P. (1997)**. "Testing the Equality of Prediction Mean Squared Errors." *International Journal of Forecasting*, 13(2): 281–291.
+- **Hidalgo, C. A., & Hausmann, R. (2009)**. "The Building Blocks of Economic Complexity." *Proceedings of the National Academy of Sciences*, 106(26): 10570–10575.
+- **Jordà, Ò. (2005)**. "Estimation and Inference of Impulse Responses by Local Projections." *American Economic Review*, 95(1): 161–182.
+- **Kaufmann, D., & Kraay, A. (2023)**. *Worldwide Governance Indicators (WGI)*. World Bank Development Research Group, Source=3.
+- **Mankiw, N. G., Romer, D., & Weil, D. N. (1992)**. "A Contribution to the Empirics of Economic Growth." *Quarterly Journal of Economics*, 107(2): 407–437.
+- **Solow, R. M. (1956)**. "A Contribution to the Theory of Economic Growth." *Quarterly Journal of Economics*, 70(1): 65–94.
+- **World Bank (2024)**. *World Development Indicators (WDI)*. Official API Data Service (1990–2024 Vintage).
+

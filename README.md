@@ -1,6 +1,7 @@
 # 4D-EPDM: Four-Dimensional Economic Power Dynamics Model
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Live Web Dashboard](https://img.shields.io/badge/Live%20Dashboard-GitHub%20Pages-success.svg)](https://rbr48.github.io/4d-epdm/)
 [![Pre-Registration](https://img.shields.io/badge/pre--registration-PASS%20(%E2%9C%93)-brightgreen.svg)](PRE_REGISTRATION.md)
 [![Diebold-Mariano](https://img.shields.io/badge/Diebold--Mariano%20(h=3)-p%20=%200.0062-success.svg)](#2-dieboldmariano-statistical-significance-tests-vs-ar1_fe)
 [![Evaluation Horizons](https://img.shields.io/badge/horizons-h%20=%201...5-orange.svg)](#)
@@ -10,6 +11,7 @@
 
 > **Japan’s Postwar Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh (2025–2045)**  
 > *Izhaan Intellect Research Series & Academic Working Paper*  
+> 🌐 **Live Interactive Web Simulator**: [https://rbr48.github.io/4d-epdm/](https://rbr48.github.io/4d-epdm/)  
 > 📺 **Presentation & Overview**: [Izhaan Intellect Research Series on YouTube](https://www.youtube.com/shorts/BKpkIKy8MT8)
 
 ---
@@ -126,19 +128,23 @@ All figures are generated at 300 DPI in `outputs/figures/`:
 
 ## 🎮 Interactive Web Dashboards & Simulators
 
-We provide two interactive platforms to explore the policy parameter space:
+We provide three interactive platforms to explore the policy parameter space:
 
-1. **Streamlit Web Application**:
+1. **Live Web Browser Dashboard (GitHub Pages)**:
+   - 🌐 **Instant Access**: [**https://rbr48.github.io/4d-epdm/**](https://rbr48.github.io/4d-epdm/)
+   - Fully interactive, client-side simulation running directly in any modern browser on mobile or desktop without installation. Real-time parameter tweaking and 9D capability radar updates.
+
+2. **Streamlit Local Application**:
    ```bash
    pip install streamlit
    streamlit run dashboard.py
    # Or:
    make dashboard
    ```
-   Interactive sliders for tax mobilization, deep-sea port logistics, product complexity, vocational skills, and toggleable adversarial shocks.
+   Full-featured local Streamlit sandbox with interactive sliders for tax mobilization, deep-sea port logistics, product complexity, vocational skills, and toggleable adversarial shocks.
 
-2. **Zero-Dependency Standalone Browser Visualizer**:
-   Open [`outputs/interactive_dashboard.html`](outputs/interactive_dashboard.html) in **any web browser** without installing Python or dependencies. Real-time client-side calculation of 2025–2045 trajectory fan charts and 9D capability radar diagrams.
+3. **Zero-Dependency Standalone HTML File**:
+   - Double-click [`index.html`](index.html) or [`outputs/interactive_dashboard.html`](outputs/interactive_dashboard.html) locally to run offline in any web browser.
 
 ---
 

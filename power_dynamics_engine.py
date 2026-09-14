@@ -220,6 +220,36 @@ def simulate_bangladesh_scenarios(latest_row, dims, weights, n_draws=20000, hori
     return pd.DataFrame(prob_summary), pd.DataFrame(all_results)
 
 
+def run_weight_robustness_analysis(latest, dims, weights_tiered):
+    """
+    Formally evaluate sensitivity of national rankings to weighting choice:
+    Compare Tiered Theoretical Weights against Equal Weights (1/9).
+    """
+    from scipy import stats
+    weights_equal = np.ones(len(dims)) / len(dims)
+
+    log_eq = np.zeros(len(latest))
+    for dim, w in zip(dims, weights_equal):
+        log_eq += w * np.log(latest[dim].clip(0.01, 0.99))
+    epi_equal = 100.0 * np.exp(log_eq)
+
+    df_comp = latest[["iso", "EPI"]].copy().rename(columns={"EPI": "EPI_tiered"})
+    df_comp["EPI_equal"] = epi_equal.round(2)
+    df_comp["rank_tiered"] = df_comp["EPI_tiered"].rank(ascending=False).astype(int)
+    df_comp["rank_equal"] = df_comp["EPI_equal"].rank(ascending=False).astype(int)
+
+    corr_spearman, p_spearman = stats.spearmanr(df_comp["EPI_tiered"], df_comp["EPI_equal"])
+    corr_pearson, p_pearson = stats.pearsonr(df_comp["EPI_tiered"], df_comp["EPI_equal"])
+
+    df_comp.to_csv(OUT / "weight_robustness_check.csv", index=False)
+
+    print("\n--- Weight Allocation Robustness Audit ---")
+    print(f"Spearman Rank Correlation (Tiered vs. Equal Weights): {corr_spearman:.4f} (p = {p_spearman:.2e})")
+    print(f"Pearson Linear Correlation (Tiered vs. Equal Weights): {corr_pearson:.4f} (p = {p_pearson:.2e})")
+    print(f"Saved robustness table to {OUT / 'weight_robustness_check.csv'}")
+    return df_comp, corr_spearman, p_spearman
+
+
 def main():
     print("=" * 70)
     print("POWER DYNAMICS ENGINE: STRUCTURAL SIMULATION (2025-2045)")
@@ -239,6 +269,10 @@ def main():
 
     latest_caps.to_csv(OUT / "empirical_capabilities_2024.csv", index=False)
     print(f"\nSaved empirical baseline to {OUT / 'empirical_capabilities_2024.csv'}")
+
+    # Run automated weight robustness check
+    run_weight_robustness_analysis(latest, dims, weights)
+
 
     # Bangladesh simulation
     bgd_row = latest[latest.iso == "BGD"].iloc[0]

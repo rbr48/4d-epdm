@@ -64,7 +64,8 @@ The baseline weighting vector allocates priority across three theoretical capabi
 - **Tier 2: Macroeconomic Anchors & Structural Accelerators ($w_D = w_C = w_F = 0.10$, 30% total)**: Demographic structure, product space economic complexity, and domestic fiscal mobilization/banking depth.
 - **Tier 3: Catalytic & Utilization Channels ($w_G = w_S = 0.05$, 10% total)**: Maritime logistics gravity and social/female labor force utilization.
 
-**Weight Robustness Test**: To ensure findings are not artifacts of subjective weighting, we re-estimated the 2024 composite indices under a strict **Equal-Weight Specification** ($w_j = 1/9 \approx 11.11\%$ for all nine dimensions). The Spearman rank correlation across the 16 economies between the baseline tiered index and the equal-weight index is **$\rho = 0.988$ ($p < 10^{-12}$)**, with zero ordinal rank reversals among the top four or bottom four economies. The diagnostic gap separating frontier Asian economies from Bangladesh is therefore invariant to the weighting schema.
+**Weight Robustness Test**: To ensure findings are not artifacts of subjective weighting, we re-estimated the 2024 composite indices under a strict **Equal-Weight Specification** ($w_j = 1/9 \approx 11.11\%$ for all nine dimensions, documented in `outputs/weight_robustness_check.csv`). The Spearman rank correlation across the 16 economies between the baseline tiered index and the equal-weight index is **$\rho = 0.9382$ ($p = 7.80 \times 10^{-8}$)**, and the Pearson linear correlation is **$r = 0.9765$ ($p = 1.00 \times 10^{-10}$)**, with zero ordinal rank reversals among the top four or bottom four economies. The diagnostic gap separating frontier Asian economies from Bangladesh is therefore invariant to the weighting schema.
+
 
 
 ---

@@ -55,12 +55,332 @@
             -webkit-font-smoothing: antialiased;
         }
 
-                html, body {
+                        html, body {
             overflow-x: hidden;
             width: 100%;
         }
 
-        /* Tooltip Component */
+        /* Top Sticky Bar (Ultra-Responsive, Zero Clipping) */
+        .top-navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 18px;
+            min-height: 52px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-xs);
+            gap: 12px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .brand-emblem {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 15px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+            flex-shrink: 0;
+        }
+        .brand-meta h1 {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+        .brand-meta p {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        @media (max-width: 1240px) {
+            .brand-meta p { display: none; }
+        }
+        .nav-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 1;
+        }
+        @media (max-width: 1080px) {
+            .nav-badges { display: none; }
+        }
+        .badge-chip {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            line-height: 1.2;
+            cursor: help;
+        }
+        .badge-pre-reg {
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+        .badge-dm {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .btn-nav {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.15s;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #334155;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            height: 30px;
+            box-sizing: border-box;
+        }
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f8fafc;
+        }
+        .btn-paper {
+            border-color: #cbd5e1;
+            color: #0f172a;
+            background: #f8fafc;
+            font-weight: 700;
+        }
+        .btn-paper:hover {
+            background: #ffffff;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .btn-youtube {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+            font-weight: 700;
+        }
+        .btn-youtube:hover {
+            background: #dc2626;
+            color: #ffffff;
+            border-color: #dc2626;
+        }
+
+        /* Container */
+        .app-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 10px 18px 32px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Compact Sandbox Header & Preset Strip */
+        .sandbox-strip {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow-xs);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .sandbox-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .sandbox-title-badge {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .scenario-pill-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .btn-scenario {
+            padding: 4px 10px;
+            height: 29px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+        .btn-scenario:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f8fafc;
+        }
+        .btn-scenario.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(37,99,235,0.25);
+        }
+        .sandbox-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .btn-run-primary {
+            background: var(--primary) !important;
+            color: #ffffff !important;
+            border-color: var(--primary) !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 6px rgba(37,99,235,0.3) !important;
+        }
+        .btn-run-primary:hover {
+            background: var(--primary-hover) !important;
+        }
+        .btn-reset-ghost {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+        }
+        .btn-reset-ghost:hover {
+            border-color: #94a3b8;
+            color: #0f172a;
+            background: #f1f5f9;
+        }
+
+        /* 5 Metric Cards: Strict 5-Column Single Row on all Desktop/Laptop Viewports (>= 768px) */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        @media (max-width: 768px) {
+            .kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 480px) {
+            .kpi-row { grid-template-columns: 1fr; }
+        }
+
+        .kpi-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: var(--shadow-xs);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 64px;
+            box-sizing: border-box;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+        .kpi-card-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3.5px;
+            height: 100%;
+        }
+        .kpi-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+        .kpi-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+        .kpi-sub {
+            font-size: 10.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #334155;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+
+        /* Tooltip Icon & Box Component */
         .tooltip-wrap {
             position: relative;
             display: inline-flex;
@@ -75,11 +395,15 @@
             height: 13px;
             border-radius: 50%;
             background: #e2e8f0;
-            color: #64748b;
-            font-size: 9.5px;
-            font-weight: 700;
+            color: #475569;
+            font-size: 9px;
+            font-weight: 800;
+            font-family: serif;
+            font-style: italic;
             margin-left: 4px;
-            transition: background 0.15s;
+            line-height: 1;
+            flex-shrink: 0;
+            transition: all 0.15s;
         }
         .tooltip-wrap:hover .tooltip-icon {
             background: var(--primary);
@@ -95,19 +419,20 @@
             color: #f8fafc;
             font-size: 11px;
             line-height: 1.45;
-            padding: 7px 11px;
+            padding: 6px 10px;
             border-radius: 6px;
             width: max-content;
             max-width: 240px;
             z-index: 1000;
             box-shadow: 0 4px 14px rgba(0,0,0,0.18);
             opacity: 0;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            transition: opacity 0.2s ease;
             pointer-events: none;
             font-weight: 500;
             text-transform: none;
             letter-spacing: normal;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            white-space: normal;
         }
         .tooltip-box::after {
             content: '';
@@ -122,349 +447,6 @@
         .tooltip-wrap:hover .tooltip-box {
             visibility: visible;
             opacity: 1;
-        }
-
-        /* Top Sticky Bar */
-        .top-navbar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 10px 28px;
-            min-height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow-xs);
-            gap: 16px;
-        }
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .brand-emblem {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 17px;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-        }
-        .brand-meta h1 {
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
-        }
-        .brand-meta p {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .nav-badges {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .badge-chip {
-            padding: 4px 10px;
-            border-radius: var(--radius-full);
-            font-size: 11.5px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            letter-spacing: 0.02em;
-        }
-        .badge-pre-reg {
-            background: var(--success-light);
-            color: var(--success);
-            border: 1px solid var(--success-border);
-        }
-        .badge-dm {
-            background: var(--primary-light);
-            color: var(--primary);
-            border: 1px solid var(--primary-border);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-nav {
-            padding: 6px 13px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s;
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            color: #334155;
-            cursor: pointer;
-            line-height: 1.2;
-        }
-        .btn-nav:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: #f8fafc;
-            box-shadow: var(--shadow-xs);
-        }
-        .btn-paper {
-            border-color: #cbd5e1;
-            color: #1e293b;
-            background: #f8fafc;
-            font-weight: 700;
-        }
-        .btn-paper:hover {
-            background: #ffffff;
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .btn-youtube {
-            background: #fef2f2;
-            color: #dc2626;
-            border-color: #fecaca;
-            font-weight: 700;
-            box-shadow: none;
-        }
-        .btn-youtube:hover {
-            background: #dc2626;
-            color: #ffffff;
-            border-color: #dc2626;
-            box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
-        }
-
-        /* Container */
-        .app-container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 16px 24px 36px;
-        }
-
-        /* Hero / Preset Header */
-        .hero-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-xs);
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-        .hero-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .hero-info h2 {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-            margin-bottom: 2px;
-        }
-        .hero-info p {
-            font-size: 12.5px;
-            color: var(--text-muted);
-            max-width: 900px;
-            line-height: 1.4;
-        }
-        .preset-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            padding-top: 12px;
-            border-top: 1px solid #f1f5f9;
-        }
-        .preset-left-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .preset-tag {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-right: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .btn-scenario {
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 11.5px;
-            font-weight: 600;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            color: var(--text-body);
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-        }
-        .btn-scenario:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: #f8fafc;
-        }
-        .btn-scenario.active {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-            font-weight: 700;
-            box-shadow: 0 2px 6px rgba(37,99,235,0.25);
-        }
-        .btn-reset-ghost {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            color: #64748b;
-            font-weight: 600;
-            margin-left: auto;
-        }
-        .btn-reset-ghost:hover {
-            border-color: #94a3b8;
-            color: #0f172a;
-            background: #f8fafc;
-        }
-        .hero-info h2 {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-            margin-bottom: 4px;
-        }
-        .hero-info p {
-            font-size: 13.5px;
-            color: var(--text-muted);
-            max-width: 820px;
-        }
-        .preset-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .preset-tag {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-light);
-            margin-right: 4px;
-        }
-        .btn-scenario {
-            padding: 7px 14px;
-            border-radius: var(--radius-full);
-            font-size: 12px;
-            font-weight: 700;
-            background: var(--bg-subtle);
-            border: 1px solid var(--border);
-            color: var(--text-body);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .btn-scenario:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: var(--primary-light);
-        }
-        .btn-scenario.active {
-            background: #0f172a;
-            color: #ffffff;
-            border-color: #0f172a;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Metrics Bar (5 KPIs) */
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 980px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .kpi-row { grid-template-columns: 1fr; } }
-
-        .kpi-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 12px 14px;
-            box-shadow: var(--shadow-xs);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.15s, box-shadow 0.15s;
-        }
-        .kpi-card:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
-        }
-        .kpi-card-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-        }
-        .kpi-title {
-            font-size: 10.5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: #475569;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .kpi-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-        }
-        .kpi-sub {
-            font-size: 11.5px;
-            font-weight: 600;
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: #334155;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         /* 2-Column War Room Workspace */
@@ -991,37 +973,41 @@
     <div class="nav-brand">
         <div class="brand-emblem">4D</div>
         <div class="brand-meta">
-            <h1>4D-EPDM Macroeconomic Capability Simulator</h1>
+            <h1>4D-EPDM Simulator</h1>
             <p>Japan’s Postwar Leap vs. Bangladesh 2025–2045 Horizon</p>
         </div>
     </div>
     <div class="nav-badges">
         <div class="tooltip-wrap">
-            <span class="badge-chip badge-pre-reg">Pre-Registration PASS ✓</span>
-            <span class="tooltip-icon">i</span>
+            <span class="badge-chip badge-pre-reg">
+                <span>Pre-Registration PASS ✓</span>
+                <span class="tooltip-icon">i</span>
+            </span>
             <div class="tooltip-box">Specification, loss functions, empirical panel data, and replication code successfully pre-registered and audited.</div>
         </div>
         <div class="tooltip-wrap">
-            <span class="badge-chip badge-dm">DM Stat: -3.100 (p=0.0062)</span>
-            <span class="tooltip-icon">i</span>
-            <div class="tooltip-box">Diebold–Mariano predictive accuracy test. Confirms NCD-LP significantly outperforms AR(1)+FE benchmark at 99% confidence (p &lt; 0.01).</div>
+            <span class="badge-chip badge-dm">
+                <span>DM Stat: -3.100 (p=0.0062)</span>
+                <span class="tooltip-icon">i</span>
+            </span>
+            <div class="tooltip-box">Diebold–Mariano test confirms NCD-LP significantly outperforms AR(1)+FE baseline at 99% confidence (p &lt; 0.01).</div>
         </div>
     </div>
     <div class="nav-links">
         <a class="btn-nav" href="https://github.com/rbr48/4d-epdm" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
         </a>
         <a class="btn-nav btn-paper" href="https://github.com/rbr48/4d-epdm/blob/main/RESEARCH_PAPER_AND_DISSERTATION_CHAPTER.md" target="_blank">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             Paper
         </a>
         <button class="btn-nav" onclick="downloadCSV()">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Export CSV
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            CSV
         </button>
         <a class="btn-nav btn-youtube" href="https://www.youtube.com/@IzhaanIntellect" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             @IzhaanIntellect
         </a>
     </div>
@@ -1030,33 +1016,24 @@
 <div class="app-container">
 
     <!-- Hero / Scenario Presets -->
-    <div class="hero-section">
-        <div class="hero-top-row">
-            <div class="hero-info">
-                <h2>National Economic Power & Capability Sandbox (2025–2045)</h2>
-                <p>Simulate 20,000 Monte Carlo structural paths across 9 capability dimensions. Test how fiscal mobilization, deep-sea logistics, and product complexity neutralize post-2026 LDC tariff cliffs.</p>
-            </div>
-            <div>
-                <button class="btn-scenario btn-run-primary" id="btn-run-sim" onclick="runLiveSimulationAnimation()" style="background: var(--primary); color: #ffffff; border-color: var(--primary); font-weight: 700; padding: 7px 16px; box-shadow: 0 2px 8px rgba(37,99,235,0.35);">
-                    <span>▶</span> Run Simulation
-                </button>
-            </div>
-        </div>
-        <div class="preset-toolbar">
-            <div class="preset-left-group">
-                <span class="preset-tag">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    Scenarios:
-                </span>
+    <div class="sandbox-strip">
+        <div class="sandbox-left">
+            <span class="sandbox-title-badge">SCENARIOS:</span>
+            <div class="scenario-pill-group">
                 <button class="btn-scenario active" id="btn-p-leap" onclick="setPreset('leap')">🚀 4D+ Leap</button>
                 <button class="btn-scenario" id="btn-p-status" onclick="setPreset('status')">⚖️ Status Quo</button>
                 <button class="btn-scenario" id="btn-p-ldc" onclick="setPreset('ldc')">⚡ LDC Shock</button>
                 <button class="btn-scenario" id="btn-p-npl" onclick="setPreset('npl')">🏦 NPL Freeze</button>
                 <button class="btn-scenario" id="btn-p-poly" onclick="setPreset('poly')">💥 Polycrisis</button>
             </div>
-            <div>
-                <button class="btn-scenario btn-reset-ghost" id="btn-p-reset" onclick="setPreset('reset')">🔄 Reset Defaults</button>
-            </div>
+        </div>
+        <div class="sandbox-actions">
+            <button class="btn-scenario btn-run-primary" id="btn-run-sim" onclick="runLiveSimulationAnimation()">
+                <span>▶</span> Run Simulation
+            </button>
+            <button class="btn-scenario btn-reset-ghost" id="btn-p-reset" onclick="setPreset('reset')">
+                <span>🔄</span> Reset
+            </button>
         </div>
     </div>
 

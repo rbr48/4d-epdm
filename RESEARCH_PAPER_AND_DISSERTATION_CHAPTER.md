@@ -282,6 +282,24 @@ To rigorously evaluate the baseline drift parameters ($\Delta = +0.003, 	heta = 
 2. **Refining the Bangladesh Governance Narrative**: Bangladesh's historical overshoot (+6.5 points) sits *below* the panel-wide average (+10.9). Therefore, attributing Bangladesh's entire residual to domestic "corruption and banking scandals" is unsupported by the panel evidence—the residual is primarily driven by generic model drift. However, the qualitative finding remains: unconstrained status-quo compounding consistently overstates future progress across developing aspirants unless explicit bottleneck and shock mechanisms are incorporated.
 3. **The Vietnam Anomaly**: Vietnam is the sole economy in the entire 16-country panel that decisively *outperformed* the naive simulation (residual of -7.8, $90\%$ CI $[-9.9, -5.6]$), reflecting unprecedented structural trade expansion (trade openness surging from $112\%$ to over $200\%$ of GDP) and rapid FDI absorption.
 
+### 7.7 Macroeconomic Monetary Translation & Fiscal Valuation (2024–2044)
+To make the 9-dimensional capability trajectories operationally tangible for financial planning, bilateral trade negotiations, and commercial strategy, the simulated growth paths are translated into USD-denominated macroeconomic aggregates using empirical baseline data ($455B nominal GDP, $1.46T PPP GDP, 172.5M population, 7.6% tax-to-GDP):
+
+| Year & Horizon | Status Quo (Inertial) | Factor-Driven (Capex Only) | Integrated 4D+ Reform (Japan Playbook) | Reform Value-Added (Δ Gap) |
+| :---: | :---: | :---: | :---: | :---: |
+| **2024 (Base)** | Nom: $455B \| PC: $8,487 \| Tax: $34.6B | Nom: $455B \| PC: $8,487 \| Tax: $34.6B | Nom: $455B \| PC: $8,487 \| Tax: $34.6B | **Baseline Benchmark** |
+| **2029 (h=5)** | Nom: $642B \| PC: $10,372 \| Tax: $50.7B | Nom: $682B \| PC: $10,967 \| Tax: $56.7B | Nom: $730B \| PC: $11,654 \| Tax: $68.1B | +**$88B** Nom \| +**$17.4B**/yr Tax |
+| **2034 (h=10)** | Nom: $893B \| PC: $12,584 \| Tax: $73.2B | Nom: $1,005B \| PC: $14,073 \| Tax: $91.0B | Nom: $1,176B \| PC: $16,208 \| Tax: $129.9B | +**$283B** Nom \| +**$56.7B**/yr Tax |
+| **2039 (h=15)** | Nom: $1,217B \| PC: $15,073 \| Tax: $103.5B | Nom: $1,437B \| PC: $17,594 \| Tax: $140.4B | Nom: $1,851B \| PC: $22,159 \| Tax: $236.5B | +**$634B** Nom \| +**$133.0B**/yr Tax |
+| **2044 (h=20)** | Nom: $1,638B \| PC: $17,923 \| Tax: $144.1B | Nom: $2,007B \| PC: $21,634 \| Tax: $210.8B | Nom: **$2,848B ($2.85T)** \| PC: $29,779 \| Tax: $413.0B | +**$1,210B ($1.21T)** Nom \| +**$268.9B**/yr Tax |
+
+*Table 7.3: Macroeconomic Monetary Milestones (2024–2044). File: `outputs/monetary_projections.csv`. Nom = Nominal GDP (USD Billions); PC = GDP per Capita in PPP (Constant International USD); Tax = Annual Public Tax Revenue Mobilization (USD Billions).*
+
+**Key Monetary Findings**:
+1. **The Compounded Reform Dividend**: Structural execution of the Japan-style developmental playbook yields an additional **+$1.21 Trillion in annual nominal GDP** and elevates living standards to **$29,779 per capita PPP** by 2044 (reaching contemporary Chilean and Malaysian middle-income standards), compared to the middle-income trap stagnation of $17,923 under the Status Quo.
+2. **Fiscal Self-Reliance vs. Debt Dependency**: Raising the tax-to-GDP ratio from $7.6\%$ to $14.5\%$ delivers **+$268.9 Billion in annual domestic tax revenue** by 2044. This domestic resource mobilization permanently breaks the reliance on external foreign loans for mega-infrastructure financing.
+3. **The 2026 LDC Tariff Exposure**: The loss of European EBA duty-free status in 2026 threatens an immediate **-$3.8 Billion annual export tariff drag**, reinforcing the urgent requirement for Matarbari deep-sea port logistics turnaround to compress maritime supply chain costs.
+
 ---
 
 ## 8. Strategic Policy Roadmap for Bangladesh (2025–2045)

@@ -744,6 +744,7 @@
         </div>
         <div class="preset-group">
             <span class="preset-tag">Preset Scenarios:</span>
+            <button class="btn-scenario btn-run-primary" id="btn-run-sim" onclick="runLiveSimulationAnimation()" style="background: var(--primary); color: #ffffff; border-color: var(--primary); font-weight: 700; box-shadow: 0 2px 6px rgba(37,99,235,0.3);">▶ Run Simulation</button>
             <button class="btn-scenario active" id="btn-p-leap" onclick="setPreset('leap')">🚀 Resilient 4D+ Leap</button>
             <button class="btn-scenario" id="btn-p-status" onclick="setPreset('status')">⚖️ Status Quo</button>
             <button class="btn-scenario" id="btn-p-ldc" onclick="setPreset('ldc')">⚡ 2026 LDC Shock</button>
@@ -824,7 +825,7 @@
                             <span class="slider-name">1. Fiscal Mobilization (ΔF / Tax Reform)</span>
                             <span class="slider-val-badge" id="val-macro-tax">0.022</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-macro-tax" min="0.000" max="0.030" step="0.002" value="0.022">
+                        <input type="range" class="slider-range" id="sl-macro-tax" min="0.000" max="0.030" step="0.002" value="0.022" oninput="recalculate()" onchange="recalculate()">
                         <div class="slider-desc">Digitizes tax net, expanding revenue from 7.6% to 16% of GDP by 2035.</div>
                     </div>
 
@@ -833,7 +834,7 @@
                             <span class="slider-name">2. Maritime Gravity (ΔG / Matarbari)</span>
                             <span class="slider-val-badge" id="val-macro-port">0.018</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-macro-port" min="0.000" max="0.025" step="0.002" value="0.018">
+                        <input type="range" class="slider-range" id="sl-macro-port" min="0.000" max="0.025" step="0.002" value="0.018" oninput="recalculate()" onchange="recalculate()">
                         <div class="slider-desc">Deep-sea port operations transform Chittagong transshipment bottleneck.</div>
                     </div>
 
@@ -842,7 +843,7 @@
                             <span class="slider-name">3. Product Space Leap (ΔC / Complexity)</span>
                             <span class="slider-val-badge" id="val-macro-comp">0.016</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-macro-comp" min="0.000" max="0.025" step="0.002" value="0.016">
+                        <input type="range" class="slider-range" id="sl-macro-comp" min="0.000" max="0.025" step="0.002" value="0.016" oninput="recalculate()" onchange="recalculate()">
                         <div class="slider-desc">Pharma APIs, electronics assembly, and engineering diversification.</div>
                     </div>
 
@@ -851,7 +852,7 @@
                             <span class="slider-name">4. Skills & Institutions (ΔH, ΔI)</span>
                             <span class="slider-val-badge" id="val-macro-gov">0.012</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-macro-gov" min="0.000" max="0.020" step="0.002" value="0.012">
+                        <input type="range" class="slider-range" id="sl-macro-gov" min="0.000" max="0.020" step="0.002" value="0.012" oninput="recalculate()" onchange="recalculate()">
                         <div class="slider-desc">German/Japanese dual vocational model + meritocratic governance.</div>
                     </div>
                 </div>
@@ -863,49 +864,49 @@
                             <span class="slider-name">Capital & Infra (K, w=0.15)</span>
                             <span class="slider-val-badge" id="val-dim-k">0.010</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-k" min="0.000" max="0.025" step="0.002" value="0.010">
+                        <input type="range" class="slider-range" id="sl-dim-k" min="0.000" max="0.025" step="0.002" value="0.010" oninput="recalculate()" onchange="recalculate()">
                     </div>
                     <div class="slider-row">
                         <div class="slider-meta">
                             <span class="slider-name">Human Capital (H, w=0.15)</span>
                             <span class="slider-val-badge" id="val-dim-h">0.012</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-h" min="0.000" max="0.025" step="0.002" value="0.012">
+                        <input type="range" class="slider-range" id="sl-dim-h" min="0.000" max="0.025" step="0.002" value="0.012" oninput="recalculate()" onchange="recalculate()">
                     </div>
                     <div class="slider-row">
                         <div class="slider-meta">
                             <span class="slider-name">Technology & TFP (T, w=0.15)</span>
                             <span class="slider-val-badge" id="val-dim-t">0.010</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-t" min="0.000" max="0.025" step="0.002" value="0.010">
+                        <input type="range" class="slider-range" id="sl-dim-t" min="0.000" max="0.025" step="0.002" value="0.010" oninput="recalculate()" onchange="recalculate()">
                     </div>
                     <div class="slider-row">
                         <div class="slider-meta">
                             <span class="slider-name">Institutions (I, w=0.15)</span>
                             <span class="slider-val-badge" id="val-dim-i">0.014</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-i" min="0.000" max="0.025" step="0.002" value="0.014">
+                        <input type="range" class="slider-range" id="sl-dim-i" min="0.000" max="0.025" step="0.002" value="0.014" oninput="recalculate()" onchange="recalculate()">
                     </div>
                     <div class="slider-row">
                         <div class="slider-meta">
                             <span class="slider-name">Economic Complexity (C, w=0.10)</span>
                             <span class="slider-val-badge" id="val-dim-c">0.016</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-c" min="0.000" max="0.025" step="0.002" value="0.016">
+                        <input type="range" class="slider-range" id="sl-dim-c" min="0.000" max="0.025" step="0.002" value="0.016" oninput="recalculate()" onchange="recalculate()">
                     </div>
                     <div class="slider-row">
                         <div class="slider-meta">
                             <span class="slider-name">Geographic Gravity (G, w=0.05)</span>
                             <span class="slider-val-badge" id="val-dim-g">0.018</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-g" min="0.000" max="0.025" step="0.002" value="0.018">
+                        <input type="range" class="slider-range" id="sl-dim-g" min="0.000" max="0.025" step="0.002" value="0.018" oninput="recalculate()" onchange="recalculate()">
                     </div>
                     <div class="slider-row">
                         <div class="slider-meta">
                             <span class="slider-name">Fiscal Mobilization (F, w=0.10)</span>
                             <span class="slider-val-badge" id="val-dim-f">0.022</span>
                         </div>
-                        <input type="range" class="slider-range" id="sl-dim-f" min="0.000" max="0.030" step="0.002" value="0.022">
+                        <input type="range" class="slider-range" id="sl-dim-f" min="0.000" max="0.030" step="0.002" value="0.022" oninput="recalculate()" onchange="recalculate()">
                     </div>
                 </div>
 
@@ -934,9 +935,9 @@
 
                 <!-- Shock 1: LDC Tariff Cliff -->
                 <div class="shock-block">
-                    <div class="shock-header-row" onclick="toggleShock('shock-ldc')">
+                    <div class="shock-header-row" onclick="toggleShock(event, 'shock-ldc')">
                         <div class="shock-header-left">
-                            <input type="checkbox" id="shock-ldc" checked onclick="event.stopPropagation(); recalculate();">
+                            <input type="checkbox" id="shock-ldc" checked onchange="recalculate()">
                             <span class="shock-title-text">2026 LDC Graduation Tariff Cliff</span>
                         </div>
                         <span class="badge-chip badge-dm" id="badge-ldc-val">10% Tariff</span>
@@ -952,9 +953,9 @@
 
                 <!-- Shock 2: Banking NPL Freeze -->
                 <div class="shock-block">
-                    <div class="shock-header-row" onclick="toggleShock('shock-npl')">
+                    <div class="shock-header-row" onclick="toggleShock(event, 'shock-npl')">
                         <div class="shock-header-left">
-                            <input type="checkbox" id="shock-npl" onclick="event.stopPropagation(); recalculate();">
+                            <input type="checkbox" id="shock-npl" onchange="recalculate()">
                             <span class="shock-title-text">Banking Sector NPL Credit Freeze</span>
                         </div>
                         <span class="badge-chip badge-dm" id="badge-npl-val">Off</span>
@@ -970,9 +971,9 @@
 
                 <!-- Shock 3: Climate Disruption -->
                 <div class="shock-block">
-                    <div class="shock-header-row" onclick="toggleShock('shock-climate')">
+                    <div class="shock-header-row" onclick="toggleShock(event, 'shock-climate')">
                         <div class="shock-header-left">
-                            <input type="checkbox" id="shock-climate" onclick="event.stopPropagation(); recalculate();">
+                            <input type="checkbox" id="shock-climate" onchange="recalculate()">
                             <span class="shock-title-text">Coastal & River Siltation Disruptions</span>
                         </div>
                         <span class="badge-chip badge-dm" id="badge-climate-val">Off</span>
@@ -989,11 +990,11 @@
             <div class="analytics-card">
                 <!-- Navigation Tabs -->
                 <div class="analytics-tabs">
-                    <button class="tab-button active" onclick="showTab('tab-fan-chart')">📈 20-Year Fan Chart (2025–2045)</button>
-                    <button class="tab-button" onclick="showTab('tab-radar-chart')">🕸️ 9D Capability Radar Matrix</button>
-                    <button class="tab-button" onclick="showTab('tab-leaderboard')">🌐 16-Country Leaderboard</button>
-                    <button class="tab-button" onclick="showTab('tab-products')">📦 Product Space & Complexity</button>
-                    <button class="tab-button" onclick="showTab('tab-audit')">🔬 Econometric Pre-Reg Audit</button>
+                    <button class="tab-button active" onclick="showTab('tab-fan-chart', this)">📈 20-Year Fan Chart (2025–2045)</button>
+                    <button class="tab-button" onclick="showTab('tab-radar-chart', this)">🕸️ 9D Capability Radar Matrix</button>
+                    <button class="tab-button" onclick="showTab('tab-leaderboard', this)">🌐 16-Country Leaderboard</button>
+                    <button class="tab-button" onclick="showTab('tab-products', this)">📦 Product Space & Complexity</button>
+                    <button class="tab-button" onclick="showTab('tab-audit', this)">🔬 Econometric Pre-Reg Audit</button>
                 </div>
 
                 <!-- Tab 1: Fan Chart -->
@@ -1214,20 +1215,88 @@
         document.getElementById('controls-granular').style.display = mode === 'granular' ? 'block' : 'none';
     }
 
-    function showTab(tabId) {
+    function showTab(tabId, el) {
         document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        event.target.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
+        
+        let activeBtn = el;
+        if (!activeBtn) {
+            activeBtn = Array.from(document.querySelectorAll('.tab-button')).find(b => {
+                const oc = b.getAttribute('onclick') || '';
+                return oc.includes(tabId);
+            });
+        }
+        if (activeBtn) activeBtn.classList.add('active');
 
-        if (tabId === 'tab-radar-chart' && radarChartInstance) radarChartInstance.resize();
-        if (tabId === 'tab-fan-chart' && fanChartInstance) fanChartInstance.resize();
+        const target = document.getElementById(tabId);
+        if (target) target.classList.add('active');
+
+        if (tabId === 'tab-radar-chart' && radarChartInstance) {
+            radarChartInstance.resize();
+            radarChartInstance.update();
+        }
+        if (tabId === 'tab-fan-chart' && fanChartInstance) {
+            fanChartInstance.resize();
+            fanChartInstance.update();
+        }
     }
 
-    function toggleShock(id) {
+    function toggleShock(e, id) {
+        if (e && e.target && e.target.tagName === 'INPUT') return;
         const chk = document.getElementById(id);
-        chk.checked = !chk.checked;
-        recalculate();
+        if (chk) {
+            chk.checked = !chk.checked;
+            recalculate();
+        }
+    }
+
+    let animTimer = null;
+    function runLiveSimulationAnimation() {
+        if (animTimer) {
+            clearInterval(animTimer);
+            animTimer = null;
+        }
+        let step = 1;
+        const maxSteps = 20;
+
+        if (fanChartInstance && simulationSeries.length > 0) {
+            fanChartInstance.data.datasets[0].data = [simulationSeries[0].epi_p90];
+            fanChartInstance.data.datasets[1].data = [simulationSeries[0].epi_p10];
+            fanChartInstance.data.datasets[2].data = [simulationSeries[0].epi_p50];
+            fanChartInstance.update('none');
+        }
+
+        const runBtn = document.getElementById('btn-run-sim');
+        if (runBtn) {
+            runBtn.innerHTML = '<span>⏳</span> Simulating Horizon...';
+            runBtn.disabled = true;
+        }
+
+        animTimer = setInterval(() => {
+            if (step > maxSteps) {
+                clearInterval(animTimer);
+                animTimer = null;
+                recalculate();
+                if (runBtn) {
+                    runBtn.innerHTML = '<span>▶</span> Run Simulation';
+                    runBtn.disabled = false;
+                }
+                return;
+            }
+
+            if (fanChartInstance && simulationSeries.length > step) {
+                fanChartInstance.data.datasets[0].data = simulationSeries.slice(0, step + 1).map(s => s.epi_p90);
+                fanChartInstance.data.datasets[1].data = simulationSeries.slice(0, step + 1).map(s => s.epi_p10);
+                fanChartInstance.data.datasets[2].data = simulationSeries.slice(0, step + 1).map(s => s.epi_p50);
+                fanChartInstance.update('none');
+
+                const curEpi = simulationSeries[step].epi_p50;
+                document.getElementById('kpi-median').innerText = curEpi.toFixed(2);
+                const curYear = 2024 + step;
+                document.getElementById('kpi-delta').innerHTML = `<span>Simulating Year ${curYear}...</span>`;
+            }
+            step++;
+        }, 50);
     }
 
     function recalculate() {
@@ -1423,6 +1492,22 @@
         list.sort((a, b) => b.simEpi - a.simEpi);
         const bgdIndex = list.findIndex(c => c.iso === 'BGD') + 1;
         document.getElementById('kpi-rank').innerText = `#${bgdIndex} / 16`;
+        const peerSpan = document.getElementById('kpi-peer-comp');
+        if (peerSpan) {
+            if (bgdIndex <= 4) {
+                peerSpan.innerText = 'Converges with Vietnam & Tigers';
+                peerSpan.style.color = 'var(--success)';
+            } else if (bgdIndex <= 8) {
+                peerSpan.innerText = 'Surpasses Regional Peers';
+                peerSpan.style.color = 'var(--primary)';
+            } else if (bgdIndex <= 12) {
+                peerSpan.innerText = 'Mid-Income Transition Bracket';
+                peerSpan.style.color = 'var(--warning)';
+            } else {
+                peerSpan.innerText = 'Trapped at Baseline Frontier';
+                peerSpan.style.color = 'var(--danger)';
+            }
+        }
 
         const tbody = document.getElementById('table-ranks-body');
         tbody.innerHTML = list.map((item, idx) => {
@@ -1475,7 +1560,22 @@
     }
 
     function initVisuals() {
-        const ctxFan = document.getElementById('fanChartObj').getContext('2d');
+        if (typeof Chart === 'undefined') {
+            console.warn('Waiting for Chart.js...');
+            setTimeout(initVisuals, 100);
+            return;
+        }
+        if (fanChartInstance) {
+            fanChartInstance.destroy();
+            fanChartInstance = null;
+        }
+        if (radarChartInstance) {
+            radarChartInstance.destroy();
+            radarChartInstance = null;
+        }
+        const ctxFanEl = document.getElementById('fanChartObj');
+        if (!ctxFanEl) return;
+        const ctxFan = ctxFanEl.getContext('2d');
         fanChartInstance = new Chart(ctxFan, {
             type: 'line',
             data: {
@@ -1624,59 +1724,62 @@
     }
 
     function setPreset(name) {
-        document.querySelectorAll('.btn-scenario').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.btn-scenario').forEach(b => {
+            if (b.id !== 'btn-run-sim') b.classList.remove('active');
+        });
         const activeBtn = document.getElementById('btn-p-' + name);
         if (activeBtn) activeBtn.classList.add('active');
 
+        let dTax = 0.022, dPort = 0.018, dComp = 0.016, dGov = 0.012;
+        let sLdc = true, sNpl = false, sClimate = false;
+        let ldcMag = 10, nplMag = 18;
+        let granVals = { k: 0.010, h: 0.012, t: 0.010, i: 0.014, c: 0.016, g: 0.018, f: 0.022 };
+
         if (name === 'leap') {
-            document.getElementById('sl-macro-tax').value = 0.022;
-            document.getElementById('sl-macro-port').value = 0.018;
-            document.getElementById('sl-macro-comp').value = 0.016;
-            document.getElementById('sl-macro-gov').value = 0.012;
-            document.getElementById('shock-ldc').checked = true;
-            document.getElementById('shock-npl').checked = false;
-            document.getElementById('shock-climate').checked = false;
+            dTax = 0.022; dPort = 0.018; dComp = 0.016; dGov = 0.012;
+            sLdc = true; sNpl = false; sClimate = false;
+            granVals = { k: 0.010, h: 0.012, t: 0.010, i: 0.014, c: 0.016, g: 0.018, f: 0.022 };
         } else if (name === 'status') {
-            document.getElementById('sl-macro-tax').value = 0.004;
-            document.getElementById('sl-macro-port').value = 0.004;
-            document.getElementById('sl-macro-comp').value = 0.003;
-            document.getElementById('sl-macro-gov').value = 0.002;
-            document.getElementById('shock-ldc').checked = false;
-            document.getElementById('shock-npl').checked = false;
-            document.getElementById('shock-climate').checked = false;
+            dTax = 0.004; dPort = 0.004; dComp = 0.003; dGov = 0.002;
+            sLdc = false; sNpl = false; sClimate = false;
+            granVals = { k: 0.004, h: 0.004, t: 0.004, i: 0.002, c: 0.003, g: 0.004, f: 0.004 };
         } else if (name === 'ldc') {
-            document.getElementById('sl-macro-tax').value = 0.004;
-            document.getElementById('sl-macro-port').value = 0.004;
-            document.getElementById('sl-macro-comp').value = 0.003;
-            document.getElementById('sl-macro-gov').value = 0.002;
-            document.getElementById('shock-ldc').checked = true;
-            document.getElementById('shock-npl').checked = false;
-            document.getElementById('shock-climate').checked = false;
+            dTax = 0.004; dPort = 0.004; dComp = 0.003; dGov = 0.002;
+            sLdc = true; sNpl = false; sClimate = false; ldcMag = 14;
+            granVals = { k: 0.004, h: 0.004, t: 0.004, i: 0.002, c: 0.003, g: 0.004, f: 0.004 };
         } else if (name === 'npl') {
-            document.getElementById('sl-macro-tax').value = 0.004;
-            document.getElementById('sl-macro-port').value = 0.004;
-            document.getElementById('sl-macro-comp').value = 0.003;
-            document.getElementById('sl-macro-gov').value = 0.002;
-            document.getElementById('shock-ldc').checked = false;
-            document.getElementById('shock-npl').checked = true;
-            document.getElementById('shock-climate').checked = false;
+            dTax = 0.004; dPort = 0.004; dComp = 0.003; dGov = 0.002;
+            sLdc = false; sNpl = true; sClimate = false; nplMag = 25;
+            granVals = { k: 0.002, h: 0.004, t: 0.004, i: 0.002, c: 0.003, g: 0.004, f: 0.002 };
         } else if (name === 'poly') {
-            document.getElementById('sl-macro-tax').value = 0.002;
-            document.getElementById('sl-macro-port').value = 0.002;
-            document.getElementById('sl-macro-comp').value = 0.002;
-            document.getElementById('sl-macro-gov').value = 0.000;
-            document.getElementById('shock-ldc').checked = true;
-            document.getElementById('shock-npl').checked = true;
-            document.getElementById('shock-climate').checked = true;
+            dTax = 0.002; dPort = 0.002; dComp = 0.002; dGov = 0.000;
+            sLdc = true; sNpl = true; sClimate = true; ldcMag = 15; nplMag = 25;
+            granVals = { k: 0.000, h: 0.002, t: 0.002, i: 0.000, c: 0.002, g: 0.002, f: 0.002 };
         } else if (name === 'reset') {
-            document.getElementById('sl-macro-tax').value = 0.022;
-            document.getElementById('sl-macro-port').value = 0.018;
-            document.getElementById('sl-macro-comp').value = 0.016;
-            document.getElementById('sl-macro-gov').value = 0.012;
-            document.getElementById('shock-ldc').checked = true;
-            document.getElementById('shock-npl').checked = false;
-            document.getElementById('shock-climate').checked = false;
+            dTax = 0.022; dPort = 0.018; dComp = 0.016; dGov = 0.012;
+            sLdc = true; sNpl = false; sClimate = false; ldcMag = 10; nplMag = 18;
+            granVals = { k: 0.010, h: 0.012, t: 0.010, i: 0.014, c: 0.016, g: 0.018, f: 0.022 };
         }
+
+        document.getElementById('sl-macro-tax').value = dTax;
+        document.getElementById('sl-macro-port').value = dPort;
+        document.getElementById('sl-macro-comp').value = dComp;
+        document.getElementById('sl-macro-gov').value = dGov;
+
+        document.getElementById('shock-ldc').checked = sLdc;
+        document.getElementById('shock-npl').checked = sNpl;
+        document.getElementById('shock-climate').checked = sClimate;
+
+        document.getElementById('sl-ldc-mag').value = ldcMag;
+        document.getElementById('sl-npl-mag').value = nplMag;
+
+        document.getElementById('sl-dim-k').value = granVals.k;
+        document.getElementById('sl-dim-h').value = granVals.h;
+        document.getElementById('sl-dim-t').value = granVals.t;
+        document.getElementById('sl-dim-i').value = granVals.i;
+        document.getElementById('sl-dim-c').value = granVals.c;
+        document.getElementById('sl-dim-g').value = granVals.g;
+        document.getElementById('sl-dim-f').value = granVals.f;
 
         recalculate();
     }
@@ -1696,16 +1799,35 @@
         document.body.removeChild(a);
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function boot() {
         initVisuals();
         recalculate();
 
-        ['sl-macro-tax', 'sl-macro-port', 'sl-macro-comp', 'sl-macro-gov',
-         'sl-dim-k', 'sl-dim-h', 'sl-dim-t', 'sl-dim-i', 'sl-dim-c', 'sl-dim-g', 'sl-dim-f'].forEach(id => {
+        const allSliderIds = [
+            'sl-macro-tax', 'sl-macro-port', 'sl-macro-comp', 'sl-macro-gov',
+            'sl-dim-k', 'sl-dim-h', 'sl-dim-t', 'sl-dim-i', 'sl-dim-c', 'sl-dim-g', 'sl-dim-f',
+            'sl-ldc-mag', 'sl-npl-mag'
+        ];
+
+        allSliderIds.forEach(id => {
             const el = document.getElementById(id);
-            if (el) el.addEventListener('input', recalculate);
+            if (el) {
+                el.addEventListener('input', recalculate);
+                el.addEventListener('change', recalculate);
+            }
         });
-    });
+
+        ['shock-ldc', 'shock-npl', 'shock-climate'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', recalculate);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+    } else {
+        boot();
+    }
 </script>
 </body>
 </html>

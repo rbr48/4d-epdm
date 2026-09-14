@@ -1,5 +1,17 @@
-iso,episode,period,initial_EPI,actual_final_EPI,simulated_final_EPI,tracking_error,epistemic_note
-BGD,Bangladesh Millennium Trajectory (2000-2020),2000-2020,11.32,21.09,27.83,6.74,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
-VNM,Vietnam Post-Doi Moi Convergence (2000-2020),2000-2020,33.62,54.02,46.42,-7.61,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
-KOR,South Korea Advanced Maturation (1990-2010),1990-2010,53.67,63.03,64.76,1.73,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
-IND,India Post-Liberalization Growth (2000-2020),2000-2020,17.12,29.2,31.96,2.76,Overshoot reflects real-world institutional friction / bottleneck penalties omitted in unconstrained accumulation
+iso,period,actual_2000_EPI,actual_2020_EPI,simulated_2020_median,sim_90_band,residual,residual_90_CI
+BGD,2000-2020,11.3,21.1,27.6,"[25.3, 29.9]",6.5,"[4.2, 8.9]"
+CHN,2000-2020,37.2,47.4,50.5,"[48.2, 52.8]",3.1,"[0.8, 5.4]"
+DEU,2000-2020,56.2,51.2,66.8,"[64.8, 68.8]",15.6,"[13.7, 17.6]"
+FRA,2000-2020,45.7,44.5,62.1,"[59.9, 64.2]",17.6,"[15.4, 19.7]"
+GBR,2000-2020,55.3,47.5,66.3,"[64.3, 68.4]",18.7,"[16.7, 20.9]"
+IDN,2000-2020,23.4,31.9,39.2,"[36.6, 41.7]",7.3,"[4.6, 9.7]"
+IND,2000-2020,17.1,29.2,31.8,"[29.6, 33.9]",2.6,"[0.4, 4.7]"
+JPN,2000-2020,57.8,44.9,68.2,"[66.1, 70.2]",23.2,"[21.2, 25.3]"
+KOR,2000-2020,57.7,62.7,67.9,"[65.8, 70.0]",5.2,"[3.1, 7.3]"
+MYS,2000-2020,52.8,51.8,63.2,"[61.2, 65.4]",11.4,"[9.4, 13.6]"
+NLD,2000-2020,64.3,55.7,73.6,"[71.5, 75.6]",18.0,"[15.9, 19.9]"
+PHL,2000-2020,29.4,38.4,43.5,"[41.2, 45.7]",5.1,"[2.7, 7.3]"
+SGP,2000-2020,74.7,71.4,82.7,"[80.7, 84.5]",11.2,"[9.2, 13.0]"
+THA,2000-2020,42.2,46.4,54.4,"[52.2, 56.7]",8.1,"[5.8, 10.4]"
+USA,2000-2020,58.0,40.6,68.6,"[66.6, 70.5]",28.0,"[26.0, 29.9]"
+VNM,2000-2020,33.6,54.0,46.2,"[44.2, 48.4]",-7.8,"[-9.9, -5.6]"

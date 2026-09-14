@@ -15,9 +15,9 @@ This paper addresses this fundamental methodological challenge by developing a t
 1. **Engine 1: Out-of-Sample Predictive Forecaster (`NCD-LP`)**: A multi-horizon direct local projection model combining short-term business cycle persistence ($h=1$) with neoclassical income convergence and demographic dividend dynamics ($h=2\dots 5$) under $L_2$ Ridge shrinkage. Evaluated across 19 rolling origins (2001–2019) and 16 major economies under a strict zero-leakage protocol, the model achieves a pooled RMSE of **2.8905**, statistically significantly beating the pre-registered iterated AR(1) fixed-effects benchmark under the cross-sectionally averaged Diebold–Mariano test ($stat = -3.100, p = 0.0062$ at $h=3$). We formally demonstrate that this predictive advantage is invariant across four orders of magnitude of regularization ($\lambda \in [0.01, 200.0]$), refuting any suspicion of knife-edge parameter tuning.
 2. **Engine 2: Calibrated 20-Year Structural State-Space Simulator**: A 9-dimensional capability framework ($\mathbf{K, H, T, I, D, C, G, S, F}$) modeling productive capital, human capital, technology, institutions, demographic dividend, economic complexity, geographic gravity, social capital, and fiscal/financial depth.
 
-**Epistemic Demarcation**: We explicitly disclose that while Engine 1 provides an empirically validated, out-of-sample predictive model for medium-term growth bounds ($h=1\dots 5$), Engine 2 serves as an exploratory, calibrated policy simulation laboratory for long-run structural scenarios ($h=1\dots 20$). Its state-space parameters are calibrated to historical frontier dynamics rather than estimated out-of-sample, and its 2044 projections represent conditional "if-then" normative policy experiments rather than unconditional point forecasts. 
+**Epistemic Demarcation & Strict Non-Equivalence**: We explicitly disclose that while Engine 1 has been rigorously tested and validated out-of-sample under the pre-registered rolling-origin protocol ($h=1\dots 5$), **Engine 2 has not been subjected to that test and makes no claim of empirical predictive validity.** It operates strictly as an exploratory, calibrated policy simulation sandbox for 20-year structural scenarios ($h=1\dots 20$). Its state-space parameters are calibrated to global frontiers, not estimated out-of-sample, and its 2044 projections represent conditional, rounded illustrative policy ranges under stated assumptions, not statistical forecasts or calibrated probabilities. 
 
-Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators) and historically backtested against actual catch-up episodes (Bangladesh 2000–2020, Vietnam 2000–2020, South Korea 1990–2010), we evaluate Bangladesh's 2025–2045 trajectory under scheduled **2026 UN LDC graduation tariff shocks** and domestic banking sector liquidity stress. We demonstrate that under status-quo policies, Bangladesh faces middle-income stagnation as its demographic window closes around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing elevates Bangladesh's conditional simulated Economic Power Index from $21.3$ to **$54.9$–$58.3$ by 2044**, matching present-day Vietnam and Malaysia.
+Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators) and historically backtested against actual catch-up episodes (Bangladesh 2000–2020, Vietnam 2000–2020, South Korea 1990–2010), we evaluate Bangladesh's 2025–2045 trajectory under scheduled **2026 UN LDC graduation tariff shocks** and domestic banking sector liquidity stress. We demonstrate that under status-quo policies, Bangladesh faces middle-income stagnation as its demographic window closes around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing elevates Bangladesh's conditional simulated Economic Power Index from $21.3$ to an illustrative range of **roughly 52–58 by 2044**, matching present-day Vietnam and Malaysia under stated policy execution.
 
 
 ---
@@ -66,7 +66,9 @@ The composite index is formulated as a weighted geometric mean over frontier-nor
 
 $$\text{EPI}_{it} = 100 \times \prod_{j=1}^{9} \widetilde{X}_{j, it}^{w_j}, \quad \sum_{j=1}^{9} w_j = 1$$
 
-The geometric mean guarantees super-modular penalty: severe failure in any foundational dimension (e.g., near-zero institutional quality or tax mobilization) severely depresses the overall composite index.
+The geometric mean ($\rho \to 0$) guarantees a super-modular penalty: severe failure in any foundational dimension (e.g., near-zero institutional quality or tax mobilization) severely depresses the overall composite index.
+
+**Methodological Disclosure on Aggregation Elasticity (Empirical vs. Normative Tension)**: We explicitly acknowledge that the geometric mean is adopted here as a *declared normative policy assumption* grounded in Kremer’s (1993) O-Ring development theory, rather than an empirically estimated elasticity. Indeed, earlier exploratory estimations on this panel using profile likelihood over a generalized CES aggregator yielded an optimal parameter of $\rho \approx 2.92$—empirically rejecting complementarity in favor of cross-indicator substitutability across observed historical data. We intentionally retain the geometric mean not as an empirical representation of unconstrained market equilibrium, but as a deliberate policy-design stress device: in an authentic developing state, severe failure in core governance or revenue mobilization creates structural bottlenecks that cannot be trivially compensated by accumulating more factor inputs.
 
 ### 2.1 Weight Distribution Methodology & Robustness
 The baseline weighting vector allocates priority across three theoretical capability tiers:
@@ -219,17 +221,17 @@ $$\mathbf{S}_{t+1} = \text{clip}\Big(\mathbf{S}_t + \mathbf{\Delta}_{\text{polic
 - **Discrete Shock Timing ($\boldsymbol{\delta}_{\text{shock}}$)**: Applied deterministically at $t=2$ (corresponding to the scheduled 2026 LDC graduation year) to reflect the sudden, discrete loss of EU EBA tariff preferences and trade-finance friction.
 
 
-### Summary of 2044 Horizon Milestones
+### Summary of 2044 Horizon Milestones (Illustrative Policy Scenarios)
 
-| Simulation Scenario | 2044 Median EPI | 90% Confidence Interval | $P(\text{EPI} \ge 50)$ | Strategic Trajectory Outcome |
-| :--- | :---: | :---: | :---: | :--- |
-| **Baseline Status Quo** | **35.89** | $[32.90, \; 38.51]$ | 0.0% | **Middle-Income Trap**: Demographic window closes ~2038 without industrial upgrade. |
-| **2026 LDC Tariff Shock** | **31.32** | $[26.80, \; 35.35]$ | 0.0% | **Export Contraction**: Loss of EU EBA duty-free access erodes reserves and growth. |
-| **Banking NPL Freeze** | **25.68** | $[19.77, \; 31.04]$ | 0.0% | **Credit Crunch**: Non-performing loans stall private sector capital formation. |
-| **Compound Polycrisis** | **21.38** | $[15.91, \; 27.03]$ | 0.0% | **Two Lost Decades**: Complete stagnation at 2024 capability baseline. |
-| **Resilient 4D+ Response** | **54.86** | $[51.76, \; 57.85]$ | **99.5%** | **Industrial Takeoff**: Neutralizes external shocks; matches Vietnam today. |
+| Simulation Scenario | Illustrative 2044 Range | Directional Trajectory Outcome | Core Strategic Mechanism |
+| :--- | :---: | :--- | :--- |
+| **Baseline Status Quo** | **~33 – 39** | **Middle-Income Trap** | Demographic window closes ~2038 without export complexity upgrade. |
+| **2026 LDC Tariff Shock** | **~27 – 35** | **Export Contraction** | Loss of EU EBA duty-free access erodes garment margins and reserves. |
+| **Banking NPL Freeze** | **~20 – 31** | **Credit Crunch** | Non-performing loans stall private sector investment and capitalization. |
+| **Compound Polycrisis** | **~16 – 27** | **Two Lost Decades** | Compounded external trade shock and domestic liquidity freeze. |
+| **Resilient 4D+ Response** | **~52 – 58** | **Industrial Takeoff** | Matarbari deep-sea port, tax net doubling to 15%, and API/MMF diversification. |
 
-*Source: Monte Carlo state-space simulations (20,000 iterations per scenario, seed=42) calibrated on empirical panel dynamics and historical shock variance.*
+*Note: Ranges represent rounded, illustrative policy scenarios generated by the calibrated simulation sandbox under stated reform assumptions, not statistical confidence intervals or econometric probability forecasts.*
 
 ### 7.5 Hyperparameter Sensitivity Audit: Ruling Out L2 Cherry-Picking
 A critical concern in pre-registered forecasting is whether hyperparameter choices—specifically the Ridge shrinkage parameter $\lambda = 15.0$ in Engine 1 (`candidate_model.py`)—were selected through uncommitted trial-and-error against the test set. To eliminate this ambiguity, we conducted a systematic grid sweep of $\lambda$ across four orders of magnitude ($\lambda \in [0.01, 200.0]$) under the exact 19 rolling-origin, 16-country pre-registered protocol.
@@ -251,19 +253,34 @@ A critical concern in pre-registered forecasting is whether hyperparameter choic
 
 **Audit Finding**: The predictive superiority of the NCD-LP model does not depend on $\lambda = 15.0$. Across the entire range $\lambda \in [0.01, 200.0]$, pooled RMSE varies by less than $0.0008$, and the Diebold–Mariano test at $h=3$ remains statistically significant ($p < 0.01$). The result is driven by the structural economic signal (neoclassical income convergence and demographic dividend), not parameter tuning.
 
-### 7.6 Historical Backcasting Audit & Epistemic Boundaries of Engine 2
-To benchmark the tracking error of Engine 2 against ground truth, we backtested the 9D capability simulation against four historical 20-year developmental transitions:
+### 7.6 16-Country Historical Backcast Audit & The Generic Drift Bias Finding
+To rigorously evaluate the baseline drift parameters ($\Delta = +0.003, 	heta = 0.005$) against ground truth, we extended the unconstrained status-quo simulation across **all 16 economies in our empirical panel** from 2000 to 2020, evaluating 2,000 Monte Carlo stochastic paths per country with $\sigma_u = 0.008$.
 
-| Economy | Historical Episode | Period | Initial Observed EPI | Final Observed EPI | Simulated Final EPI | Tracking Error ($\Delta$) | Epistemic Diagnostics |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Bangladesh** | Millennium Growth | 2000–2020 | 11.32 | 21.09 | 27.83 | +6.74 | Status-quo drift overshoots actual EPI due to institutional & fiscal drag. |
-| **Vietnam** | Post-Doi Moi Convergence | 2000–2020 | 33.62 | 54.02 | 46.42 | -7.61 | Actual growth exceeded naive drift due to aggressive structural reforms. |
-| **South Korea** | Advanced Maturation | 1990–2010 | 53.67 | 63.03 | 64.76 | +1.73 | High tracking precision in mature, institutionalized economic regimes. |
-| **India** | Post-Liberalization Growth | 2000–2020 | 17.12 | 29.20 | 31.96 | +2.76 | Moderate tracking error; infrastructure gains balanced by reform delays. |
+| ISO | Economy | Actual 2000 EPI | Actual 2020 EPI | Simulated 2020 Median [90% MC Band] | Residual (Sim − Act) [90% CI] | Empirical Diagnosis |
+| :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| **BGD** | Bangladesh | 11.3 | 21.1 | 27.6 [25.3, 29.9] | **+6.5 [+4.2, +8.9]** | Below panel-mean overshoot; moderate institutional drag. |
+| **CHN** | China | 37.2 | 47.4 | 50.5 [48.2, 52.8] | **+3.1 [+0.8, +5.4]** | Rapid physical capital accumulation closely tracked. |
+| **DEU** | Germany | 56.2 | 51.2 | 66.8 [64.8, 68.8] | **+15.6 [+13.7, +17.6]** | Large overshoot; naive drift ignores mature deindustrialization. |
+| **FRA** | France | 45.7 | 44.5 | 62.1 [59.9, 64.2] | **+17.6 [+15.4, +19.7]** | Naive drift assumes positive frontier accumulation. |
+| **GBR** | United Kingdom | 55.3 | 47.5 | 66.3 [64.3, 68.4] | **+18.7 [+16.7, +20.9]** | Misses financial crisis shock and productivity plateau. |
+| **IDN** | Indonesia | 23.4 | 31.9 | 39.2 [36.6, 41.7] | **+7.3 [+4.6, +9.7]** | Moderate overshoot; resource cycle volatility. |
+| **IND** | India | 17.1 | 29.2 | 31.8 [29.6, 33.9] | **+2.6 [+0.4, +4.7]** | Accurate tracking; services export momentum. |
+| **JPN** | Japan | 57.8 | 44.9 | 68.2 [66.1, 70.2] | **+23.2 [+21.2, +25.3]** | Massive overshoot; ignores demographic aging and deflation. |
+| **KOR** | South Korea | 57.7 | 62.7 | 67.9 [65.8, 70.0] | **+5.2 [+3.1, +7.3]** | Well-tracked high-income convergence. |
+| **MYS** | Malaysia | 52.8 | 51.8 | 63.2 [61.2, 65.4] | **+11.4 [+9.4, +13.6]** | Classic middle-income plateau overshot by naive model. |
+| **NLD** | Netherlands | 64.3 | 55.7 | 73.6 [71.5, 75.6] | **+18.0 [+15.9, +19.9]** | Advanced mature economy variance. |
+| **PHL** | Philippines | 29.4 | 38.4 | 43.5 [41.2, 45.7] | **+5.1 [+2.7, +7.3]** | Moderate tracking error. |
+| **SGP** | Singapore | 74.7 | 71.4 | 82.7 [80.7, 84.5] | **+11.2 [+9.2, +13.0]** | Frontier saturation effects. |
+| **THA** | Thailand | 42.2 | 46.4 | 54.4 [52.2, 56.7] | **+8.1 [+5.8, +10.4]** | Middle-income trap overshot by naive accumulation. |
+| **USA** | United States | 58.0 | 40.6 | 68.6 [66.6, 70.5] | **+28.0 [+26.0, +29.9]** | Severe overshoot; misses 2008 GFC shock and inequality drag. |
+| **VNM** | Vietnam | 33.6 | 54.0 | 46.2 [44.2, 48.4] | **-7.8 [-9.9, -5.6]** | **Only negative residual**: outperformed naive drift via trade leap. |
 
-*Table 7.2: Historical 20-year backcast validation. File: `outputs/historical_backcast_validation.csv`.*
+*Table 7.2: 16-Country Historical Backcast Audit (2000–2020). File: `outputs/historical_backcast_validation.csv`.*
 
-Furthermore, estimating the frontier convergence velocity directly on our 16-country panel yields an average empirical velocity of $\bar{\theta} = 0.00711$ per annum (with capital at $0.0068$, human capital at $0.0179$, and fiscal mobilization at $0.0035$), confirming that the calibrated model's $\theta = 0.005$ represents a conservative lower-bound estimate rather than an arbitrary inflationary parameter.
+**Key Empirical Findings on Model Behavior**:
+1. **Generic Positive Drift Bias (+10.9 Points)**: Across all 16 economies, the average unconstrained simulation residual is **+10.9 points** (median: +9.8). Unconstrained linear accumulation with positive drift inherently overshoots historical reality because it assumes smooth compounding while omitting common historical crises (e.g., the 2008 Global Financial Crisis) and structural headwinds (such as demographic aging in advanced economies).
+2. **Refining the Bangladesh Governance Narrative**: Bangladesh's historical overshoot (+6.5 points) sits *below* the panel-wide average (+10.9). Therefore, attributing Bangladesh's entire residual to domestic "corruption and banking scandals" is unsupported by the panel evidence—the residual is primarily driven by generic model drift. However, the qualitative finding remains: unconstrained status-quo compounding consistently overstates future progress across developing aspirants unless explicit bottleneck and shock mechanisms are incorporated.
+3. **The Vietnam Anomaly**: Vietnam is the sole economy in the entire 16-country panel that decisively *outperformed* the naive simulation (residual of -7.8, $90\%$ CI $[-9.9, -5.6]$), reflecting unprecedented structural trade expansion (trade openness surging from $112\%$ to over $200\%$ of GDP) and rapid FDI absorption.
 
 ---
 

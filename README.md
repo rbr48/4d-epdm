@@ -7,12 +7,12 @@
 [![Evaluation Horizons](https://img.shields.io/badge/horizons-h%20=%201...5-orange.svg)](#)
 [![Observations](https://img.shields.io/badge/OOS%20observations-9,120-blueviolet.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
-[![Izhaan Intellect Video](https://img.shields.io/badge/YouTube-Izhaan%20Intellect-red.svg)](https://www.youtube.com/shorts/BKpkIKy8MT8)
+[![Izhaan Intellect Channel](https://img.shields.io/badge/YouTube-@IzhaanIntellect-red.svg)](https://www.youtube.com/@IzhaanIntellect)
 
 > **Japan’s Postwar Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh (2025–2045)**  
 > *Izhaan Intellect Research Series & Academic Working Paper*  
 > 🌐 **Live Interactive Web Simulator**: [https://rbr48.github.io/4d-epdm/](https://rbr48.github.io/4d-epdm/)  
-> 📺 **Presentation & Overview**: [Izhaan Intellect Research Series on YouTube](https://www.youtube.com/shorts/BKpkIKy8MT8)
+> 📺 **Presentation & Channel**: [Izhaan Intellect on YouTube](https://www.youtube.com/@IzhaanIntellect)
 
 ---
 

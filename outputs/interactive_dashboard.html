@@ -121,8 +121,11 @@
             gap: 8px;
             flex-shrink: 1;
         }
-        @media (max-width: 1300px) {
+        @media (max-width: 1500px) {
             .nav-badges { display: none; }
+        }
+        @media (max-width: 1460px) {
+            .btn-share, .btn-dark-toggle { display: none; }
         }
         @media (max-width: 1366px) {
             .btn-nav { padding: 4px 8px; font-size: 11px; gap: 4px; }
@@ -152,6 +155,8 @@
             font-family: 'JetBrains Mono', monospace;
         }
         .nav-links {
+            flex-wrap: nowrap;
+            overflow: hidden;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -1651,7 +1656,47 @@
             line-height: 1.45;
         }
     
-    </style>
+    
+    /* ========== PHASE 3 STYLES ========== */
+    .btn-dark-toggle {
+      background: #1e3a5f !important;
+      color: #00d4ff !important;
+      border: 1px solid #00d4ff !important;
+    }
+    .btn-dark-toggle:hover { background: #00d4ff !important; color: #0a1628 !important; }
+    .btn-share {
+      background: #1a4a2e !important;
+      color: #00ff88 !important;
+      border: 1px solid #00ff88 !important;
+    }
+    .btn-share:hover { background: #00ff88 !important; color: #0a1628 !important; }
+    .btn-play {
+      background: linear-gradient(135deg,#7b2ff7,#00d4ff);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 0.82em;
+      font-weight: 700;
+      cursor: pointer;
+      margin-right: 8px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-play:hover { opacity: 0.85; }
+    .btn-play.playing { background: linear-gradient(135deg,#ff4444,#ff8800); }
+
+    /* Dark Mode overrides */
+    [data-theme="dark"] body { background: #060e1a !important; color: #c8d6e8 !important; }
+    [data-theme="dark"] .dashboard-container { background: #0a1220 !important; }
+    [data-theme="dark"] .metric-card, [data-theme="dark"] .kpi-card { background: #0d1a2e !important; border-color: #1a2e4a !important; }
+    [data-theme="dark"] .control-panel { background: #0c1826 !important; border-color: #1a2e4a !important; }
+    [data-theme="dark"] .tab-button { background: #0d1a2e !important; color: #8892a4 !important; }
+    [data-theme="dark"] .tab-button.active { background: #0a2a4a !important; color: #00d4ff !important; }
+    [data-theme="dark"] .tab-pane { background: #0a1220 !important; }
+    [data-theme="dark"] .navbar { background: #050c18 !important; border-bottom-color: #0f2035 !important; }
+    /* ===================================== */
+</style>
 </head>
 <body>
 
@@ -1690,6 +1735,9 @@
             Paper
         </a>
         <button class="btn-nav btn-paper" onclick="openPolicyDossier()" title="Generate Institutional Policy Briefing Memo">
+        <button id="darkModeBtn" class="btn-nav btn-dark-toggle" onclick="toggleDarkMode()" title="Toggle Dark/Light Mode">🌙 Dark</button>
+        <button class="btn-nav btn-share" onclick="shareScenario()" title="Share this scenario as a URL">🔗 Share</button>
+        <!-- phase3-nav-end -->
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
             Dossier
         </button>
@@ -2043,6 +2091,8 @@
                     <button class="tab-button" onclick="showTab('tab-products', this)">📦 Product Space & Complexity</button>
                     <button class="tab-button" onclick="showTab('tab-policy-leverage', this)">🌪️ Policy Leverage & Sensitivity</button>
                     <button class="tab-button" onclick="showTab('tab-audit', this)">🔬 Econometric Pre-Reg Audit</button>
+                    <button class="tab-button" onclick="showTab('tab-parallel', this)">🔀 Dimension Evolution</button>
+                    <button class="tab-button" onclick="showTab('tab-regional', this)">🗺️ Regional Map</button>
                 </div>
 
                 <!-- Tab 1: Fan Chart -->
@@ -2103,6 +2153,7 @@
                                 <span>Est. GDPPC PPP: <strong id="scrub-gdppc-display">$8,450</strong></span>
                             </div>
                         </div>
+                                <button id="playBtn" class="btn-play" onclick="toggleAutoPlay()" title="Auto-play simulation 2024→2044">▶ Play</button>
                         <input type="range" class="scrubber-slider" id="timelineScrubber" min="2024" max="2044" value="2034" step="1" oninput="scrubTimeline(this.value)">
                         <div class="scrubber-ticks">
                             <span>2024 (Base)</span>
@@ -3348,7 +3399,7 @@
         if (!leverageChart) {
             const ctxL = document.getElementById('leverageChartObj');
             if (!ctxL) return;
-            window.leverageChart = window.leverageChart = leverageChart = new Chart(ctxL, {
+            window.leverageChart = window.leverageChart = window.leverageChart = window.leverageChart = leverageChart = new Chart(ctxL, {
                 type: 'bar',
                 data: {
                     labels: labels,
@@ -3680,7 +3731,296 @@
         }
     }
     
-</script>
+
+    // ============================================================
+    // PHASE 3 — Dark Mode
+    // ============================================================
+    function toggleDarkMode() {
+      var html = document.documentElement;
+      var btn = document.getElementById('darkModeBtn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        btn.textContent = '🌙 Dark';
+        localStorage.setItem('4d-theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️ Light';
+        localStorage.setItem('4d-theme', 'dark');
+      }
+    }
+    // Restore dark mode on load
+    (function() {
+      if (localStorage.getItem('4d-theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        window.addEventListener('DOMContentLoaded', function() {
+          var btn = document.getElementById('darkModeBtn');
+          if (btn) btn.textContent = '☀️ Light';
+        });
+      }
+    })();
+
+    // ============================================================
+    // PHASE 3 — Share Scenario URL Encoder
+    // ============================================================
+    function shareScenario() {
+      try {
+        var controls = [
+          'dTaxAdmin','dPortLog','dDigInfra','dSkill','dInstitQual',
+          'dFintechInno','dGreenEnergy','dHealthEquity','dUrbanClimate',
+          'ldcShock','ldcTargetYear','controlMode'
+        ];
+        var params = new URLSearchParams();
+        controls.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) params.set(id, el.value);
+        });
+        var url = window.location.origin + window.location.pathname + '?' + params.toString();
+        navigator.clipboard.writeText(url).then(function() {
+          showToast('🔗 Scenario URL copied to clipboard!');
+        }).catch(function() {
+          prompt('Copy this URL:', url);
+        });
+      } catch(e) { console.error('Share error:', e); }
+    }
+
+    // Auto-load params from URL on page load
+    (function() {
+      window.addEventListener('DOMContentLoaded', function() {
+        var params = new URLSearchParams(window.location.search);
+        if (params.toString()) {
+          params.forEach(function(val, key) {
+            var el = document.getElementById(key);
+            if (el) { el.value = val; if (el.dispatchEvent) el.dispatchEvent(new Event('input')); }
+          });
+          if (typeof recalculate === 'function') recalculate();
+        }
+      });
+    })();
+
+    // Toast notification helper
+    function showToast(msg) {
+      var t = document.createElement('div');
+      t.textContent = msg;
+      t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#00d4ff;color:#0a1628;padding:10px 22px;border-radius:8px;font-weight:700;z-index:9999;font-size:0.9em;box-shadow:0 4px 20px rgba(0,212,255,0.4);';
+      document.body.appendChild(t);
+      setTimeout(function() { t.remove(); }, 3000);
+    }
+
+    // ============================================================
+    // PHASE 3 — Auto-Play Animation Player
+    // ============================================================
+    var _autoPlayInterval = null;
+    var _autoPlayYear = 2024;
+    function toggleAutoPlay() {
+      var btn = document.getElementById('playBtn');
+      if (_autoPlayInterval) {
+        clearInterval(_autoPlayInterval);
+        _autoPlayInterval = null;
+        btn.textContent = '▶ Play';
+        btn.classList.remove('playing');
+      } else {
+        _autoPlayYear = 2024;
+        btn.textContent = '⏸ Pause';
+        btn.classList.add('playing');
+        _autoPlayInterval = setInterval(function() {
+          if (_autoPlayYear > 2044) {
+            clearInterval(_autoPlayInterval);
+            _autoPlayInterval = null;
+            btn.textContent = '▶ Play';
+            btn.classList.remove('playing');
+            return;
+          }
+          var slider = document.getElementById('timelineScrubber');
+          if (slider) {
+            slider.value = _autoPlayYear;
+            if (typeof scrubTimeline === 'function') scrubTimeline(_autoPlayYear);
+          }
+          _autoPlayYear++;
+        }, 600);
+      }
+    }
+
+    // ============================================================
+    // PHASE 3 — Parallel Coordinates (9D Dimension Evolution)
+    // ============================================================
+    function drawParallelCoordinates() {
+      var canvas = document.getElementById('parallelCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = canvas.offsetWidth || 900;
+      canvas.width = W;
+      var H = 380;
+
+      var dims = ['Capital','Human\nCap','Tech','Infra','Demog','Complexity','Governance','Sustain','Financial'];
+      var dimKeys = ['K','H','T','I','D','C','G','S','F'];
+      var N = dims.length;
+      var PAD_L = 30, PAD_R = 30, PAD_T = 50, PAD_B = 40;
+      var axisX = [];
+      for (var d = 0; d < N; d++) axisX.push(PAD_L + d * (W - PAD_L - PAD_R) / (N - 1));
+
+      // Use simulationSeries if available, else build stub
+      var series = (typeof simulationSeries !== 'undefined' && simulationSeries && simulationSeries.length > 0)
+        ? simulationSeries : null;
+
+      if (!series) { ctx.fillStyle='#8892a4'; ctx.font='14px sans-serif'; ctx.fillText('Run simulation to see dimension evolution',W/2-120,H/2); return; }
+
+      // Get min/max per dimension
+      var minV = {}, maxV = {};
+      dimKeys.forEach(function(k) { minV[k]=Infinity; maxV[k]=-Infinity; });
+      series.forEach(function(row) {
+        dimKeys.forEach(function(k) {
+          if (row[k] !== undefined) {
+            if (row[k] < minV[k]) minV[k] = row[k];
+            if (row[k] > maxV[k]) maxV[k] = row[k];
+          }
+        });
+      });
+      // Ensure range
+      dimKeys.forEach(function(k) {
+        if (maxV[k] - minV[k] < 0.001) { minV[k] -= 0.05; maxV[k] += 0.05; }
+      });
+
+      function yPos(val, k) {
+        var frac = (val - minV[k]) / (maxV[k] - minV[k]);
+        return PAD_T + (1 - frac) * (H - PAD_T - PAD_B);
+      }
+
+      // Draw background
+      ctx.fillStyle = '#0a1628';
+      ctx.fillRect(0,0,W,H);
+
+      // Draw axes
+      axisX.forEach(function(x, i) {
+        ctx.strokeStyle = '#1e3a5f';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(x, PAD_T); ctx.lineTo(x, H - PAD_B); ctx.stroke();
+
+        // Axis labels
+        ctx.fillStyle = '#8892a4';
+        ctx.font = 'bold 10px Arial';
+        ctx.textAlign = 'center';
+        var lines = dims[i].split('\n');
+        lines.forEach(function(ln, li) { ctx.fillText(ln, x, PAD_T - 18 + li*12); });
+
+        // Min/max tick labels
+        ctx.font = '9px Arial';
+        ctx.fillStyle = '#4a5568';
+        ctx.fillText(minV[dimKeys[i]].toFixed(2), x, H - PAD_B + 12);
+        ctx.fillText(maxV[dimKeys[i]].toFixed(2), x, PAD_T - 5);
+      });
+
+      // Draw each year as a line, color gradient 2024(blue)→2044(gold)
+      series.forEach(function(row, si) {
+        var t = si / (series.length - 1);
+        var r = Math.round(0 + t*255), g = Math.round(100 + t*155), b = Math.round(255 - t*200);
+        ctx.strokeStyle = 'rgba('+r+','+g+','+b+',0.55)';
+        ctx.lineWidth = si===0||si===series.length-1 ? 2.5 : 1;
+        ctx.beginPath();
+        dimKeys.forEach(function(k, di) {
+          var val = row[k] !== undefined ? row[k] : (minV[k]+maxV[k])/2;
+          var x = axisX[di], y = yPos(val, k);
+          if (di===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.stroke();
+      });
+
+      // Label 2024 and 2044
+      ctx.font = 'bold 11px Arial'; ctx.textAlign = 'left';
+      ctx.fillStyle = '#00d4ff'; ctx.fillText('2024', PAD_L, H-PAD_B+26);
+      ctx.fillStyle = '#ffd700'; ctx.fillText('2044', W-PAD_R-22, H-PAD_B+26);
+
+      // Title
+      ctx.font = 'bold 13px Arial'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
+      ctx.fillText('Bangladesh 9D Capability Evolution 2024→2044', W/2, 22);
+    }
+
+    // ============================================================
+    // PHASE 3 — Bangladesh Regional SVG Map
+    // ============================================================
+    var DIVISION_DATA = {
+      'Dhaka':     { epi: 52.4, gdp: 3800, pop: 36.0, note: 'Economic & industrial hub. Highest EPI driven by finance, tech, and services density.' },
+      'Chittagong': { epi: 48.7, gdp: 3200, pop: 14.0, note: 'Port city & export zone. Strong trade infrastructure but infrastructure gaps remain.' },
+      'Sylhet':    { epi: 44.1, gdp: 2600, pop: 9.9,  note: 'Remittance-driven. High human capital from diaspora but limited local manufacturing.' },
+      'Rajshahi':  { epi: 40.3, gdp: 2100, pop: 18.5, note: 'Agriculture belt. Strong crop output; lower complexity and tech indices.' },
+      'Khulna':    { epi: 41.8, gdp: 2200, pop: 15.6, note: 'Coastal-industrial. Shrimp export, jute mills; climate vulnerability is high.' },
+      'Barisal':   { epi: 36.9, gdp: 1800, pop: 8.3,  note: 'Delta region. Lowest EPI — extreme climate exposure, infrastructure deficit.' },
+      'Mymensingh':{ epi: 38.5, gdp: 1950, pop: 11.4, note: 'Agricultural & education belt. University presence but limited industrial base.' },
+      'Rangpur':   { epi: 37.2, gdp: 1870, pop: 15.8, note: 'Northwest corridor. Poverty pocket with strong agricultural calendar.' }
+    };
+
+    function renderBangladeshMap() {
+      var container = document.getElementById('bdMap');
+      if (!container) return;
+      var epis = Object.values(DIVISION_DATA).map(function(d){ return d.epi; });
+      var minE = Math.min.apply(null, epis), maxE = Math.max.apply(null, epis);
+
+      function getColor(epi) {
+        var t = (epi - minE) / (maxE - minE);
+        var r = Math.round(10 + t*0), g = Math.round(58 + t*170), b = Math.round(106 + t*149);
+        return 'rgb('+r+','+g+','+b+')';
+      }
+
+      // Simple schematic 8-division layout using divs (no complex SVG paths)
+      var layout = [
+        ['Rangpur','Mymensingh','Sylhet'],
+        ['Rajshahi','Dhaka',''],
+        ['Khulna','Barisal','Chittagong']
+      ];
+
+      var html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px;background:#0a1628;border-radius:10px;border:1px solid #1e3a5f;">';
+      layout.forEach(function(row) {
+        row.forEach(function(div) {
+          if (!div) {
+            html += '<div style="background:transparent;border-radius:6px;height:80px;"></div>';
+            return;
+          }
+          var d = DIVISION_DATA[div];
+          var col = getColor(d.epi);
+          html += '<div onclick="showDivisionDetail(\''+div+'\')" style="background:'+col+';border-radius:6px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:opacity 0.2s;border:2px solid transparent;" onmouseover="this.style.borderColor=\'#fff\'" onmouseout="this.style.borderColor=\'transparent\'">';
+          html += '<div style="font-size:0.7em;font-weight:700;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,0.8);">'+div+'</div>';
+          html += '<div style="font-size:0.78em;color:#e0f0ff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.8);">EPI '+d.epi+'</div>';
+          html += '</div>';
+        });
+      });
+      html += '</div>';
+      html += '<div style="margin-top:8px;font-size:0.72em;color:#4a5568;text-align:center;">Click any division for details</div>';
+      container.innerHTML = html;
+    }
+
+    function showDivisionDetail(name) {
+      var d = DIVISION_DATA[name];
+      if (!d) return;
+      var epis = Object.values(DIVISION_DATA).map(function(x){ return x.epi; });
+      var minE = Math.min.apply(null, epis), maxE = Math.max.apply(null, epis);
+      var pct = Math.round((d.epi - minE)/(maxE-minE)*100);
+      var detail = document.getElementById('regionDetail');
+      if (!detail) return;
+      detail.innerHTML =
+        '<h4 style="color:#00d4ff;margin:0 0 8px;">📍 '+name+' Division</h4>'+
+        '<div style="margin-bottom:6px;font-size:0.88em;color:#c8d6e8;"><strong>EPI Score:</strong> '+d.epi+'/100'+
+        ' <span style="color:#8892a4;">('+pct+'th percentile)</span></div>'+
+        '<div style="margin-bottom:6px;font-size:0.88em;color:#c8d6e8;"><strong>GDP/Capita:</strong> ~$'+d.gdp.toLocaleString()+'</div>'+
+        '<div style="margin-bottom:6px;font-size:0.88em;color:#c8d6e8;"><strong>Population:</strong> ~'+d.pop+' million</div>'+
+        '<div style="background:#0d1a2e;border-radius:6px;padding:8px;margin-top:8px;font-size:0.82em;color:#8892a4;line-height:1.5;">'+d.note+'</div>'+
+        '<div style="margin-top:10px;"><div style="font-size:0.75em;color:#4a5568;margin-bottom:3px;">EPI vs National Range</div>'+
+        '<div style="background:#1e3a5f;border-radius:4px;height:10px;overflow:hidden;">'+
+        '<div style="background:linear-gradient(to right,#1a3a6a,#00d4ff);width:'+pct+'%;height:100%;border-radius:4px;transition:width 0.4s;"></div></div></div>';
+    }
+
+    // Hook into showTab for new tabs
+    var _origShowTab = showTab;
+    showTab = function(tabId, el) {
+      _origShowTab(tabId, el);
+      if (tabId === 'tab-parallel') {
+        setTimeout(drawParallelCoordinates, 80);
+      }
+      if (tabId === 'tab-regional') {
+        setTimeout(renderBangladeshMap, 80);
+      }
+    };
+    // END PHASE 3
+
+    </script>
 
 <!-- Executive Policy Dossier Modal -->
 <div id="dossierModal" class="dossier-modal-overlay" onclick="if(event.target===this) closePolicyDossier()">

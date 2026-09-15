@@ -24,3 +24,7 @@ Thumbs.db
 *.pem
 *.key
 
+# Scratch audio files
+*.pcm
+sample_gemini_audio.*
+

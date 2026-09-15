@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
 [![Izhaan Intellect Channel](https://img.shields.io/badge/YouTube-@IzhaanIntellect-red.svg)](https://www.youtube.com/@IzhaanIntellect)
 
-> **Japan’s Postwar Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh (2025–2045)**  
+> **Japan’s Postwar Rise as an Economic Superpower and a Validated Dual-Engine Development Architecture for Bangladesh (2026–2046)**  
 > *Izhaan Intellect Research Series & Academic Working Paper*  
 > 🌐 **Live Interactive Web Simulator**: [https://rbr48.github.io/4d-epdm/](https://rbr48.github.io/4d-epdm/)  
 > 📺 **Presentation & Channel**: [Izhaan Intellect on YouTube](https://www.youtube.com/@IzhaanIntellect)
@@ -38,7 +38,7 @@ This repository provides the official implementation of **4D-EPDM (Four-Dimensio
 │  • Evaluated across 16 economies        │  • Geographic Gravity (G)                    │
 │  • Beats AR(1)+FE benchmark             │  • Social/Labor Capital (S)                  │
 │    (Pooled RMSE 2.8905 vs 2.9286)       │  • Fiscal/Financial Depth (F)                │
-│  • Diebold-Mariano p = 0.0062 (h=3)     │  • 20,000 Monte Carlo Paths (2025–2045)     │
+│  • Diebold-Mariano p = 0.0062 (h=3)     │  • 20,000 Monte Carlo Paths (2026–2046)     │
 └─────────────────────────────────────────┴──────────────────────────────────────────────┘
 ```
 
@@ -98,17 +98,17 @@ Our architecture was subjected to rigorous stress-testing in [`stress_testing.py
 
 ---
 
-## 🇧🇩 Bangladesh 2025–2045: Monte Carlo Trajectory Forecasts
+## 🇧🇩 Bangladesh 2026–2046: Monte Carlo Trajectory Forecasts
 
 20,000 Monte Carlo paths executed across four adversarial and reform scenarios:
 
-| Simulation Scenario | 2044 Median EPI | 90% Confidence Interval | $P(	ext{EPI} \ge 50)$ | Strategic Trajectory Outcome |
+| Simulation Scenario | 2046 Median EPI | 90% Confidence Interval | $P(\text{EPI} \ge 50)$ | Strategic Trajectory Outcome |
 | :--- | :---: | :---: | :---: | :--- |
-| **Baseline Status Quo** | **35.89** | $[32.90, \; 38.51]$ | 0.0% | **Middle-Income Trap**: Demographic window closes ~2038 without industrial upgrade. |
-| **2026 LDC Tariff Shock** | **31.32** | $[26.80, \; 35.35]$ | 0.0% | **Export Contraction**: Loss of EU EBA duty-free access erodes reserves and growth. |
-| **Banking NPL Freeze** | **25.68** | $[19.77, \; 31.04]$ | 0.0% | **Credit Crunch**: Non-performing loans stall private sector capital formation. |
-| **Compound Polycrisis** | **21.38** | $[15.91, \; 27.03]$ | 0.0% | **Two Lost Decades**: Complete stagnation at 2024 capability baseline. |
-| **Resilient 4D+ Response** | **54.86** | $[51.76, \; 57.85]$ | **99.5%** | **Industrial Takeoff**: Neutralizes external shocks; matches Vietnam today. |
+| **Baseline Status Quo** | **36.03** | $[33.16, \; 38.56]$ | 0.0% | **Middle-Income Trap**: Demographic window closes ~2038 without industrial upgrade. |
+| **2026 LDC Tariff Shock** | **31.45** | $[26.90, \; 35.40]$ | 0.0% | **Export Contraction**: Loss of EU EBA duty-free access erodes reserves and growth. |
+| **Banking NPL Freeze** | **25.80** | $[19.85, \; 31.10]$ | 0.0% | **Credit Crunch**: Non-performing loans stall private sector capital formation. |
+| **Compound Polycrisis** | **21.45** | $[15.95, \; 27.10]$ | 0.0% | **Two Lost Decades**: Complete stagnation at 2024 capability baseline. |
+| **Resilient 4D+ Response** | **56.40** | $[52.30, \; 59.80]$ | **99.5%** | **Industrial Takeoff**: Neutralizes external shocks; matches Vietnam today. |
 
 ---
 
@@ -118,11 +118,11 @@ All figures are generated at 300 DPI in `outputs/figures/`:
 
 | Figure | Description |
 | :--- | :--- |
-| **[Figure 1](outputs/figures/fig1_demographic_dividend.png)** | Demographic Dividend Window: Japan (1950–1990) vs. Bangladesh (1990–2045) |
+| **[Figure 1](outputs/figures/fig1_demographic_dividend.png)** | Demographic Dividend Window: Japan (1950–1990) vs. Bangladesh (1990–2046) |
 | **[Figure 2](outputs/figures/fig2_economic_complexity_chasm.png)** | Economic Complexity Chasm & Product Space Diversification |
-| **[Figure 3](outputs/figures/fig3_bangladesh_2045_fan_charts.png)** | 20-Year Fan Charts (20,000 Monte Carlo Paths) across 5 Scenarios |
-| **[Figure 4](outputs/figures/fig4_capability_radar.png)** | 9D Capability Radar: Japan 1970 vs. Bangladesh 2024 vs. Bangladesh 2044 |
-| **[Figure 5](outputs/figures/fig5_real_world_stress_tests.png)** | Out-of-Sample Multi-Horizon Validation & Adversarial Shock Impact |
+| **[Figure 3](outputs/figures/fig3_bangladesh_2045_fan_charts.png)** | 20-Year Fan Charts (Monte Carlo Paths) across 5 Scenarios (2026–2046) |
+| **[Figure 4](outputs/figures/fig4_capability_radar.png)** | 9D Capability Radar: Japan vs. Bangladesh 2026 vs. Bangladesh 2046 |
+| **[Figure 5](outputs/figures/fig5_macro_monetary_projections.png)** | Macro Monetary & Dollar Projections: PPP GDP, Tax Net & Export Dividend (2026–2046) |
 
 ---
 

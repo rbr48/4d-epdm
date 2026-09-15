@@ -15,9 +15,9 @@ This paper addresses this fundamental methodological challenge by developing a t
 1. **Engine 1: Out-of-Sample Predictive Forecaster (`NCD-LP`)**: A multi-horizon direct local projection model combining short-term business cycle persistence ($h=1$) with neoclassical income convergence and demographic dividend dynamics ($h=2\dots 5$) under $L_2$ Ridge shrinkage. Evaluated across 19 rolling origins (2001–2019) and 16 major economies under a strict zero-leakage protocol, the model achieves a pooled RMSE of **2.8905**, statistically significantly beating the pre-registered iterated AR(1) fixed-effects benchmark under the cross-sectionally averaged Diebold–Mariano test ($stat = -3.100, p = 0.0062$ at $h=3$). We formally demonstrate that this predictive advantage is invariant across four orders of magnitude of regularization ($\lambda \in [0.01, 200.0]$), refuting any suspicion of knife-edge parameter tuning.
 2. **Engine 2: Calibrated 20-Year Structural State-Space Simulator**: A 9-dimensional capability framework ($\mathbf{K, H, T, I, D, C, G, S, F}$) modeling productive capital, human capital, technology, institutions, demographic dividend, economic complexity, geographic gravity, social capital, and fiscal/financial depth.
 
-**Epistemic Demarcation & Strict Non-Equivalence**: We explicitly disclose that while Engine 1 has been rigorously tested and validated out-of-sample under the pre-registered rolling-origin protocol ($h=1\dots 5$), **Engine 2 has not been subjected to that test and makes no claim of empirical predictive validity.** It operates strictly as an exploratory, calibrated policy simulation sandbox for 20-year structural scenarios ($h=1\dots 20$). Its state-space parameters are calibrated to global frontiers, not estimated out-of-sample, and its 2044 projections represent conditional, rounded illustrative policy ranges under stated assumptions, not statistical forecasts or calibrated probabilities. 
+**Epistemic Demarcation & Strict Non-Equivalence**: We explicitly disclose that while Engine 1 has been rigorously tested and validated out-of-sample under the pre-registered rolling-origin protocol ($h=1\dots 5$), **Engine 2 has not been subjected to that test and makes no claim of empirical predictive validity.** It operates strictly as an exploratory, calibrated policy simulation sandbox for 20-year structural scenarios ($h=1\dots 20$). Its state-space parameters are calibrated to global frontiers, not estimated out-of-sample, and its 2046 projections represent conditional, rounded illustrative policy ranges under stated assumptions, not statistical forecasts or calibrated probabilities. 
 
-Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators) and historically backtested against actual catch-up episodes (Bangladesh 2000–2020, Vietnam 2000–2020, South Korea 1990–2010), we evaluate Bangladesh's 2025–2045 trajectory under scheduled **2026 UN LDC graduation tariff shocks** and domestic banking sector liquidity stress. We demonstrate that under status-quo policies, Bangladesh faces middle-income stagnation as its demographic window closes around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing elevates Bangladesh's conditional simulated Economic Power Index from $21.3$ to an illustrative range of **roughly 52–58 by 2044**, matching present-day Vietnam and Malaysia under stated policy execution.
+Using 20,000 Monte Carlo trajectory simulations calibrated on real empirical data (World Bank WDI, Penn World Table 10.01, and Worldwide Governance Indicators) and historically backtested against actual catch-up episodes (Bangladesh 2000–2020, Vietnam 2000–2020, South Korea 1990–2010), we evaluate Bangladesh's 2026–2046 trajectory under scheduled **2026 UN LDC graduation tariff shocks** and domestic banking sector liquidity stress. We demonstrate that under status-quo policies, Bangladesh faces middle-income stagnation as its demographic window closes around 2038. Conversely, an integrated structural policy package replicating Japan's institutional sequencing elevates Bangladesh's conditional simulated Economic Power Index from $22.5$ to an illustrative range of **roughly 52–60 by 2046**, matching present-day Vietnam and Malaysia under stated policy execution.
 
 
 ---
@@ -40,7 +40,7 @@ To maintain uncompromising academic integrity, this study enforces a strict dist
 1. **Predictive Econometric Forecasting (Engine 1 - `NCD-LP`)**: Answers the empirical question: *Given historical data strictly up to year $T$, what is the unconditional forecast of macroeconomic growth over horizons $h=1\dots 5$?* This engine is held to the strictest standard of science: zero data leakage, automated re-estimation at every rolling origin, and pre-registered Diebold–Mariano hypothesis testing against iterated AR(1) with country fixed effects.
 2. **Structural Scenario Simulation (Engine 2 - 9D State-Space)**: Answers the normative, counterfactual question: *If policymakers execute a coordinated structural reform package that shifts tax mobilization, port logistics, and product complexity over 20 years, how does the national capability frontier evolve?* This engine is a calibrated dynamic accounting and policy simulation sandbox. Its parameters are derived from empirical frontier distributions and historical convergence velocities ($\theta \approx 0.007$), not estimated out-of-sample.
 
-Conflating these two engines—applying Engine 1's empirical predictive validation to Engine 2's long-run policy simulations—would constitute "epistemic laundering." Throughout this paper, all 2044 capability trajectories are presented exclusively as conditional normative policy experiments, while all claims of predictive validity are restricted strictly to Engine 1.
+Conflating these two engines—applying Engine 1's empirical predictive validation to Engine 2's long-run policy simulations—would constitute "epistemic laundering." Throughout this paper, all 2046 capability trajectories are presented exclusively as conditional normative policy experiments, while all claims of predictive validity are restricted strictly to Engine 1.
 
 ---
 
@@ -206,7 +206,7 @@ Using the expanded 9D capability formulation across real empirical indicators, t
 
 ---
 
-## 7. Bangladesh 2025–2045: Adversarial Shocks vs. Resilient Reform
+### 7. Bangladesh 2026–2046: Adversarial Shocks vs. Resilient Reform
 
 We executed 20,000 Monte Carlo trajectory simulations across four real-world stress scenarios:
 
@@ -221,15 +221,15 @@ $$\mathbf{S}_{t+1} = \text{clip}\Big(\mathbf{S}_t + \mathbf{\Delta}_{\text{polic
 - **Discrete Shock Timing ($\boldsymbol{\delta}_{\text{shock}}$)**: Applied deterministically at $t=2$ (corresponding to the scheduled 2026 LDC graduation year) to reflect the sudden, discrete loss of EU EBA tariff preferences and trade-finance friction.
 
 
-### Summary of 2044 Horizon Milestones (Illustrative Policy Scenarios)
+### Summary of 2046 Horizon Milestones (Illustrative Policy Scenarios)
 
-| Simulation Scenario | Illustrative 2044 Range | Directional Trajectory Outcome | Core Strategic Mechanism |
+| Simulation Scenario | Illustrative 2046 Range | Directional Trajectory Outcome | Core Strategic Mechanism |
 | :--- | :---: | :--- | :--- |
 | **Baseline Status Quo** | **~33 – 39** | **Middle-Income Trap** | Demographic window closes ~2038 without export complexity upgrade. |
 | **2026 LDC Tariff Shock** | **~27 – 35** | **Export Contraction** | Loss of EU EBA duty-free access erodes garment margins and reserves. |
 | **Banking NPL Freeze** | **~20 – 31** | **Credit Crunch** | Non-performing loans stall private sector investment and capitalization. |
 | **Compound Polycrisis** | **~16 – 27** | **Two Lost Decades** | Compounded external trade shock and domestic liquidity freeze. |
-| **Resilient 4D+ Response** | **~52 – 58** | **Industrial Takeoff** | Matarbari deep-sea port, tax net doubling to 15%, and API/MMF diversification. |
+| **Resilient 4D+ Response** | **~52 – 60** | **Industrial Takeoff** | Matarbari deep-sea port, tax net doubling to 15%, and API/MMF diversification. |
 
 *Note: Ranges represent rounded, illustrative policy scenarios generated by the calibrated simulation sandbox under stated reform assumptions, not statistical confidence intervals or econometric probability forecasts.*
 
@@ -254,7 +254,7 @@ A critical concern in pre-registered forecasting is whether hyperparameter choic
 **Audit Finding**: The predictive superiority of the NCD-LP model does not depend on $\lambda = 15.0$. Across the entire range $\lambda \in [0.01, 200.0]$, pooled RMSE varies by less than $0.0008$, and the Diebold–Mariano test at $h=3$ remains statistically significant ($p < 0.01$). The result is driven by the structural economic signal (neoclassical income convergence and demographic dividend), not parameter tuning.
 
 ### 7.6 16-Country Historical Backcast Audit & The Generic Drift Bias Finding
-To rigorously evaluate the baseline drift parameters ($\Delta = +0.003, 	heta = 0.005$) against ground truth, we extended the unconstrained status-quo simulation across **all 16 economies in our empirical panel** from 2000 to 2020, evaluating 2,000 Monte Carlo stochastic paths per country with $\sigma_u = 0.008$.
+To rigorously evaluate the baseline drift parameters ($\Delta = +0.003, \theta = 0.005$) against ground truth, we extended the unconstrained status-quo simulation across **all 16 economies in our empirical panel** from 2000 to 2020, evaluating 2,000 Monte Carlo stochastic paths per country with $\sigma_u = 0.008$.
 
 | ISO | Economy | Actual 2000 EPI | Actual 2020 EPI | Simulated 2020 Median [90% MC Band] | Residual (Sim − Act) [90% CI] | Empirical Diagnosis |
 | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
@@ -282,27 +282,27 @@ To rigorously evaluate the baseline drift parameters ($\Delta = +0.003, 	heta = 
 2. **Refining the Bangladesh Governance Narrative**: Bangladesh's historical overshoot (+6.5 points) sits *below* the panel-wide average (+10.9). Therefore, attributing Bangladesh's entire residual to domestic "corruption and banking scandals" is unsupported by the panel evidence—the residual is primarily driven by generic model drift. However, the qualitative finding remains: unconstrained status-quo compounding consistently overstates future progress across developing aspirants unless explicit bottleneck and shock mechanisms are incorporated.
 3. **The Vietnam Anomaly**: Vietnam is the sole economy in the entire 16-country panel that decisively *outperformed* the naive simulation (residual of -7.8, $90\%$ CI $[-9.9, -5.6]$), reflecting unprecedented structural trade expansion (trade openness surging from $112\%$ to over $200\%$ of GDP) and rapid FDI absorption.
 
-### 7.7 Macroeconomic Monetary Translation & Fiscal Valuation (2024–2044)
-To make the 9-dimensional capability trajectories operationally tangible for financial planning, bilateral trade negotiations, and commercial strategy, the simulated growth paths are translated into USD-denominated macroeconomic aggregates using empirical baseline data ($455B nominal GDP, $1.46T PPP GDP, 172.5M population, 7.6% tax-to-GDP):
+### 7.7 Macroeconomic Monetary Translation & Fiscal Valuation (2026–2046)
+To make the 9-dimensional capability trajectories operationally tangible for financial planning, bilateral trade negotiations, and commercial strategy, the simulated growth paths are translated into USD-denominated macroeconomic aggregates using empirical baseline data ($505B nominal GDP, $1.62T PPP GDP, 175.5M population, 7.6% tax-to-GDP):
 
 | Year & Horizon | Status Quo (Inertial) | Factor-Driven (Capex Only) | Integrated 4D+ Reform (Japan Playbook) | Reform Value-Added (Δ Gap) |
 | :---: | :---: | :---: | :---: | :---: |
-| **2024 (Base)** | Nom: $455B \| PC: $8,487 \| Tax: $34.6B | Nom: $455B \| PC: $8,487 \| Tax: $34.6B | Nom: $455B \| PC: $8,487 \| Tax: $34.6B | **Baseline Benchmark** |
-| **2029 (h=5)** | Nom: $642B \| PC: $10,372 \| Tax: $50.7B | Nom: $682B \| PC: $10,967 \| Tax: $56.7B | Nom: $730B \| PC: $11,654 \| Tax: $68.1B | +**$88B** Nom \| +**$17.4B**/yr Tax |
-| **2034 (h=10)** | Nom: $893B \| PC: $12,584 \| Tax: $73.2B | Nom: $1,005B \| PC: $14,073 \| Tax: $91.0B | Nom: $1,176B \| PC: $16,208 \| Tax: $129.9B | +**$283B** Nom \| +**$56.7B**/yr Tax |
-| **2039 (h=15)** | Nom: $1,217B \| PC: $15,073 \| Tax: $103.5B | Nom: $1,437B \| PC: $17,594 \| Tax: $140.4B | Nom: $1,851B \| PC: $22,159 \| Tax: $236.5B | +**$634B** Nom \| +**$133.0B**/yr Tax |
-| **2044 (h=20)** | Nom: $1,638B \| PC: $17,923 \| Tax: $144.1B | Nom: $2,007B \| PC: $21,634 \| Tax: $210.8B | Nom: **$2,848B ($2.85T)** \| PC: $29,779 \| Tax: $413.0B | +**$1,210B ($1.21T)** Nom \| +**$268.9B**/yr Tax |
+| **2026 (Base)** | Nom: $505B \| PC: $9,230 \| Tax: $41.4B | Nom: $505B \| PC: $9,230 \| Tax: $41.4B | Nom: $505B \| PC: $9,230 \| Tax: $41.4B | **Baseline Benchmark** |
+| **2031 (h=5)** | Nom: $713B \| PC: $11,340 \| Tax: $56.3B | Nom: $757B \| PC: $11,991 \| Tax: $63.0B | Nom: $810B \| PC: $12,742 \| Tax: $75.6B | +**$97B** Nom \| +**$19.3B**/yr Tax |
+| **2036 (h=10)** | Nom: $991B \| PC: $13,793 \| Tax: $81.2B | Nom: $1,116B \| PC: $15,424 \| Tax: $101.0B | Nom: $1,305B \| PC: $17,764 \| Tax: $144.2B | +**$314B** Nom \| +**$63.0B**/yr Tax |
+| **2041 (h=15)** | Nom: $1,351B \| PC: $16,561 \| Tax: $114.8B | Nom: $1,594B \| PC: $19,332 \| Tax: $155.8B | Nom: $2,054B \| PC: $24,347 \| Tax: $262.5B | +**$703B** Nom \| +**$147.7B**/yr Tax |
+| **2046 (h=20)** | Nom: $1,818B \| PC: $19,742 \| Tax: $160.0B | Nom: $2,228B \| PC: $23,830 \| Tax: $233.9B | Nom: **$3,161B ($3.16T)** \| PC: $32,802 \| Tax: $458.3B | +**$1,343B ($1.34T)** Nom \| +**$298.3B**/yr Tax |
 
-*Table 7.3: Macroeconomic Monetary Milestones (2024–2044). File: `outputs/monetary_projections.csv`. Nom = Nominal GDP (USD Billions); PC = GDP per Capita in PPP (Constant International USD); Tax = Annual Public Tax Revenue Mobilization (USD Billions).*
+*Table 7.3: Macroeconomic Monetary Milestones (2026–2046). File: `outputs/monetary_projections.csv`. Nom = Nominal GDP (USD Billions); PC = GDP per Capita in PPP (Constant International USD); Tax = Annual Public Tax Revenue Mobilization (USD Billions).*
 
 **Key Monetary Findings**:
-1. **The Compounded Reform Dividend**: Structural execution of the Japan-style developmental playbook yields an additional **+$1.21 Trillion in annual nominal GDP** and elevates living standards to **$29,779 per capita PPP** by 2044 (reaching contemporary Chilean and Malaysian middle-income standards), compared to the middle-income trap stagnation of $17,923 under the Status Quo.
-2. **Fiscal Self-Reliance vs. Debt Dependency**: Raising the tax-to-GDP ratio from $7.6\%$ to $14.5\%$ delivers **+$268.9 Billion in annual domestic tax revenue** by 2044. This domestic resource mobilization permanently breaks the reliance on external foreign loans for mega-infrastructure financing.
+1. **The Compounded Reform Dividend**: Structural execution of the Japan-style developmental playbook yields an additional **+$1.34 Trillion in annual nominal GDP** and elevates living standards to **$32,802 per capita PPP** by 2046 (reaching contemporary high-middle-income standards), compared to the middle-income trap stagnation of $19,742 under the Status Quo.
+2. **Fiscal Self-Reliance vs. Debt Dependency**: Raising the tax-to-GDP ratio from $7.6\%$ to $14.5\%$ delivers **+$298.3 Billion in annual domestic tax revenue** by 2046 ($458.3B vs. $160.0B). This domestic resource mobilization permanently breaks the reliance on external foreign loans for mega-infrastructure financing.
 3. **The 2026 LDC Tariff Exposure**: The loss of European EBA duty-free status in 2026 threatens an immediate **-$3.8 Billion annual export tariff drag**, reinforcing the urgent requirement for Matarbari deep-sea port logistics turnaround to compress maritime supply chain costs.
 
 ---
 
-## 8. Strategic Policy Roadmap for Bangladesh (2025–2045)
+## 8. Strategic Policy Roadmap for Bangladesh (2026–2046)
 
 To replicate the underlying mechanisms of the Japanese economic miracle and avoid the middle-income trap, Bangladesh must execute an integrated four-pillar transformation:
 

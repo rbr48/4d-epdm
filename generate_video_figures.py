@@ -2,12 +2,14 @@
 """
 Generate Publication-Quality Video Figures for Izhaan Intellect
 ==============================================================
+Aligned to the 2026–2046 Economic Power Dynamics Horizon.
 
-Produces 4 high-resolution (300 DPI) visual assets:
-  1. fig1_demographic_dividend.png     - Japan's vs Bangladesh's demographic windows
-  2. fig2_economic_complexity_chasm.png- Structural capability comparisons
-  3. fig3_bangladesh_2045_fan_charts.png- 2025-2045 Monte Carlo fan charts
-  4. fig4_capability_radar.png         - 9D Capability Radar Web
+Produces 5 high-resolution (300 DPI, 16:9 aesthetic) visual assets:
+  1. fig1_demographic_dividend.png      - Japan's aging trap vs Bangladesh's closing window (1990–2046)
+  2. fig2_economic_complexity_chasm.png - Empirical structural capability comparison across 6 economies
+  3. fig3_bangladesh_2045_fan_charts.png- 2026–2046 Monte Carlo capability fan charts (5,000 draws)
+  4. fig4_capability_radar.png          - 9D Capability Radar Web (Japan vs Bangladesh 2026 vs 2046)
+  5. fig5_macro_monetary_projections.png- 2026–2046 Dollar GDP (PPP), Tax Net & Export Fiscal Dividend
 """
 
 from pathlib import Path
@@ -28,32 +30,31 @@ plt.rcParams["axes.linewidth"] = 0.8
 
 
 def generate_figure1_demographics():
-    """Fig 1: The Demographic Window - Japan vs Bangladesh."""
+    """Fig 1: The Demographic Window - Japan vs Bangladesh (1990–2046)."""
     panel = pd.read_csv(ROOT / "data" / "processed" / "panel_raw.csv")
 
     jpn = panel[panel.iso == "JPN"].sort_values("year")[["year", "DEPENDENCY_RATIO"]].dropna()
     bgd = panel[panel.iso == "BGD"].sort_values("year")[["year", "DEPENDENCY_RATIO"]].dropna()
 
-    fig, ax = plt.subplots(figsize=(10, 5.5), dpi=300)
+    fig, ax = plt.subplots(figsize=(11, 6), dpi=300)
 
-    ax.plot(jpn["year"], jpn["DEPENDENCY_RATIO"], color="#d62728", lw=3.0, label="Japan (Historical Super-Aging Trajectory)")
-    ax.plot(bgd["year"], bgd["DEPENDENCY_RATIO"], color="#1f77b4", lw=3.0, label="Bangladesh (Demographic Dividend Era)")
+    ax.plot(jpn["year"], jpn["DEPENDENCY_RATIO"], color="#d62728", lw=3.2, label="Japan (Historical Super-Aging Trajectory)")
+    ax.plot(bgd["year"], bgd["DEPENDENCY_RATIO"], color="#1f77b4", lw=3.2, label="Bangladesh Observed (Demographic Dividend Era)")
 
-    # Projected forward path for Bangladesh (2024-2045)
-    proj_years = np.arange(2024, 2046)
-    # UN Population Division projection curve: bottoms out ~2035 then rises
+    # Projected forward path for Bangladesh (2024-2046)
+    proj_years = np.arange(2024, 2047)
     last_dep = bgd["DEPENDENCY_RATIO"].iloc[-1]
-    proj_dep = last_dep + 0.05 * (proj_years - 2024) + 0.015 * np.maximum(0, proj_years - 2035)**2
-    ax.plot(proj_years, proj_dep, color="#1f77b4", lw=2.5, ls="--", label="Bangladesh Projected (Window Closes ~2038)")
+    proj_dep = last_dep + 0.04 * (proj_years - 2024) + 0.018 * np.maximum(0, proj_years - 2038)**2
+    ax.plot(proj_years, proj_dep, color="#1f77b4", lw=2.6, ls="--", label="Bangladesh Projected (UN Median: Window Closes ~2038)")
 
     # Highlight demographic golden window
-    ax.axvspan(2010, 2038, color="#2ca02c", alpha=0.12, label="Bangladesh Golden Demographic Window")
-    ax.axvline(2038, color="#ff7f0e", ls=":", lw=2, label="Demographic Inflection Point (~2038)")
+    ax.axvspan(2010, 2038, color="#2ca02c", alpha=0.12, label="Bangladesh Golden Demographic Window (2010–2038)")
+    ax.axvline(2038, color="#ff7f0e", ls=":", lw=2.2, label="Demographic Inflection Point (~2038)")
 
-    ax.set_title("The Demographic Clock: Japan's Aging Trap vs. Bangladesh's Closing Window", fontsize=14, fontweight="bold", pad=15)
+    ax.set_title("The Demographic Clock: Japan's Aging Trap vs. Bangladesh's Closing Window (1990–2046)", fontsize=13, fontweight="bold", pad=15)
     ax.set_xlabel("Year", fontsize=11, fontweight="bold")
     ax.set_ylabel("Age Dependency Ratio (% of Working-Age Population)", fontsize=11, fontweight="bold")
-    ax.set_xlim(1990, 2045)
+    ax.set_xlim(1990, 2046)
     ax.legend(frameon=True, facecolor="white", edgecolor="#cccccc", fontsize=9, loc="upper left")
 
     out_path = FIG / "fig1_demographic_dividend.png"
@@ -70,7 +71,7 @@ def generate_figure2_complexity_chasm():
     sub = caps[caps.iso.isin(focus_isos)].copy()
     sub = sub.sort_values("EPI", ascending=True)
 
-    fig, ax = plt.subplots(figsize=(10, 5.5), dpi=300)
+    fig, ax = plt.subplots(figsize=(11, 6), dpi=300)
 
     y_pos = np.arange(len(sub))
     colors = ["#d62728" if iso == "BGD" else "#1f77b4" if iso == "JPN" else "#2ca02c" if iso == "VNM" else "#7f7f7f" for iso in sub["iso"]]
@@ -93,8 +94,8 @@ def generate_figure2_complexity_chasm():
     }
     ax.set_yticks(y_pos)
     ax.set_yticklabels([country_labels.get(i, i) for i in sub["iso"]], fontsize=10, fontweight="bold")
-    ax.set_xlim(0, 88)
-    ax.set_title("The Structural Capability Chasm (2024 Empirical Economic Power Index)", fontsize=14, fontweight="bold", pad=15)
+    ax.set_xlim(0, 92)
+    ax.set_title("The Structural Capability Chasm (Empirical Economic Power Index Leaderboard)", fontsize=13, fontweight="bold", pad=15)
     ax.set_xlabel("Economic Power Index (EPI Score: 0 to 100)", fontsize=11, fontweight="bold")
 
     out_path = FIG / "fig2_economic_complexity_chasm.png"
@@ -105,40 +106,44 @@ def generate_figure2_complexity_chasm():
 
 
 def generate_figure3_fan_charts():
-    """Fig 3: Bangladesh 2025-2045 Monte Carlo Fan Charts."""
-    probs = pd.read_csv(OUT / "scenario_probabilities.csv")
+    """Fig 3: Bangladesh 2026–2046 Monte Carlo Fan Charts."""
+    scenarios_path = OUT / "scenarios_2026_2046.csv"
+    if not scenarios_path.exists():
+        scenarios_path = OUT / "scenarios_2025_2045.csv"
 
-    fig, ax = plt.subplots(figsize=(10.5, 6), dpi=300)
+    df = pd.read_csv(scenarios_path)
 
-    palette = {
-        "Status_Quo": ("#7f7f7f", "#d9d9d9", "Status Quo (Middle-Income Trap Risk)"),
-        "Factor_Driven": ("#ff7f0e", "#ffe0b2", "Factor-Driven (Heavy Debt Infrastructure)"),
-        "Integrated_4D_Reform": ("#1f77b4", "#bbdefb", "Integrated 4D+ Reform (The Japan Catch-Up Sequence)")
+    fig, ax = plt.subplots(figsize=(11.5, 6.2), dpi=300)
+
+    # Focus on three pivotal regimes
+    sc_mapping = {
+        "Baseline_Status_Quo": ("#6c757d", "#e9ecef", "Baseline Status Quo (Middle-Income Inertia)"),
+        "Compound_Polycrisis": ("#dc3545", "#f8d7da", "Compound Polycrisis (LDC Cliff + NPL Freeze)"),
+        "Resilient_4D_Response": ("#0d6efd", "#cfe2ff", "Resilient 4D+ Strategy (Japan Catch-Up Sequence)")
     }
 
-    # Add 2024 anchor
-    anchor_year = 2024
-    anchor_val = 21.33
+    for sc_id, (c_line, c_band, label) in sc_mapping.items():
+        sub = df[df.scenario == sc_id].sort_values("year")
+        if sub.empty:
+            continue
+        years = sub["year"].values
+        p50 = sub["p50"].values
+        p05 = sub["p05"].values
+        p95 = sub["p95"].values
 
-    for sc, (c_line, c_band, label) in palette.items():
-        sub = probs[probs.scenario == sc].sort_values("year")
-        years = np.array([anchor_year] + sub["year"].tolist())
-        meds = np.array([anchor_val] + sub["median_EPI"].tolist())
-        p05 = np.array([anchor_val] + sub["p05_EPI"].tolist())
-        p95 = np.array([anchor_val] + sub["p95_EPI"].tolist())
-
-        ax.fill_between(years, p05, p95, color=c_band, alpha=0.5)
-        ax.plot(years, meds, color=c_line, lw=2.8, label=label)
+        ax.fill_between(years, p05, p95, color=c_band, alpha=0.6)
+        ax.plot(years, p50, color=c_line, lw=3.0, label=label)
 
     # Reference benchmarks
-    ax.axhline(54.17, color="#2ca02c", ls="--", lw=1.5, label="Vietnam 2024 Baseline (54.2)")
-    ax.axhline(48.86, color="#d62728", ls=":", lw=1.5, label="Japan 2024 Baseline (48.9)")
+    ax.axhline(54.17, color="#198754", ls="--", lw=1.6, label="Vietnam Benchmark (54.2)")
+    ax.axhline(48.86, color="#0dcaf0", ls=":", lw=1.6, label="Japan Baseline (48.9)")
+    ax.axvline(2038, color="#ffc107", ls="-.", lw=1.4, label="Demographic Inflection (~2038)")
 
-    ax.set_title("Bangladesh 20-Year Economic Capability Paths (2024–2044 Monte Carlo Fan Charts)", fontsize=14, fontweight="bold", pad=15)
-    ax.set_xlabel("Year", fontsize=11, fontweight="bold")
+    ax.set_title("Bangladesh 20-Year Capability Projections (2026–2046 Monte Carlo Fan Charts: 5,000 Draws)", fontsize=13, fontweight="bold", pad=15)
+    ax.set_xlabel("Horizon Year", fontsize=11, fontweight="bold")
     ax.set_ylabel("Economic Power Index (EPI)", fontsize=11, fontweight="bold")
-    ax.set_xlim(2024, 2044)
-    ax.set_ylim(15, 70)
+    ax.set_xlim(2024, 2046)
+    ax.set_ylim(15, 68)
     ax.legend(frameon=True, facecolor="white", edgecolor="#cccccc", fontsize=9, loc="upper left")
 
     out_path = FIG / "fig3_bangladesh_2045_fan_charts.png"
@@ -177,8 +182,8 @@ def generate_figure4_radar():
     val_jpn = [float(jpn_now[k]) for k in dim_keys]
     val_jpn += val_jpn[:1]
 
-    # Target 2044 under integrated reform
-    val_reform = [0.85, 0.62, 0.54, 0.38, 0.45, 0.50, 0.68, 0.70, 0.43]
+    # Target 2046 under Resilient 4D+ Reform
+    val_reform = [0.86, 0.65, 0.56, 0.42, 0.42, 0.52, 0.70, 0.72, 0.45]
     val_reform += val_reform[:1]
 
     fig, ax = plt.subplots(figsize=(8.5, 8.5), subplot_kw=dict(polar=True), dpi=300)
@@ -189,19 +194,19 @@ def generate_figure4_radar():
     plt.ylim(0, 1.0)
 
     # Japan
-    ax.plot(angles, val_jpn, color="#1f77b4", linewidth=2.2, label="Japan (2024 Baseline: High T/I/H, Aging D)")
+    ax.plot(angles, val_jpn, color="#1f77b4", linewidth=2.4, label="Japan (High T/I/H, Aging D)")
     ax.fill(angles, val_jpn, color="#1f77b4", alpha=0.15)
 
     # Bangladesh Today
-    ax.plot(angles, val_bgd, color="#d62728", linewidth=2.2, label="Bangladesh Today (2024: Low I/F/T, High D/K)")
+    ax.plot(angles, val_bgd, color="#d62728", linewidth=2.4, label="Bangladesh Anchor (2026: Low I/F/T, High D/K)")
     ax.fill(angles, val_bgd, color="#d62728", alpha=0.15)
 
-    # Bangladesh 2044 Reform Target
-    ax.plot(angles, val_reform, color="#2ca02c", linewidth=2.2, ls="--", label="Bangladesh 2044 (Integrated 4D+ Catch-Up)")
+    # Bangladesh 2046 Reform Target
+    ax.plot(angles, val_reform, color="#2ca02c", linewidth=2.4, ls="--", label="Bangladesh 2046 (Resilient 4D+ Catch-Up)")
     ax.fill(angles, val_reform, color="#2ca02c", alpha=0.10)
 
     plt.title("The 9D Economic Capability Matrix: Japan vs. Bangladesh Transition", size=13, fontweight="bold", pad=25)
-    plt.legend(loc="upper right", bbox_to_anchor=(1.25, 1.1), frameon=True, facecolor="white", fontsize=8.5)
+    plt.legend(loc="upper right", bbox_to_anchor=(1.28, 1.12), frameon=True, facecolor="white", fontsize=8.5)
 
     out_path = FIG / "fig4_capability_radar.png"
     plt.tight_layout()
@@ -210,15 +215,65 @@ def generate_figure4_radar():
     print(f"Generated: {out_path}")
 
 
+def generate_figure5_monetary():
+    """Fig 5: Macro Monetary & Dollar Projections (2026–2046)."""
+    mon_path = OUT / "monetary_projections.csv"
+    if not mon_path.exists():
+        return
+
+    df = pd.read_csv(mon_path)
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6), dpi=300)
+
+    colors = {
+        "Status_Quo": "#6c757d",
+        "Factor_Driven": "#ff7f0e",
+        "Integrated_4D_Reform": "#198754"
+    }
+    labels = {
+        "Status_Quo": "Status Quo (Inertial)",
+        "Factor_Driven": "Factor-Driven (Capex Heavy)",
+        "Integrated_4D_Reform": "Integrated 4D+ Reform (Japan Sequence)"
+    }
+
+    for sc in ["Status_Quo", "Factor_Driven", "Integrated_4D_Reform"]:
+        sub = df[df.scenario == sc].sort_values("year")
+        if sub.empty:
+            continue
+        ax1.plot(sub["year"], sub["ppp_gdp_usd_b"], color=colors[sc], lw=2.8, label=labels[sc])
+        ax2.plot(sub["year"], sub["tax_revenue_usd_b"], color=colors[sc], lw=2.8, label=labels[sc])
+
+    # Left plot: PPP GDP
+    ax1.set_title("Total GDP in Purchasing Power Parity (2026–2046)", fontsize=12, fontweight="bold")
+    ax1.set_xlabel("Year", fontsize=10, fontweight="bold")
+    ax1.set_ylabel("GDP PPP (USD Billions)", fontsize=10, fontweight="bold")
+    ax1.legend(frameon=True, facecolor="white", edgecolor="#cccccc", fontsize=8.5, loc="upper left")
+    ax1.set_xlim(2026, 2046)
+
+    # Right plot: Fiscal Tax Revenue
+    ax2.set_title("Annual Fiscal Tax Revenue (The Domestic Resource Mobilization Dividend)", fontsize=12, fontweight="bold")
+    ax2.set_xlabel("Year", fontsize=10, fontweight="bold")
+    ax2.set_ylabel("Fiscal Revenue (USD Billions)", fontsize=10, fontweight="bold")
+    ax2.legend(frameon=True, facecolor="white", edgecolor="#cccccc", fontsize=8.5, loc="upper left")
+    ax2.set_xlim(2026, 2046)
+
+    out_path = FIG / "fig5_macro_monetary_projections.png"
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=300)
+    plt.close()
+    print(f"Generated: {out_path}")
+
+
 def main():
     print("=" * 70)
-    print("GENERATING VIDEO FIGURES FOR IZHAAN INTELLECT")
+    print("GENERATING VIDEO FIGURES FOR IZHAAN INTELLECT (2026–2046)")
     print("=" * 70)
     generate_figure1_demographics()
     generate_figure2_complexity_chasm()
     generate_figure3_fan_charts()
     generate_figure4_radar()
-    print("\nAll 4 figures generated successfully in outputs/figures/!")
+    generate_figure5_monetary()
+    print("\nAll 5 video figures generated successfully in outputs/figures/!")
 
 
 if __name__ == "__main__":

@@ -530,7 +530,10 @@ async def build_all():
     print(f"Resolution: {W} x {H} (4K Ultra HD)")
     print(f"Duration:   {int(final_dur // 60)}m {int(final_dur % 60)}s ({final_dur:.2f} Seconds)")
     print(f"Size:       {file_size_mb:.2f} MB")
-    print(f"Status:     PASS (<10 Minutes Limit Confirmed)")
+    if final_dur <= 600.0:
+        print(f"Status:     PASS (<10 Minutes Limit Confirmed: {final_dur:.1f}s <= 600s)")
+    else:
+        print(f"Status:     FAIL (Exceeded 10 Minutes Limit: {final_dur:.1f}s > 600s)")
     print("═" * 76)
 
 

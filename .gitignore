@@ -30,4 +30,6 @@ Thumbs.db
 sample_gemini_audio.*
 build_temp/
 build_temp_4k_white/
+build_temp_cinematic_4k/
+*.wav
 

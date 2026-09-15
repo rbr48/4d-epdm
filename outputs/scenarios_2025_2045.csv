@@ -1,0 +1,106 @@
+iso,scenario,label,year,h,p05,p25,p50,p75,p95,P_ge_50,P_ge_60
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2024,0,21.33,21.33,21.33,21.33,21.33,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2025,1,21.07,21.9,22.44,22.92,23.57,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2026,2,21.57,22.77,23.45,24.08,24.9,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2027,3,22.24,23.62,24.36,25.07,26.03,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2028,4,22.94,24.44,25.25,26.03,27.07,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2029,5,23.69,25.2,26.1,26.92,28.04,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2030,6,24.4,25.97,26.93,27.78,28.95,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2031,7,25.05,26.68,27.72,28.59,29.8,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2032,8,25.73,27.43,28.46,29.35,30.64,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2033,9,26.41,28.13,29.16,30.09,31.38,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2034,10,27.17,28.76,29.83,30.82,32.13,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2035,11,27.82,29.45,30.51,31.5,32.81,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2036,12,28.4,30.12,31.18,32.18,33.57,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2037,13,29.07,30.76,31.85,32.88,34.21,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2038,14,29.6,31.35,32.42,33.42,34.85,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2039,15,30.17,31.89,32.98,33.99,35.45,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2040,16,30.68,32.42,33.52,34.56,36.02,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2041,17,31.25,32.95,34.09,35.12,36.59,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2042,18,31.79,33.46,34.6,35.63,37.15,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2043,19,32.19,33.94,35.12,36.15,37.68,0.0,0.0
+BGD,Baseline_Status_Quo,Status Quo (Inertial Base),2044,20,32.67,34.48,35.6,36.68,38.18,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2024,0,21.33,21.33,21.33,21.33,21.33,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2025,1,19.99,21.27,22.01,22.73,23.71,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2026,2,19.22,20.82,21.7,22.46,23.5,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2027,3,19.65,21.58,22.64,23.56,24.83,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2028,4,20.07,22.22,23.4,24.48,25.92,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2029,5,20.62,22.81,24.08,25.28,26.84,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2030,6,20.87,23.35,24.69,25.96,27.63,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2031,7,21.55,23.89,25.32,26.67,28.41,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2032,8,22.07,24.45,25.94,27.33,29.16,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2033,9,22.46,25.03,26.51,27.93,29.82,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2034,10,22.96,25.55,27.04,28.52,30.43,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2035,11,23.41,26.05,27.61,29.02,31.05,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2036,12,23.88,26.52,28.09,29.55,31.58,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2037,13,24.38,26.96,28.54,30.07,32.17,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2038,14,24.6,27.35,29.01,30.52,32.67,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2039,15,25.14,27.77,29.39,31.0,33.06,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2040,16,25.48,28.15,29.79,31.43,33.56,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2041,17,25.93,28.56,30.16,31.85,33.98,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2042,18,26.42,28.87,30.54,32.21,34.48,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2043,19,26.67,29.22,30.9,32.61,34.92,0.0,0.0
+BGD,LDC_Tariff_Shock_2026,2026 LDC Graduation Tariff Cliff (-10% EBA),2044,20,26.98,29.53,31.23,32.93,35.31,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2024,0,21.33,21.33,21.33,21.33,21.33,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2025,1,19.39,20.86,21.76,22.56,23.66,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2026,2,15.1,16.83,18.29,19.79,21.6,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2027,3,15.39,17.33,18.87,20.5,22.53,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2028,4,15.65,17.76,19.44,21.17,23.26,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2029,5,15.85,18.06,20.0,21.75,23.95,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2030,6,16.16,18.61,20.52,22.33,24.66,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2031,7,16.46,19.02,20.97,22.86,25.24,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2032,8,16.73,19.51,21.42,23.36,25.95,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2033,9,17.12,19.87,21.9,23.84,26.49,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2034,10,17.41,20.17,22.28,24.36,27.0,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2035,11,17.61,20.56,22.7,24.74,27.46,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2036,12,17.86,20.92,23.03,25.16,27.96,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2037,13,18.14,21.25,23.42,25.55,28.34,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2038,14,18.38,21.57,23.79,25.87,28.72,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2039,15,18.52,21.8,24.08,26.22,29.07,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2040,16,18.78,22.1,24.33,26.56,29.45,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2041,17,19.13,22.34,24.62,26.84,29.79,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2042,18,19.29,22.58,24.79,27.16,30.17,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2043,19,19.47,22.74,25.1,27.43,30.47,0.0,0.0
+BGD,Banking_Fiscal_Freeze,Domestic Financial & Banking NPL Freeze,2044,20,19.5,23.09,25.38,27.67,30.74,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2024,0,21.33,21.33,21.33,21.33,21.33,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2025,1,18.11,20.25,21.3,22.32,23.61,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2026,2,13.15,14.22,15.33,16.69,18.81,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2027,3,13.46,14.96,16.32,17.89,20.06,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2028,4,13.75,15.52,16.99,18.6,21.01,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2029,5,13.89,15.83,17.52,19.35,21.82,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2030,6,14.2,16.24,17.97,19.81,22.54,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2031,7,14.25,16.55,18.38,20.3,23.07,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2032,8,14.55,16.89,18.73,20.73,23.48,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2033,9,14.7,17.17,19.11,21.16,23.87,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2034,10,14.76,17.46,19.49,21.52,24.41,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2035,11,15.0,17.72,19.8,21.85,24.78,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2036,12,15.11,17.96,20.07,22.13,25.15,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2037,13,15.32,18.13,20.26,22.4,25.4,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2038,14,15.38,18.33,20.43,22.67,25.62,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2039,15,15.61,18.4,20.67,22.87,25.83,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2040,16,15.54,18.65,20.88,23.13,26.12,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2041,17,15.7,18.76,21.08,23.29,26.36,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2042,18,15.7,18.95,21.19,23.36,26.61,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2043,19,15.84,19.04,21.32,23.65,26.87,0.0,0.0
+BGD,Compound_Polycrisis,Compound Polycrisis (LDC + Banking + Climate),2044,20,15.9,19.06,21.52,23.8,26.93,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2024,0,21.33,21.33,21.33,21.33,21.33,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2025,1,22.45,23.44,24.09,24.68,25.44,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2026,2,23.04,24.28,25.1,25.89,26.98,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2027,3,25.29,26.65,27.55,28.39,29.54,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2028,4,27.31,28.74,29.7,30.58,31.75,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2029,5,29.21,30.68,31.65,32.57,33.79,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2030,6,31.06,32.49,33.5,34.44,35.71,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2031,7,32.71,34.24,35.27,36.22,37.53,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2032,8,34.37,35.9,36.97,37.92,39.3,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2033,9,35.92,37.54,38.61,39.57,41.0,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2034,10,37.54,39.09,40.16,41.19,42.67,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2035,11,39.03,40.61,41.73,42.75,44.24,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2036,12,40.47,42.12,43.23,44.28,45.77,0.0,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2037,13,41.94,43.57,44.67,45.8,47.31,0.0002,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2038,14,43.19,44.91,46.05,47.18,48.73,0.0066,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2039,15,44.46,46.23,47.36,48.49,50.1,0.0572,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2040,16,45.77,47.51,48.67,49.84,51.5,0.2212,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2041,17,47.04,48.77,49.94,51.15,52.84,0.4864,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2042,18,48.28,49.99,51.19,52.42,54.1,0.7482,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2043,19,49.4,51.16,52.43,53.62,55.4,0.9062,0.0
+BGD,Resilient_4D_Response,Resilient 4D+ Counter-Strategy (Tax + Port + Diversification),2044,20,50.47,52.36,53.61,54.88,56.63,0.97,0.0004

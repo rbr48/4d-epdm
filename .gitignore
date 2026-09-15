@@ -15,3 +15,7 @@ Thumbs.db
 # Archive files
 *.zip
 
+# Pytest cache
+.pytest_cache/
+
+

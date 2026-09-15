@@ -258,7 +258,7 @@ def main():
     plot_real_world_stress_figure(stress_probs)
 
     print("\n" + "=" * 70)
-    print("DEEP TESTING & STRESS AUDIT COMPLETE: ALL CHECKS PASSED.")
+    print("DEEP TESTING & STRESS AUDIT COMPLETE.")
     print("=" * 70)
 
 

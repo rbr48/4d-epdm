@@ -1,0 +1,50 @@
+name: Pre-registration compliance
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas scipy scikit-learn pytest
+      - name: Build panel (if script exists)
+        run: |
+          if [ -f data_layer.py ]; then python data_layer.py; fi
+      - name: Contract + leakage + verdict tests
+        run: pytest tests/test_regression_suite.py -v --maxfail=1
+      - name: Density + PIT tests
+        run: pytest tests/test_density_scores.py -v --maxfail=1
+      - name: Print pre-registered verdict (does not gate)
+        run: |
+          python - <<'PY'
+          import pandas as pd, numpy as np
+          from pathlib import Path
+          from evaluation import rolling_origin, verdict
+          from candidate_model import neoclassical_convergence_lp
+          from advanced_model import hb_dlp_sv
+          from bma_layer import bma_forecaster
+          p = Path("data/processed/panel_raw.csv")
+          if not p.exists():
+              print("Panel not available — skipping verdict print.")
+              raise SystemExit(0)
+          df = pd.read_csv(p).dropna(subset=["GDP_GROWTH"])
+          ev = rolling_origin(df, {
+              "NCD-LP": neoclassical_convergence_lp,
+              "HB-DLP-SV": hb_dlp_sv,
+              "BMA": bma_forecaster,
+          }, horizons=[1,2,3,4,5], verbose=False)
+          for m in ["NCD-LP", "HB-DLP-SV", "BMA"]:
+              v = verdict(ev, m, horizons=[1,2,3,4,5])
+              print(f"{m:12s} {'PASS' if v['pass'] else 'FAIL'}  {v['reason']}")
+          PY

@@ -78,9 +78,17 @@ def main():
     print("=" * 80)
 
     pass_df = df[df["pass_prereg"] == True]
-    print(f"\nAUDIT VERDICT: {len(pass_df)} / {len(l2_values)} hyperparameter values pass all pre-registered criteria!")
-    print(f"Every value of lambda from {pass_df['l2_reg'].min()} to {pass_df['l2_reg'].max()} passes with p < 0.05 at h=3.")
-    print("Conclusion: l2_reg=15.0 is NOT a knife-edge cherry-pick. The result is completely structural and stable.")
+    n_pass = len(pass_df)
+    n_total = len(l2_values)
+    print(f"\nAUDIT VERDICT: {n_pass} / {n_total} hyperparameter values meet pre-registered criteria.")
+    if n_pass > 0:
+        print(f"Lambda range that meets criteria: {pass_df['l2_reg'].min()} to {pass_df['l2_reg'].max()}")
+        if n_pass == n_total:
+            print("Conclusion: l2_reg=15.0 is NOT a knife-edge cherry-pick. The result is structural and stable.")
+        else:
+            print(f"Conclusion: {n_pass}/{n_total} values meet the bar. Sensitivity is partial.")
+    else:
+        print("Conclusion: No hyperparameter value meets pre-registered criteria.")
 
 if __name__ == "__main__":
     main()

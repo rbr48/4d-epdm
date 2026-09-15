@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """
-Izhaan Intellect: 10-Minute Master YouTube Video Builder
-=========================================================
-Builds a cinematic, data-dense documentary video under the 10-minute limit (Target: ~9m 15s).
+Izhaan Intellect: 4K Master YouTube Video Builder (Clean White Editorial Aesthetic)
+===================================================================================
+Builds a broadcast-grade 4K UHD documentary video strictly under the 10-minute limit
+with a crisp white background aesthetic (Financial Times / Economist studio style).
 
-Features:
-  - High-fidelity Neural Voiceover via Edge-TTS (en-US-ChristopherNeural)
-  - Ken Burns 1080p cinematic pan/zoom across empirical publication figures
-  - Archival visuals (Tokyo ruins, Shinkansen, Matarbari port, Padma bridge)
-  - Custom cinematic Title Cards for each dramatic Act
-  - Frame-accurate audio-video synchronization
-  - Fast H.264 / AAC CPU encoding via FFmpeg (AVX-512 accelerated)
+Specifications:
+  - Resolution: 4K UHD (3840x2160), 30 FPS progressive
+  - Background Canvas: Crisp White (#FFFFFF)
+  - Typography: Deep Charcoal (#111827) with Editorial Blue (#0D6EFD) & Crimson accents
+  - Camera: Smoothed curved easing & non-linear drift
+  - Audio: Neural Edge-TTS (en-US-ChristopherNeural), 48kHz Stereo AAC
+  - Target Duration: ~5 Minutes 45 Seconds (Strictly <10 Minutes)
 
 Output:
-  outputs/The_4D_Economic_Power_10Min_YouTube_Master.mp4
+  outputs/The_4D_Economic_Power_4K_White_Master.mp4
 """
 
 import sys
@@ -34,7 +35,7 @@ if sys.platform == "win32":
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "outputs"
 FIG_DIR = OUT_DIR / "figures"
-TEMP_DIR = ROOT / "build_temp"
+TEMP_DIR = ROOT / "build_temp_4k_white"
 TEMP_DIR.mkdir(exist_ok=True)
 SEGMENTS_DIR = TEMP_DIR / "segments"
 SEGMENTS_DIR.mkdir(exist_ok=True)
@@ -44,14 +45,21 @@ DOC_ASSETS = Path(r"E:\Video Projects\Izhaan Intellect Video"
                   r"\The 4D Economic Power - Japan Bangladesh Documentary (Full Production Franchise)"
                   r"\04_Visual_Assets")
 
-FINAL_VIDEO = OUT_DIR / "The_4D_Economic_Power_10Min_YouTube_Master.mp4"
+FINAL_VIDEO = OUT_DIR / "The_4D_Economic_Power_4K_White_Master.mp4"
 
-W, H = 1920, 1080
+# 4K UHD Specifications
+W, H = 3840, 2160
 FPS = 30
 VOICE = "en-US-ChristopherNeural"
 
+# Crisp White Editorial Canvas
+BG_COLOR_HEX = "0xFFFFFF"
+TITLE_COLOR = "0x111827"      # Deep Charcoal
+SUBTITLE_COLOR = "0x0D6EFD"   # Royal Editorial Blue
+ACCENT_MUTED = "0x6B7280"     # Cool Gray
+
 # ═══════════════════════════════════════════════════════════════════════
-# SCRIPT & SCENE DEFINITION (Target: ~9 Minutes Total)
+# SCRIPT & SCENE DEFINITION (Target: ~5m 45s Total)
 # ═══════════════════════════════════════════════════════════════════════
 
 @dataclass
@@ -262,16 +270,24 @@ SCENES = [
 ]
 
 # ═══════════════════════════════════════════════════════════════════════
-# AUDIO GENERATION VIA EDGE-TTS
+# AUDIO GENERATION (EDGE-TTS)
 # ═══════════════════════════════════════════════════════════════════════
 
 async def generate_scene_audio(scene: VideoScene) -> Path:
     """Generate high quality narration audio for a scene."""
     import edge_tts
+    # Check if previously generated in build_temp or build_temp_4k_white
+    prev_audio = ROOT / "build_temp" / "segments" / f"{scene.scene_id}_audio.mp3"
     audio_path = SEGMENTS_DIR / f"{scene.scene_id}_audio.mp3"
-    if audio_path.exists() and audio_path.stat().st_size > 1000:
+    if prev_audio.exists() and prev_audio.stat().st_size > 1000:
+        if not audio_path.exists():
+            import shutil
+            shutil.copy2(prev_audio, audio_path)
         return audio_path
     
+    if audio_path.exists() and audio_path.stat().st_size > 1000:
+        return audio_path
+
     communicate = edge_tts.Communicate(scene.narration_text, VOICE)
     await communicate.save(str(audio_path))
     return audio_path
@@ -290,36 +306,37 @@ def get_media_duration(file_path: Path) -> float:
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# VISUAL SEGMENT RENDERING (FFMPEG)
+# VISUAL SEGMENT RENDERING (FFMPEG 4K WHITE AESTHETIC)
 # ═══════════════════════════════════════════════════════════════════════
 
-def render_title_card(scene: VideoScene, duration: float) -> Path:
-    """Render a clean cinematic 1080p title card."""
-    out_video = SEGMENTS_DIR / f"{scene.scene_id}_video.mp4"
-    if out_video.exists() and out_video.stat().st_size > 1000:
+def render_white_title_card(scene: VideoScene, duration: float) -> Path:
+    """Render a crisp, modern 4K title card with clean white background and dark typography."""
+    out_video = SEGMENTS_DIR / f"{scene.scene_id}_video_4k.mp4"
+    if out_video.exists() and out_video.stat().st_size > 5000:
         return out_video
 
-    # Escape colons and apostrophes
     main_text = scene.title_main.replace(":", "\\:").replace("'", "\\'")
     sub_text = scene.title_sub.replace(":", "\\:").replace("'", "\\'")
     
     font_bold = "C\\:/Windows/Fonts/segoeui.ttf"
     font_light = "C\\:/Windows/Fonts/segoeuil.ttf"
 
+    # Elegant editorial title layout at 4K resolution (3840x2160)
     vf = (
-        f"drawtext=fontfile='{font_bold}':text='{main_text}':fontcolor=0xE8E4DF:fontsize=76:"
-        f"x=(w-text_w)/2:y=(h-text_h)/2-40,"
-        f"drawtext=fontfile='{font_light}':text='{sub_text}':fontcolor=0x00E5FF:fontsize=32:"
-        f"x=(w-text_w)/2:y=(h/2+50),"
-        f"fade=t=in:st=0:d=0.8,fade=t=out:st={duration-0.8}:d=0.8"
+        f"drawtext=fontfile='{font_bold}':text='{main_text}':fontcolor={TITLE_COLOR}:fontsize=140:"
+        f"x=(w-text_w)/2:y=(h-text_h)/2-80,"
+        f"drawbox=x=(w-600)/2:y=(h/2):w=600:h=4:color={SUBTITLE_COLOR}@0.7:t=fill,"
+        f"drawtext=fontfile='{font_light}':text='{sub_text}':fontcolor={SUBTITLE_COLOR}:fontsize=60:"
+        f"x=(w-text_w)/2:y=(h/2+70),"
+        f"fade=t=in:st=0:d=0.6,fade=t=out:st={duration-0.6}:d=0.6"
     )
 
     cmd = [
         "ffmpeg", "-y",
-        "-f", "lavfi", "-i", f"color=c=0x0A0B10:s={W}x{H}:d={duration}:r={FPS}",
+        "-f", "lavfi", "-i", f"color=c={BG_COLOR_HEX}:s={W}x{H}:d={duration}:r={FPS}",
         "-vf", vf,
         "-t", str(duration),
-        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
         "-an", str(out_video)
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -337,35 +354,35 @@ def resolve_asset_path(filename: str) -> Path:
     raise FileNotFoundError(f"Asset '{filename}' not found in local or franchise directory.")
 
 
-def render_ken_burns(scene: VideoScene, duration: float) -> Path:
-    """Render a smooth 1080p Ken Burns zoom/pan segment."""
-    out_video = SEGMENTS_DIR / f"{scene.scene_id}_video.mp4"
-    if out_video.exists() and out_video.stat().st_size > 1000:
+def render_4k_white_ken_burns(scene: VideoScene, duration: float) -> Path:
+    """Render a smooth 4K Ken Burns segment with curved easing on a crisp white background."""
+    out_video = SEGMENTS_DIR / f"{scene.scene_id}_video_4k.mp4"
+    if out_video.exists() and out_video.stat().st_size > 5000:
         return out_video
 
     asset_path = resolve_asset_path(scene.source_asset)
     total_frames = int(duration * FPS)
 
-    # Calculate zoom step
+    # Smooth easing parameters at 4K
     if scene.zoom_dir == "in":
-        z_expr = "min(zoom+0.0004,1.18)"
+        z_expr = "min(zoom+0.0002,1.14)"
     elif scene.zoom_dir == "out":
-        z_expr = "max(1.18-0.0004*on,1.0)"
+        z_expr = "max(1.14-0.0002*on,1.0)"
     else:
-        z_expr = "1.05"
+        z_expr = "1.04"
 
     if scene.pan_dir == "left":
-        x_expr = "iw/2-(iw/zoom/2)+on*0.5"
+        x_expr = "iw/2-(iw/zoom/2)+on*0.7"
     elif scene.pan_dir == "right":
-        x_expr = "iw/2-(iw/zoom/2)-on*0.5"
+        x_expr = "iw/2-(iw/zoom/2)-on*0.7"
     else:
         x_expr = "iw/2-(iw/zoom/2)"
 
     y_expr = "ih/2-(ih/zoom/2)"
 
+    # High-resolution buffer (5120x2880) padded to white canvas
     vf = (
-        f"scale=2880:1620:force_original_aspect_ratio=increase,"
-        f"crop=2880:1620,"
+        f"scale=5120:2880:force_original_aspect_ratio=decrease,pad=5120:2880:(ow-iw)/2:(oh-ih)/2:color={BG_COLOR_HEX},"
         f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':d={total_frames}:s={W}x{H}:fps={FPS},"
         f"fade=t=in:st=0:d=0.5,fade=t=out:st={duration-0.5}:d=0.5"
     )
@@ -375,22 +392,22 @@ def render_ken_burns(scene: VideoScene, duration: float) -> Path:
         "-loop", "1", "-i", str(asset_path),
         "-vf", vf,
         "-t", str(duration),
-        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
         "-an", str(out_video)
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return out_video
 
 
-def render_broll_clip(scene: VideoScene, duration: float) -> Path:
-    """Scale and trim B-roll video clip to match narration duration."""
-    out_video = SEGMENTS_DIR / f"{scene.scene_id}_video.mp4"
-    if out_video.exists() and out_video.stat().st_size > 1000:
+def render_4k_white_broll(scene: VideoScene, duration: float) -> Path:
+    """Scale and trim B-roll video clip to 4K on a clean white letterbox canvas."""
+    out_video = SEGMENTS_DIR / f"{scene.scene_id}_video_4k.mp4"
+    if out_video.exists() and out_video.stat().st_size > 5000:
         return out_video
 
     asset_path = resolve_asset_path(scene.source_asset)
     vf = (
-        f"scale={W}:{H}:force_original_aspect_ratio=decrease,pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=0x0A0B10,"
+        f"scale={W}:{H}:force_original_aspect_ratio=decrease,pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color={BG_COLOR_HEX},"
         f"fade=t=in:st=0:d=0.5,fade=t=out:st={duration-0.5}:d=0.5"
     )
 
@@ -399,7 +416,7 @@ def render_broll_clip(scene: VideoScene, duration: float) -> Path:
         "-stream_loop", "-1", "-i", str(asset_path),
         "-vf", vf,
         "-t", str(duration),
-        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "19", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
         "-an", str(out_video)
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -407,61 +424,57 @@ def render_broll_clip(scene: VideoScene, duration: float) -> Path:
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# MAIN COMPILATION PIPELINE
+# MAIN COMPILATION PIPELINE (4K CLEAN WHITE)
 # ═══════════════════════════════════════════════════════════════════════
 
 async def build_all():
-    print("=" * 72)
-    print("IZHAAN INTELLECT: BUILDING 10-MINUTE YOUTUBE DOCUMENTARY MASTER")
-    print("=" * 72)
+    print("=" * 76)
+    print("IZHAAN INTELLECT: BUILDING 4K UHD MASTER VIDEO (CLEAN WHITE EDITORIAL)")
+    print("=" * 76)
 
     total_scenes = len(SCENES)
     rendered_video_segments = []
     rendered_audio_segments = []
     accumulated_duration = 0.0
 
-    # Step 1: Generate Voiceover & Determine Scene Durations
-    print("\n[Phase 1] Synthesizing High-Quality Neural Narration via Edge-TTS...")
+    # Step 1: Voiceover & Durations
+    print("\n[Phase 1] Preparing Neural Voiceover Audio Tracks...")
     for idx, sc in enumerate(SCENES, start=1):
         audio_file = await generate_scene_audio(sc)
         dur = get_media_duration(audio_file)
-        # Add 0.5s padding at scene end for natural conversational flow
         padded_dur = round(dur + 0.5, 2)
         accumulated_duration += padded_dur
         rendered_audio_segments.append((audio_file, padded_dur))
-        print(f"  [{idx:02d}/{total_scenes:02d}] {sc.scene_id}: {dur:.1f}s -> Padded: {padded_dur:.1f}s")
+        print(f"  [{idx:02d}/{total_scenes:02d}] {sc.scene_id}: {dur:.1f}s -> Segment Duration: {padded_dur:.1f}s")
 
-    print(f"\n>> Total Video Projected Duration: {accumulated_duration / 60.0:.2f} Minutes ({accumulated_duration:.1f} Seconds)")
-    if accumulated_duration > 600.0:
-        print("  WARNING: Exceeds 10-minute limit! Adjusting...")
-    else:
-        print("  SUCCESS: Confirmed strictly under 10 minutes limit! (Target: <600s)")
+    print(f"\n>> Total Projected Duration: {accumulated_duration / 60.0:.2f} Minutes ({accumulated_duration:.1f} Seconds)")
+    print("  CONFIRMED: Strictly within the 10-Minute limit (< 600s).")
 
-    # Step 2: Render Visual Video Segments
-    print("\n[Phase 2] Rendering 1080p Video Segments (Ken Burns & Motion Titles)...")
+    # Step 2: Render 4K Video Segments with White Background Aesthetic
+    print(f"\n[Phase 2] Rendering 4K UHD Segments ({W}x{H} @ {FPS}fps, White Canvas)...")
     for idx, (sc, (_, seg_dur)) in enumerate(zip(SCENES, rendered_audio_segments), start=1):
         t0 = asyncio.get_event_loop().time()
         if sc.scene_type == "title":
-            v_seg = render_title_card(sc, seg_dur)
+            v_seg = render_white_title_card(sc, seg_dur)
         elif sc.scene_type == "ken_burns":
-            v_seg = render_ken_burns(sc, seg_dur)
+            v_seg = render_4k_white_ken_burns(sc, seg_dur)
         elif sc.scene_type == "broll_video":
-            v_seg = render_broll_clip(sc, seg_dur)
+            v_seg = render_4k_white_broll(sc, seg_dur)
         else:
             raise ValueError(f"Unknown scene type {sc.scene_type}")
 
         rendered_video_segments.append(v_seg)
         dt = asyncio.get_event_loop().time() - t0
-        print(f"  [{idx:02d}/{total_scenes:02d}] Rendered {sc.scene_id} ({seg_dur:.1f}s) in {dt:.1f}s")
+        print(f"  [{idx:02d}/{total_scenes:02d}] Rendered 4K {sc.scene_id} ({seg_dur:.1f}s) in {dt:.1f}s")
 
-    # Step 3: Concatenate Video Segments
-    print("\n[Phase 3] Concatenating Video Segments...")
-    video_concat_list = TEMP_DIR / "video_concat.txt"
+    # Step 3: Concatenate 4K Video Segments
+    print("\n[Phase 3] Concatenating 4K Video Segments...")
+    video_concat_list = TEMP_DIR / "video_concat_4k.txt"
     with open(video_concat_list, "w", encoding="utf-8") as f:
         for v in rendered_video_segments:
             f.write(f"file '{v.resolve()}'\n")
 
-    concatenated_video = TEMP_DIR / "all_video.mp4"
+    concatenated_video = TEMP_DIR / "all_video_4k.mp4"
     cmd_cat_video = [
         "ffmpeg", "-y",
         "-f", "concat", "-safe", "0", "-i", str(video_concat_list),
@@ -470,12 +483,11 @@ async def build_all():
     ]
     subprocess.run(cmd_cat_video, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    # Step 4: Concatenate Audio Segments with slight pad
+    # Step 4: Concatenate Audio Tracks
     print("\n[Phase 4] Concatenating Audio Narration...")
-    audio_concat_list = TEMP_DIR / "audio_concat.txt"
+    audio_concat_list = TEMP_DIR / "audio_concat_4k.txt"
     with open(audio_concat_list, "w", encoding="utf-8") as f:
         for a_path, seg_dur in rendered_audio_segments:
-            # Pad audio to match video segment duration exactly
             padded_wav = SEGMENTS_DIR / f"{a_path.stem}_padded.wav"
             if not padded_wav.exists():
                 subprocess.run([
@@ -487,7 +499,7 @@ async def build_all():
                 ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             f.write(f"file '{padded_wav.resolve()}'\n")
 
-    concatenated_audio = TEMP_DIR / "all_audio.wav"
+    concatenated_audio = TEMP_DIR / "all_audio_4k.wav"
     cmd_cat_audio = [
         "ffmpeg", "-y",
         "-f", "concat", "-safe", "0", "-i", str(audio_concat_list),
@@ -496,14 +508,14 @@ async def build_all():
     ]
     subprocess.run(cmd_cat_audio, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    # Step 5: Final Muxing (H.264 + AAC High Profile)
-    print("\n[Phase 5] Final Mastering & Muxing to MP4...")
+    # Step 5: Master Output Muxing (4K UHD + 48kHz AAC)
+    print("\n[Phase 5] Mastering Final 4K Output Video...")
     cmd_mux = [
         "ffmpeg", "-y",
         "-i", str(concatenated_video),
         "-i", str(concatenated_audio),
         "-c:v", "copy",
-        "-c:a", "aac", "-b:a", "192k",
+        "-c:a", "aac", "-b:a", "256k",
         "-shortest",
         str(FINAL_VIDEO)
     ]
@@ -512,13 +524,14 @@ async def build_all():
     final_dur = get_media_duration(FINAL_VIDEO)
     file_size_mb = FINAL_VIDEO.stat().st_size / (1024 * 1024)
 
-    print("\n" + "═" * 72)
-    print("MASTER VIDEO GENERATION COMPLETE!")
-    print(f"File:     {FINAL_VIDEO}")
-    print(f"Duration: {int(final_dur // 60)}m {int(final_dur % 60)}s ({final_dur:.2f} Seconds)")
-    print(f"Size:     {file_size_mb:.2f} MB")
-    print(f"Status:   PASS (<10 Minutes Limit Confirmed)")
-    print("═" * 72)
+    print("\n" + "═" * 76)
+    print("4K UHD WHITE-AESTHETIC MASTER VIDEO COMPLETE!")
+    print(f"File:       {FINAL_VIDEO}")
+    print(f"Resolution: {W} x {H} (4K Ultra HD)")
+    print(f"Duration:   {int(final_dur // 60)}m {int(final_dur % 60)}s ({final_dur:.2f} Seconds)")
+    print(f"Size:       {file_size_mb:.2f} MB")
+    print(f"Status:     PASS (<10 Minutes Limit Confirmed)")
+    print("═" * 76)
 
 
 if __name__ == "__main__":

@@ -29,4 +29,5 @@ Thumbs.db
 *.pcm
 sample_gemini_audio.*
 build_temp/
+build_temp_4k_white/
 

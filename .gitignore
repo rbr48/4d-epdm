@@ -18,4 +18,9 @@ Thumbs.db
 # Pytest cache
 .pytest_cache/
 
+# Environment & Credentials
+.env
+*.env
+*.pem
+*.key
 

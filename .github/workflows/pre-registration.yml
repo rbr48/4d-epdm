@@ -17,10 +17,10 @@ jobs:
       - name: Install
         run: |
           python -m pip install --upgrade pip
-          pip install numpy pandas scipy scikit-learn pytest
-      - name: Build panel (if script exists)
+          pip install numpy pandas scipy scikit-learn pytest requests
+      - name: Build panel (if missing)
         run: |
-          if [ -f data_layer.py ]; then python data_layer.py; fi
+          if [ ! -f data/processed/panel_raw.csv ] && [ -f data_layer.py ]; then python data_layer.py; fi
       - name: Contract + leakage + verdict tests
         run: pytest tests/test_regression_suite.py -v --maxfail=1
       - name: Density + PIT tests
@@ -34,6 +34,7 @@ jobs:
           from candidate_model import neoclassical_convergence_lp
           from advanced_model import hb_dlp_sv
           from bma_layer import bma_forecaster
+          from adaptive_ensemble import adaptive_forecaster
           p = Path("data/processed/panel_raw.csv")
           if not p.exists():
               print("Panel not available — skipping verdict print.")
@@ -43,8 +44,9 @@ jobs:
               "NCD-LP": neoclassical_convergence_lp,
               "HB-DLP-SV": hb_dlp_sv,
               "BMA": bma_forecaster,
+              "Adaptive-Ensemble": adaptive_forecaster,
           }, horizons=[1,2,3,4,5], verbose=False)
-          for m in ["NCD-LP", "HB-DLP-SV", "BMA"]:
+          for m in ["NCD-LP", "HB-DLP-SV", "BMA", "Adaptive-Ensemble"]:
               v = verdict(ev, m, horizons=[1,2,3,4,5])
-              print(f"{m:12s} {'PASS' if v['pass'] else 'FAIL'}  {v['reason']}")
+              print(f"{m:18s} {'PASS' if v['pass'] else 'FAIL'}  {v['reason']}")
           PY

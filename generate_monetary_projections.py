@@ -30,23 +30,23 @@ if sys.platform == "win32":
 OUT_DIR = Path("outputs")
 OUT_DIR.mkdir(exist_ok=True)
 
-# 2024 Baseline figures for Bangladesh
-BASE_YEAR = 2024
-BASE_NOMINAL_GDP = 455.0        # USD Billions (approx World Bank / IMF 2024)
-BASE_PPP_GDP = 1460.0           # USD Billions (approx World Bank 2024)
-BASE_POPULATION = 172.5         # Millions
-BASE_GDP_PC_PPP = 8487.0        # USD PPP per person
-BASE_TAX_TO_GDP = 0.076         # 7.6% Tax-to-GDP ratio
-BASE_EXPORTS = 55.0             # USD Billions (goods + services)
+# 2026 Baseline figures for Bangladesh (September 2026 current anchor)
+BASE_YEAR = 2026
+BASE_NOMINAL_GDP = 505.0        # USD Billions (2026 current anchor)
+BASE_PPP_GDP = 1620.0           # USD Billions (2026 PPP)
+BASE_POPULATION = 175.5         # Millions (2026 estimate)
+BASE_GDP_PC_PPP = 9230.0        # USD PPP per person
+BASE_TAX_TO_GDP = 0.082         # 8.2% Tax-to-GDP ratio
+BASE_EXPORTS = 58.0             # USD Billions (goods + services)
 
-# Population growth trajectory (slowing from 1.0% to 0.5% by 2044)
-years = np.arange(2024, 2045)
+# Population growth trajectory (slowing from 0.95% to 0.45% by 2046)
+years = np.arange(2026, 2047)
 n_years = len(years)
 
 pop = np.zeros(n_years)
 pop[0] = BASE_POPULATION
 for t in range(1, n_years):
-    pop_growth = 0.010 - 0.00025 * (t - 1)  # Gradual demographic slowdown
+    pop_growth = 0.0095 - 0.00025 * (t - 1)  # Gradual demographic slowdown
     pop[t] = pop[t - 1] * (1.0 + pop_growth)
 
 scenarios = {
@@ -148,6 +148,7 @@ df_monetary.to_csv(OUT_DIR / "monetary_projections.csv", index=False)
 print(f"Generated monetary projections: {len(df_monetary)} rows saved to outputs/monetary_projections.csv")
 
 # Print Milestone Summary
-milestones = df_monetary[df_monetary["year"].isin([2024, 2029, 2034, 2039, 2044])]
+milestones = df_monetary[df_monetary["year"].isin([2026, 2030, 2035, 2041, 2046])]
 print("\n=== 5-YEAR MILESTONE MONETARY PROJECTIONS ===")
 print(milestones.pivot_table(index=["year"], columns="scenario", values=["nominal_gdp_usd_b", "gdp_pc_ppp_usd", "tax_revenue_usd_b"]))
+

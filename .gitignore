@@ -12,8 +12,9 @@ venv/
 Thumbs.db
 .DS_Store
 
-# Archive files
+# Archive & Media files
 *.zip
+*.mp4
 
 # Pytest cache
 .pytest_cache/
@@ -24,7 +25,8 @@ Thumbs.db
 *.pem
 *.key
 
-# Scratch audio files
+# Scratch audio & video build files
 *.pcm
 sample_gemini_audio.*
+build_temp/
 

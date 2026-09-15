@@ -9,7 +9,12 @@ Fails the build if:
     Gaussian benchmark.
 """
 from __future__ import annotations
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 import numpy as np
 import pandas as pd
@@ -22,7 +27,7 @@ from bvar_minnesota import bvar_minnesota_density
 from gbrt_model import gbrt_density
 from bma_layer import bma_density
 
-ROOT = Path(__file__).resolve().parent.parent
+
 PANEL = ROOT / "data" / "processed" / "panel_raw.csv"
 HORIZONS = [1, 2, 3, 4, 5]
 

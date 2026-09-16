@@ -68,6 +68,8 @@ class CinematicScene:
     trim_start: float = 0.0   # For video clips
     narration_text: str = ""
     effective_duration: float = 0.0
+    motion_target: tuple = (0.50, 0.50)  # (tx, ty) normalized target to zoom towards
+    zoom_max: float = 1.15               # Maximum zoom scale at end of scene
 
     @property
     def video_file(self) -> Path:
@@ -89,7 +91,9 @@ TIMELINE: List[CinematicScene] = [
         scene_type="image",
         source_asset="card_00_title.png",
         target_duration=3.5,
-        narration_text=""
+        narration_text="",
+        motion_target=(0.50, 0.50),
+        zoom_max=1.12
     ),
     CinematicScene(
         scene_id="s02_tokyo_ruins",
@@ -99,7 +103,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "In nineteen forty-five, Tokyo was reduced to two million tons of smoking rubble. "
             "Every major industrial center was destroyed. Western economists predicted Japan would remain permanently impoverished."
-        )
+        ),
+        motion_target=(0.50, 0.45),
+        zoom_max=1.18
     ),
     CinematicScene(
         scene_id="s03_shinkansen",
@@ -109,7 +115,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Yet just twenty-five years later, Japanese bullet trains were flying past Mount Fuji, "
             "and Japanese corporations were dominating global high-tech electronics, steel, and automotive markets."
-        )
+        ),
+        motion_target=(0.52, 0.55),
+        zoom_max=1.20
     ),
     CinematicScene(
         scene_id="s04_zero_resources",
@@ -118,7 +126,9 @@ TIMELINE: List[CinematicScene] = [
         target_duration=8.0,
         narration_text=(
             "How did a country with zero natural resources pull off the greatest economic miracle in human history?"
-        )
+        ),
+        motion_target=(0.50, 0.48),
+        zoom_max=1.22
     ),
     CinematicScene(
         scene_id="s05_bangladesh_port",
@@ -128,7 +138,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "And why is Bangladesh... a booming economy of one hundred and seventy million people... "
             "walking straight into an invisible trap?"
-        )
+        ),
+        motion_target=(0.50, 0.52),
+        zoom_max=1.18
     ),
 
     # ─── ACT I: THE 2026 PRECIPICE — THE TRAPDOOR OPENS ──────────────
@@ -137,7 +149,9 @@ TIMELINE: List[CinematicScene] = [
         scene_type="image",
         source_asset="card_06_act1.png",
         target_duration=2.5,
-        narration_text=""
+        narration_text="",
+        motion_target=(0.50, 0.50),
+        zoom_max=1.10
     ),
     CinematicScene(
         scene_id="s07_garments_floor",
@@ -157,7 +171,9 @@ TIMELINE: List[CinematicScene] = [
         target_duration=8.0,
         narration_text=(
             "Over eighty-four percent of all export revenue comes from a single engine: ready-made garments."
-        )
+        ),
+        motion_target=(0.28, 0.50),
+        zoom_max=1.28
     ),
     CinematicScene(
         scene_id="s09_ldc_trapdoor",
@@ -178,7 +194,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Overnight, duty-free access to European markets vanishes, hitting exports with eight to twelve percent tariffs "
             "that obliterate thin factory margins."
-        )
+        ),
+        motion_target=(0.28, 0.52),
+        zoom_max=1.28
     ),
     CinematicScene(
         scene_id="s11_banking_stress",
@@ -188,7 +206,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "At the exact same moment, the domestic banking sector is paralyzed by non-performing loans, "
             "choking off private investment when factories need to upgrade most."
-        )
+        ),
+        motion_target=(0.40, 0.52),
+        zoom_max=1.25
     ),
     CinematicScene(
         scene_id="s12_tax_inertia",
@@ -198,7 +218,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "And with a tax-to-GDP ratio below eight percent, the sovereign government has virtually no fiscal ammunition "
             "to cushion the blow."
-        )
+        ),
+        motion_target=(0.28, 0.52),
+        zoom_max=1.28
     ),
 
     # ─── ACT II: THE BRUTAL 87% LAW — THE MIDDLE-INCOME CURSE ────────
@@ -207,7 +229,9 @@ TIMELINE: List[CinematicScene] = [
         scene_type="image",
         source_asset="card_13_act2.png",
         target_duration=2.5,
-        narration_text=""
+        narration_text="",
+        motion_target=(0.50, 0.50),
+        zoom_max=1.10
     ),
     CinematicScene(
         scene_id="s14_88_trapped",
@@ -216,7 +240,9 @@ TIMELINE: List[CinematicScene] = [
         target_duration=9.0,
         narration_text=(
             "History has an unforgiving track record. In nineteen sixty, the World Bank tracked one hundred and one middle-income economies."
-        )
+        ),
+        motion_target=(0.32, 0.52),
+        zoom_max=1.24
     ),
     CinematicScene(
         scene_id="s15_plate_investment",
@@ -226,7 +252,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "By 2008, eighty-eight of those nations were still trapped! Crushed by rising wages, "
             "beaten by cheaper competitors, unable to climb into advanced manufacturing."
-        )
+        ),
+        motion_target=(0.60, 0.52),
+        zoom_max=1.26
     ),
     CinematicScene(
         scene_id="s16_complexity_escape",
@@ -236,7 +264,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Only thirteen countries in human history broke free. Every single one of them followed a single rule: "
             "they mastered economic complexity."
-        )
+        ),
+        motion_target=(0.50, 0.45),
+        zoom_max=1.25
     ),
     CinematicScene(
         scene_id="s17_fig2_complexity",
@@ -246,7 +276,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Look at the structural reality. Japan achieved a complexity score of plus two point two. "
             "Bangladesh sits at minus zero point eight... a massive structural capability chasm."
-        )
+        ),
+        motion_target=(0.30, 0.62),
+        zoom_max=1.30
     ),
     CinematicScene(
         scene_id="s18_cheap_labor_ceiling",
@@ -256,7 +288,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Cheap labor can lift millions out of extreme poverty. But to escape the middle-income trap, "
             "you need an entirely different engine."
-        )
+        ),
+        motion_target=(0.50, 0.50),
+        zoom_max=1.22
     ),
 
     # ─── ACT III: THE SECRET JAPANESE PLAYBOOK — THE MITI TRIAD ───────
@@ -265,7 +299,9 @@ TIMELINE: List[CinematicScene] = [
         scene_type="image",
         source_asset="card_19_act3.png",
         target_duration=2.5,
-        narration_text=""
+        narration_text="",
+        motion_target=(0.50, 0.50),
+        zoom_max=1.10
     ),
     CinematicScene(
         scene_id="s20_miti_footage",
@@ -286,7 +322,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Rule number one: Sequenced Industrial Targeting. Japan never tried to build microchips overnight. "
             "They started with basic silk and cotton, used the profits to capitalize heavy steel, and then leapt into automobiles and semiconductors."
-        )
+        ),
+        motion_target=(0.32, 0.52),
+        zoom_max=1.26
     ),
     CinematicScene(
         scene_id="s22_miti_rule2",
@@ -296,7 +334,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Rule number two: Brutal Export Discipline. Subsidies were never handouts for political favorites. "
             "If a corporation failed to compete in international markets, the government ruthlessly pulled their funding."
-        )
+        ),
+        motion_target=(0.30, 0.52),
+        zoom_max=1.26
     ),
     CinematicScene(
         scene_id="s23_miti_rule3",
@@ -306,7 +346,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "And rule number three: The Postal Savings Engine. Instead of drowning in dollar-denominated foreign debt, "
             "Japan mobilized domestic citizen savings directly into national infrastructure."
-        )
+        ),
+        motion_target=(0.32, 0.52),
+        zoom_max=1.26
     ),
 
     # ─── ACT IV: THE CLOSING DEMOGRAPHIC WINDOW ───────────────────────
@@ -315,7 +357,9 @@ TIMELINE: List[CinematicScene] = [
         scene_type="image",
         source_asset="card_24_act4.png",
         target_duration=2.5,
-        narration_text=""
+        narration_text="",
+        motion_target=(0.50, 0.50),
+        zoom_max=1.10
     ),
     CinematicScene(
         scene_id="s25_fig1_demographic",
@@ -324,7 +368,9 @@ TIMELINE: List[CinematicScene] = [
         target_duration=8.0,
         narration_text=(
             "Here is the most dangerous reality for Bangladesh: the clock is ticking faster than anyone realizes."
-        )
+        ),
+        motion_target=(0.32, 0.50),
+        zoom_max=1.28
     ),
     CinematicScene(
         scene_id="s26_surplus_labor",
@@ -334,7 +380,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "According to United Nations projections, Bangladesh’s demographic dividend peaks around 2038. "
             "After that, the dependency ratio reverses."
-        )
+        ),
+        motion_target=(0.50, 0.48),
+        zoom_max=1.25
     ),
     CinematicScene(
         scene_id="s27_demographic_peak",
@@ -343,7 +391,9 @@ TIMELINE: List[CinematicScene] = [
         target_duration=11.0,
         narration_text=(
             "If Bangladesh does not modernize its economy before 2038, it will become an aging society before it becomes a prosperous one!"
-        )
+        ),
+        motion_target=(0.30, 0.52),
+        zoom_max=1.28
     ),
     CinematicScene(
         scene_id="s28_fig3_fan_charts",
@@ -353,7 +403,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "Our econometric simulations across five thousand Monte Carlo draws reveal the fork in the road. "
             "In the status quo, growth stalls under four percent. But under the Japanese reform sequence, real growth hits eight percent annually."
-        )
+        ),
+        motion_target=(0.72, 0.48),
+        zoom_max=1.28
     ),
 
     # ─── ACT V: THE $2.8 TRILLION HORIZON — THE ESCAPE VELOCITY ───────
@@ -362,7 +414,9 @@ TIMELINE: List[CinematicScene] = [
         scene_type="image",
         source_asset="card_29_act5.png",
         target_duration=2.5,
-        narration_text=""
+        narration_text="",
+        motion_target=(0.50, 0.50),
+        zoom_max=1.10
     ),
     CinematicScene(
         scene_id="s30_padma_bridge",
@@ -372,7 +426,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "The foundation is already being poured. Mega-infrastructure like the Padma Multipurpose Bridge "
             "has integrated twenty-one isolated districts into the national economy."
-        )
+        ),
+        motion_target=(0.50, 0.52),
+        zoom_max=1.20
     ),
     CinematicScene(
         scene_id="s31_matarbari_port",
@@ -382,7 +438,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "And right on the Bay of Bengal, the Japanese-backed Matarbari Deep Sea Port will allow "
             "eighteen-meter deep draft mother vessels to dock for the first time in South Asian history!"
-        )
+        ),
+        motion_target=(0.52, 0.48),
+        zoom_max=1.22
     ),
     CinematicScene(
         scene_id="s32_matarbari_stats",
@@ -392,7 +450,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "This slashes shipping times to Europe and North America by nearly a third, "
             "transforming Bangladesh into the maritime gateway for three billion people across South and Southeast Asia."
-        )
+        ),
+        motion_target=(0.28, 0.52),
+        zoom_max=1.28
     ),
     CinematicScene(
         scene_id="s33_fig4_radar",
@@ -402,7 +462,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "By closing the gap in human capital, digital infrastructure, and green power, "
             "Bangladesh can move from stitching cheap t-shirts to precision electronics, software, and light engineering."
-        )
+        ),
+        motion_target=(0.50, 0.48),
+        zoom_max=1.26
     ),
     CinematicScene(
         scene_id="s34_fig5_projections",
@@ -412,7 +474,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "The reward for executing this transition is historic: a three point one trillion dollar nominal economy "
             "by twenty forty-six, generating nearly three hundred billion dollars in annual domestic tax revenue!"
-        )
+        ),
+        motion_target=(0.75, 0.48),
+        zoom_max=1.30
     ),
     CinematicScene(
         scene_id="s35_dividend_stats",
@@ -421,7 +485,9 @@ TIMELINE: List[CinematicScene] = [
         target_duration=9.0,
         narration_text=(
             "That is a one point three trillion dollar dividend between success... and catastrophe."
-        )
+        ),
+        motion_target=(0.30, 0.52),
+        zoom_max=1.28
     ),
     CinematicScene(
         scene_id="s36_outro",
@@ -431,7 +497,9 @@ TIMELINE: List[CinematicScene] = [
         narration_text=(
             "In 2026, Bangladesh stands exactly where Japan stood in 1950. The blueprint has already been written. "
             "The only question left... is whether they will execute it."
-        )
+        ),
+        motion_target=(0.50, 0.48),
+        zoom_max=1.22
     ),
     CinematicScene(
         scene_id="s37_end_screen",
@@ -545,12 +613,14 @@ def build_master_audio(scenes: List[CinematicScene], total_video_dur: float) -> 
     subprocess.run(cmd_bgm, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # 3. Dynamic Sidechain Auto-Ducking & Broadcast Mastering
+    # Louder driving BGM (volume=0.62) with 2.2 kHz notch EQ for female vocal clarity,
+    # gentle musical ducking (ratio=2.2) and professional broadcast loudness mastering.
     audio_filter = (
-        f"[1:a]atrim=0:{total_video_dur},volume=0.28[bgm_trimmed];"
-        "[bgm_trimmed][0:a]sidechaincompress=threshold=0.06:ratio=4.5:attack=15:release=350[ducked_bgm];"
+        f"[1:a]atrim=0:{total_video_dur},volume=0.62,equalizer=f=2200:width_type=q:w=1.2:g=-4.0[bgm_eq];"
+        "[bgm_eq][0:a]sidechaincompress=threshold=0.10:ratio=2.2:attack=25:release=250[ducked_bgm];"
         "[ducked_bgm][0:a]amix=inputs=2:duration=first:weights=1.0 1.0[raw_mix];"
-        "[raw_mix]highpass=f=75,acompressor=threshold=0.12:ratio=2.8:attack=10:release=60,"
-        "loudnorm=I=-14:TP=-1.5:LRA=10,alimiter=limit=0.891[final_master]"
+        "[raw_mix]highpass=f=70,acompressor=threshold=0.12:ratio=2.6:attack=10:release=60,"
+        "loudnorm=I=-14:TP=-1.0:LRA=11,alimiter=limit=0.891[final_master]"
     )
 
     cmd_mix = [
@@ -582,19 +652,27 @@ def is_valid_video(p: Path) -> bool:
         return False
 
 
-def render_cinematic_image_scene(scene: CinematicScene) -> Path:
+def render_cinematic_image_scene(scene: CinematicScene, force_rebuild: bool = True) -> Path:
     """
-    Render 4K White Studio visual with zero awkward cropping.
-    - White cards (3840x2160): 1:1 scale with subtle crossfade.
-    - Figures/Charts: Scale to fit with generous margin, padded with pure white canvas (#FFFFFF).
-    - Photos: Subtle wide 16:9 framing without cutting subjects.
+    Render 4K White Studio visual with targeted dynamic camera motion:
+    - Pure white studio background (#FFFFFF).
+    - Targeted zoompan tracking the subject spoken by the narrator.
+    - Smooth subpixel motion across exact speech duration.
     """
     out_video = scene.video_file
-    if is_valid_video(out_video):
+    if not force_rebuild and is_valid_video(out_video):
         return out_video
 
     src = resolve_asset_path(scene.source_asset)
     d = scene.effective_duration
+    total_frames = max(1, int(round(d * FPS)))
+
+    tx, ty = scene.motion_target
+    z_max = scene.zoom_max
+
+    z_expr = f"1.0+({z_max}-1.0)*on/{total_frames}"
+    x_expr = f"max(0,min(iw*(1-1/zoom),iw*({tx}-0.5/zoom)))"
+    y_expr = f"max(0,min(ih*(1-1/zoom),ih*({ty}-0.5/zoom)))"
 
     is_white_card = "card_" in scene.source_asset.lower()
     is_figure_or_chart = (
@@ -607,21 +685,24 @@ def render_cinematic_image_scene(scene: CinematicScene) -> Path:
     )
 
     if is_white_card:
-        # Pre-generated 4K cards (3840x2160): crisp 1:1 scale, direct cut
-        vf = f"scale={W}:{H}:flags=lanczos"
+        # Pre-generated 4K cards (3840x2160): smooth targeted zoom onto narrated data card metric
+        vf = (
+            f"scale={W}:{H}:flags=lanczos,"
+            f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':d={total_frames}:s={W}x{H}:fps={FPS}"
+        )
     elif is_figure_or_chart:
-        # Scale to fit inside 3840x2160 with pure white canvas (#FFFFFF) padding
-        # Never chops off axes, legends, or notes!
+        # Scale to fit inside 3840x2160 with pure white canvas (#FFFFFF) padding, then zoom into focal chart quadrant
         vf = (
             f"scale=w=3640:h=2040:force_original_aspect_ratio=decrease:flags=lanczos,"
-            f"pad=3840:2160:(ow-iw)/2:(oh-ih)/2:color=white"
+            f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=white,"
+            f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':d={total_frames}:s={W}x{H}:fps={FPS}"
         )
     else:
         # Archival/modern photographs (1376x768 -> 3840x2160)
-        # Minimal edge trim (0.38%), centered framing, subtle contrast
         vf = (
-            f"scale=3840:2160:force_original_aspect_ratio=increase:flags=lanczos,"
-            f"crop=3840:2160,"
+            f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,"
+            f"crop={W}:{H},"
+            f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':d={total_frames}:s={W}x{H}:fps={FPS},"
             f"eq=contrast=1.04:brightness=0.01:saturation=1.02"
         )
 

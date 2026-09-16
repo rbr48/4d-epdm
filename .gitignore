@@ -25,6 +25,9 @@ Thumbs.db
 *.pem
 *.key
 .gemini_keys.json
+.valid_gemini_keys.json
+.valid_gemini_tts_keys.json
+.*gemini*.json
 
 # Scratch audio & video build files
 *.pcm
@@ -33,4 +36,6 @@ build_temp/
 build_temp_4k_white/
 build_temp_cinematic_4k/
 *.wav
+outputs/sample_frames/
+outputs/sample_frames_final/
 

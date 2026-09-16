@@ -22,22 +22,34 @@ import json
 ROOT = Path(__file__).resolve().parent
 
 def load_gemini_keys() -> List[str]:
-    """Load keys from .gemini_keys.json, .env, or system environment variables."""
+    """Load verified Gemini API keys (starting with AIzaSy)."""
     keys = []
-    # 1. Try .gemini_keys.json
-    keys_file = ROOT / ".gemini_keys.json"
-    if keys_file.exists():
+    # 1. Try .valid_gemini_keys.json
+    valid_file = ROOT / ".valid_gemini_keys.json"
+    if valid_file.exists():
         try:
-            with open(keys_file, "r", encoding="utf-8") as f:
+            with open(valid_file, "r", encoding="utf-8") as f:
                 loaded = json.load(f)
                 if isinstance(loaded, list):
-                    keys.extend([k.strip() for k in loaded if isinstance(k, str) and k.strip()])
+                    keys.extend([k.strip() for k in loaded if isinstance(k, str) and k.startswith("AIzaSy")])
         except Exception:
             pass
+            
+    # 2. Try .gemini_keys.json
+    if not keys:
+        keys_file = ROOT / ".gemini_keys.json"
+        if keys_file.exists():
+            try:
+                with open(keys_file, "r", encoding="utf-8") as f:
+                    loaded = json.load(f)
+                    if isinstance(loaded, list):
+                        keys.extend([k.strip() for k in loaded if isinstance(k, str) and k.startswith("AIzaSy")])
+            except Exception:
+                pass
     
-    # 2. Try env variables
+    # 3. Try env variables
     env_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    if env_key and env_key not in keys:
+    if env_key and env_key.startswith("AIzaSy") and env_key not in keys:
         keys.append(env_key)
         
     return keys
@@ -117,10 +129,10 @@ def synthesize_gemini_voice(
 
     for attempt in range(max_retries):
         key = get_next_key()
-        os.environ["GEMINI_API_KEY"] = key
-        os.environ["GOOGLE_API_KEY"] = key
+        os.environ.pop("GOOGLE_API_KEY", None)
+        os.environ.pop("GEMINI_API_KEY", None)
         try:
-            client = genai.Client(api_key=key, http_options=types.HttpOptions(timeout=25.0))
+            client = genai.Client(api_key=key, http_options=types.HttpOptions(api_version="v1alpha"))
             resp = client.models.generate_content(
                 model="gemini-3.1-flash-tts-preview",
                 contents=formatted_prompt,

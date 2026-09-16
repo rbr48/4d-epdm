@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate Cinematic YouTube Subtitles (.srt, .vtt), High-CTR Dark Documentary Thumbnail (4K, 720p),
-and Full Publishing Package for The 4D Economic Power Cinematic Master Cut.
+and Full Publishing Package for The 4D Economic Power Cinematic Master Cut (Gemini Voice).
 """
 
 import sys
@@ -11,7 +11,7 @@ import subprocess
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-from build_cinematic_10min_master import TIMELINE
+from build_cinematic_10min_master import TIMELINE, get_media_duration
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "outputs"
@@ -65,7 +65,7 @@ def split_text_into_sub_chunks(text: str, target_chunk_words: int = 8) -> list[s
     return chunks
 
 def generate_subtitles():
-    """Build accurate .srt and .vtt subtitle tracks matching the exact cinematic timeline."""
+    """Build accurate .srt and .vtt subtitle tracks matching the Gemini female narration."""
     print("[Subtitles] Generating timecode-accurate cinematic subtitles...")
     srt_entries = []
     vtt_entries = ["WEBVTT\n"]
@@ -74,17 +74,17 @@ def generate_subtitles():
     sub_index = 1
     
     for scene in TIMELINE:
+        wav = SEGMENTS_DIR / f"{scene.scene_id}_voice_gemini.wav"
+        dur_speech = scene.target_duration
+        if wav.exists():
+            dur_speech = get_media_duration(wav)
+            scene_dur = max(scene.target_duration, round(dur_speech + 0.8, 2))
+        else:
+            scene_dur = scene.target_duration
+
         if not scene.narration_text.strip():
-            current_time += scene.actual_duration
+            current_time += scene_dur
             continue
-            
-        mp3 = SEGMENTS_DIR / f"{scene.scene_id}_audio.mp3"
-        dur_speech = scene.actual_duration
-        if mp3.exists():
-            cmd_mp3 = ['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', str(mp3)]
-            res = subprocess.run(cmd_mp3, capture_output=True, text=True)
-            if res.stdout.strip():
-                dur_speech = min(float(res.stdout.strip()), scene.actual_duration)
         
         chunks = split_text_into_sub_chunks(scene.narration_text)
         total_chars = sum(len(c) for c in chunks)
@@ -109,7 +109,7 @@ def generate_subtitles():
             sub_index += 1
             chunk_start = chunk_end
             
-        current_time += scene.actual_duration
+        current_time += scene_dur
 
     srt_path = OUT_DIR / "The_4D_Economic_Power_Cinematic_Master_4K.en.srt"
     vtt_path = OUT_DIR / "The_4D_Economic_Power_Cinematic_Master_4K.en.vtt"
@@ -160,7 +160,6 @@ def generate_cinematic_thumbnail():
 
     # 2. Main Title: "JAPAN vs BANGLADESH" with subtle champagne tone
     title_text = "JAPAN vs BANGLADESH"
-    # Shadow
     draw.text((TW // 2 + 4, 294), title_text, fill=(0, 0, 0, 255), font=f_main, anchor="mm")
     draw.text((TW // 2, 290), title_text, fill=(243, 232, 210, 255), font=f_main, anchor="mm")
 
@@ -248,10 +247,28 @@ def generate_publishing_package():
     """Create markdown metadata pack with updated chapter timestamps."""
     print("[Package] Writing YouTube publishing package...")
     
-    doc = """# YouTube Publishing & SEO Package (Cinematic 4K Master Cut)
+    # Calculate chapter markers from timeline
+    t = 0.0
+    acts = {}
+    for sc in TIMELINE:
+        if "card" in sc.scene_id or sc.scene_id == "s00_title_hook":
+            acts[sc.scene_id] = t
+        wav = SEGMENTS_DIR / f"{sc.scene_id}_voice_gemini.wav"
+        if wav.exists():
+            d = max(sc.target_duration, round(get_media_duration(wav) + 0.8, 2))
+        else:
+            d = sc.target_duration
+        t += d
+
+    def fmt_ts(sec: float) -> str:
+        m = int(sec // 60)
+        s = int(sec % 60)
+        return f"{m:02d}:{s:02d}"
+
+    doc = f"""# YouTube Publishing & SEO Package (Cinematic 4K Master Cut)
 **Channel**: Izhaan Intellect  
 **Video File**: `outputs/The_4D_Economic_Power_Cinematic_Master_4K.mp4`  
-**Video Specs**: 3840x2160 (4K UHD), 30 FPS, ~9m 10s Duration, 2.39:1 Cinema Letterbox, Orchestral Tension Score  
+**Video Specs**: 3840x2160 (4K UHD), 30 FPS, ~9m 10s Duration, Full Canvas 16:9, Gemini Female Voiceover (Aoede), Orchestral Tension Score  
 **Subtitles**: `The_4D_Economic_Power_Cinematic_Master_4K.en.srt` | `.en.vtt`  
 **Thumbnail**: `outputs/The_4D_Economic_Power_Cinematic_Thumbnail_YouTube.png` (1280x720) & `Thumbnail_4K.png` (3840x2160)
 
@@ -273,7 +290,7 @@ def generate_publishing_package():
 ## 2. Optimized YouTube Description (Copy & Paste)
 
 ```markdown
-In 1946, Tokyo lay in ashes. Conventional economics predicted Japan would remain permanently impoverished. Yet within 25 years, Japan engineered history's greatest industrial catch-up.
+In 1946, Tokyo lay in pulverized ashes. Conventional economics predicted Japan would remain permanently impoverished. Yet within 25 years, Japan engineered history's greatest industrial catch-up.
 
 Today, Bangladesh stands at an identical crossroads. In 2026, UN LDC graduation abruptly ends duty-free European market access, exposing garments to 8-12% tariffs. Compounded by banking NPLs and a sub-8% tax-to-GDP ratio, Bangladesh faces a structural triple cliff.
 
@@ -284,13 +301,13 @@ Using the 4D Economic Power Distribution Model (4D-EPDM) and 5,000 Monte Carlo s
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⏱️ VIDEO CHAPTERS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-00:00 - Prologue: The $2.8T Convergence Premise
-00:45 - Act I: The 2026 Precipice & The Triple Cliff
-02:27 - Act II: The Japanese Miracle (Postwar Ruin to Superpower)
-04:12 - Act III: The 9D Capability Matrix Beyond Headline GDP
-05:49 - Act IV: 2026–2046 Monte Carlo Futures & Monetary Dividend
-07:34 - Act V: The Strategic Sequence & Four-Phase Roadmap
-08:52 - Live Interactive Simulator & Research Access
+{fmt_ts(acts.get("s00_title_hook", 0.0))} - Prologue: The $2.8T Convergence Premise
+{fmt_ts(acts.get("s04_act1_card", 54.0))} - Act I: The 2026 Precipice & The Triple Cliff
+{fmt_ts(acts.get("s09_act2_card", 165.0))} - Act II: The Japanese Miracle (Postwar Ruin to Superpower)
+{fmt_ts(acts.get("s13_act3_card", 285.0))} - Act III: The 9D Capability Matrix Beyond Headline GDP
+{fmt_ts(acts.get("s17_act4_card", 380.0))} - Act IV: 2026–2046 Monte Carlo Futures & Monetary Dividend
+{fmt_ts(acts.get("s21_act5_card", 475.0))} - Act V: The Strategic Sequence & Four-Phase Roadmap
+{fmt_ts(acts.get("s25_end_card", 540.0))} - Live Interactive Simulator & Research Access
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📊 INTERACTIVE SIMULATOR & RESEARCH DATA

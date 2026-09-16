@@ -24,6 +24,7 @@ Thumbs.db
 *.env
 *.pem
 *.key
+.gemini_keys.json
 
 # Scratch audio & video build files
 *.pcm
